@@ -104,7 +104,6 @@ f(px);  // T 的型别是 const int, param 的型别是 const int*
 ``` c++
 template <typename T>
 void f(T param); 
-
 ```
 
 型别推导的步骤：
