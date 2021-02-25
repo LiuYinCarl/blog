@@ -405,3 +405,56 @@ decltype(auto) f() {
 
 ### 条款 4 掌握查看型别推导结果的方法
 
+要输出一个符号的类型，有可以使用标准库自带的 `typeid` 或者 `Boost` 的 `type_id_with_cvr` ，但是 `typeid` 是不可靠的，因为标准只要求 `std::type_info::name` 中处理型别的方式类似像函数模板按值传递参数就可以。这样子会导致型别的 `cosnt`, `volatile`, 引用这三个属性消失。但是 `Boost` 的不会，从名字就可以看出来。
+
+``` c++
+File Edit Options Buffers Tools C++ Hide/Show Help
+#include <iostream>
+#include <boost/type_index.hpp>
+
+template<typename T>
+void f(const T& param) {
+  using std::cout;
+  using boost::typeindex::type_id_with_cvr;
+
+  cout << "T = " << type_id_with_cvr<T>().pretty_name() << '\n';
+  cout << "param = " << type_id_with_cvr<decltype(param)>().pretty_name() << '\n';
+}
+
+template<typename T>
+void f2(const T& param) {
+  using std::cout;
+
+  cout << "T = " << typeid(T).name() << '\n';
+  cout << "param = " << typeid(param).name() << '\n';
+}
+
+
+int main() {
+  int n = 10;
+  f(n);
+  f2(n);
+
+  return 0;
+}
+```
+
+运行结果
+
+``` bash
+T = int
+param = int const&
+T = i
+param = i
+```
+
+
+
+**要点速记**
+
+- 有些工具产生的推导型别可能无用，或者不准确，所以理解 C++ 型别推到规则是必要的
+
+## auto
+
+### 条款 5 优先选用 auto，而非显式型别声明
+
