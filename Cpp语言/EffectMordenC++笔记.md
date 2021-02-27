@@ -458,3 +458,79 @@ param = i
 
 ### 条款 5 优先选用 auto，而非显式型别声明
 
+使用 `auto` 而不使用 `std::function` 的原因
+
+- `std::function` 语法复杂，需要重复定义形参
+- `std::function`声明的是一个存储着一个闭包的 `std::function` 对象实例，可能需要从堆上分配内存来储存这个闭包， 但是使用 `auto` 声明的是一个就是一个指向闭包的对象，不需要多余的内存
+
+显式型别声明在代码迁移的时候没有 `auto` 灵活，比如
+
+``` c++
+std::vector<int> v;
+unsigned sz = v.size();
+```
+
+在 32 位的 Windows 上，`unsigned` 是 32 位的，`std::vector<int>::size_type` 也是 32 位的。在 64 位的 Windows 上，`unsigned` 还是 32 位的，但是 `std::vector<int>::size_type` 是 64 位的。所以，上面的代码从 32 位 Windows 移植到 64 位 Windows 可能会出问题，如果使用 `auto` 代替 `unsigned` 的话，就不会有这个问题。
+
+另一个 `auto` 优于显式型别声明的例子：
+
+``` c++
+std::unordered_map<std::string, int> m;
+
+for (const std::pair<std::string, int>& p : m) {
+	// ... ...   
+}
+```
+
+这个例子的错误在于 `std::unordered_map` 的键值部分是 `const` 的，所以 `std::unordered_map` 中的 `std::pair` 的型别是 `std::pair<const std::string, int>` 而不是 `std::pair<std::string, int>`。所以上面 `p` 的类型写错了，编译器就得想办法将 `std::pair<const std::string, int>` 转化为 `std::pair<std::string, int>`, 方法就是对 `m` 中的每个对象都做一次复制操作，形成一个 `p` 可以绑定的型别的临时对象，然后将 `p` 绑定到临时对象。这会造成如下后果：
+
+- 循环的每次迭代都需要创建和析构临时对象，开销巨大
+- 如果对 `p` 取地址，那么地址是临时对象的地址，而且这个临时对象在迭代结束的时候会被析构
+
+
+
+**要点速记**
+
+- `auto` 变量必须被初始化，这个特点可以防止忘记初始化对象
+
+
+
+### 条例 6 当 auto 推导的型别不符合要求时，使用带显式型别的初始化物习惯用法
+
+`auto`  出现与预期型别不同的例子
+
+``` c++
+std::vector<bool> features(const Widget& w);
+
+auto b = features(w)[5];
+```
+
+上面 `b` 的类型并不是 `bool&`, 而是 `std::vector<bool>::reference`。 `std::vector<bool>`  的 `operator[]` 的这一点和一般的 `std::vector<T>` 容器返回 `t&` 不同。但是为了保证返回的 `std::vector<bool>::reference` 和常规的 `bool&` 表现保持一致，`std::vecot<bool>::reference` 做了一个向 `bool` 的隐式型别转换（**是 `bool` 不是 `bool&`**）。
+
+`feature(w)` 会返回一个 `std::vector<bool>` 临时对象，然后针对这个对象执行 `operator[]` 返回一个 `std::vector<bool>::reference` 型别的对象。如果 `std::vector<bool>::reference` 的实现是一个对象含有一个指针。那么 `features(w)` 调用返回的临时对象会在表达式结束的地方被析构，那么 `b` 最后就会持有一个野指针，如果后面使用到了 `b`，就会发生未定义的行为。（我觉得这个锅其实不该怪 `auto`，得怪设计出了 `std::vector<bool>::reference` 的人）。
+
+`std::vector<bool>::reference` 是一个代理类的实例。所谓代理类就是指为了模拟或者扩展其他型别的类。智能指针也是代理类。
+
+**这种隐形代理类往往无法和 `auto` 和平相处，隐形代理类往往设计成生存期在一个语句内的形式。所以，如果要创建这种类的变量，往往违反了隐形代理类的假定前提，很容易造成未定义行为。** 所以要比避免写出下面这种代码：
+
+``` c++
+auto var = 隐形代理型别表达式;
+```
+
+
+
+需要做类型转转的时候，尽量使用显式的转型操作。
+
+
+
+**要点速记**
+
+- ”隐形“的代理型别可以导致 `auto` 根据初始化表达式推导出 "错误的"（不符合预期的）型别
+- 带显式型别的初始化物习惯用法可以强制 `auto` 推导出想要的类型
+
+
+
+## 转向现代 C++
+
+### 条款 7 在创建对象时注意区分 () 和 {}
+
