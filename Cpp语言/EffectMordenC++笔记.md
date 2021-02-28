@@ -525,7 +525,7 @@ auto var = 隐形代理型别表达式;
 
 **要点速记**
 
-- ”隐形“的代理型别可以导致 `auto` 根据初始化表达式推导出 "错误的"（不符合预期的）型别
+- ”隐形“的代理型别可以导致 `auto` 根据 初始化表达式推导出 "错误的"（不符合预期的）型别
 - 带显式型别的初始化物习惯用法可以强制 `auto` 推导出想要的类型
 
 
@@ -533,4 +533,207 @@ auto var = 隐形代理型别表达式;
 ## 转向现代 C++
 
 ### 条款 7 在创建对象时注意区分 () 和 {}
+
+大括号初始化语法也叫做统一初始化语法，适用于所有的初始化场合。
+
+大括号初始化有一个特性，就是禁止内建型别之间进行隐式窄化型别转换。如果大括号内的表达式无法保证能够采用初始化的对象来表达，则代码不能通过与编译。
+
+``` c++
+double x, y, z;
+int sum{ x + y + z}; // 编译错误，不能将 double 转化成 int
+```
+
+大括号初始化语法的另一个好处是可以避免语法解析错误，C++ 规定，任何能够解析为声明的都要解析为声明，但是这个规则有一个副作用：如果本来想要以默认方式构造一个对象，可能变成了声明一个函数。
+
+``` c++
+Widget w(); // 本来可能是想调用默认构造函数，却变成了声明
+```
+
+**大括号初始化的缺点**
+
+大括号初始化语法有时会出现我们预料之外的情况。这些情况往往源于大括号初始化物、`std::initializer_list` 以及构造函数重载决议之间的纠结关系。比如前面的条款 2 提到的，如果使用大括号初始化物来初始化一个使用 `auto` 声明的变量，那么推导出来的型别就会成为 `std::initializer_list`。
+
+在构造函数被调用的时候，如果形参中没有任何一个具备 `std::initializer_list` 型别，那么大括号和小括号初始化的意义就没有区别。
+
+``` c++
+class Widget {
+public:
+    Widget(int i, bool b);
+    Widget(int i, double b);
+};
+
+Widget w1(10, true); // 调用第一个构造函数
+Widget w2(10, 5.0); // 调用第二个构造函数
+Widget w1{10, true}; // 调用第一个构造函数
+Widget w2{10, 5.0}; // 调用第二个构造函数
+```
+
+但是如果有构造函数声明了任何一个具备 `std::initializer_list` 型别的形参，那么采用了大括号初始化语法的调用语句会 **强烈的优先选用带有 `std::initializer_list` 型别形参的重载版本。**
+
+``` c++
+class Widget {
+public:
+    Widget(int i, bool b);
+    Widget(int i, double b);
+    Widget(std::initializer_list<long double> il);
+};
+
+Widget w1(10, true); // 调用第一个构造函数
+Widget w2(10, 5.0); // 调用第二个构造函数
+Widget w1{10, true}; // 调用第三个构造函数，10 和 true 被强制转换成 long double
+Widget w2{10, 5.0}; // 调用第三个构造函数，10 和 5.0 被强制转换成 long double
+```
+
+
+
+有一个边界用例需要了解。假如使用了一对空大括号来构造一个函数，而该对象既支持默认构造函数，又支持带有 `std::initializer_list` 型别参数的构造函数。那么，这对空大括号的意义是什么呢，如果意义是”没有实参“，那就应该执行默认构造，如果意义是 ”空的 `std::initializer_list`“，那就应该以一个不含任何元素的 `std::initializer_list` 为基础执行构造。**语言规定，在这种情况下应该执行默认构造，空大括号表示的是 ”没有实参“而不是”空的 `std::initializer_list`“**。
+
+
+
+**要点速记**
+
+- 大括号初始化可以应用的语境最为宽泛，可以阻止隐式窄化型别转换，还可以防止初始化的时候的解析语法歧义。
+- 在构造函数重载决议期间，只要有任何可能，大括号初始化物就会与带有 `std::initializer_list` 型别的形参相匹配，即使其他重载版本有着貌似更加匹配的形参表。
+- 使用小括号还是大括号，会造成结果大相径庭的一个例子是，使用两个实参创建一个 `std::vector<T>`对象。
+
+### 条款 8 优先选用 nullptr，而非 0 或 NULL
+
+0 或者 `NULL` 并不是指针
+
+``` c++
+#include <iostream>
+
+void f(void* p) {
+  std::cout << "void*" << std::endl;
+}
+
+void f(long x) {
+  std::cout << "long" << std::endl;
+}
+
+void f(int n) {
+  std::cout << "int" << std::endl;
+}
+
+int main() {
+  f(NULL);
+
+  return 0;
+}
+```
+
+在 g++9.3 clang++10 上测试，输出都是 "long"。
+
+
+
+**要点速记**
+
+- 相对于 0 或 `NULL`，优先选用 `nullptr`。
+- 避免在整型和指针型别之间重载。
+
+
+
+### 条款 9 优先选用别名声明，而非 typedef
+
+**使用别名声明而不是 `typedef` 的理由**
+
+别名声明可以模板化（这种情况下它们被称为别名模板，alias template），`typedef` 就不行。它给了 C++11 程序员一种直截了当的表达机制，用以表达 C++98 程序员不得不用嵌套在模板化的 `struct` 里的 `typedef` 才能硬搞出来的东西。比如，想要定义一个同义词，表达一个链表，它使用了一个自定义分配器 `MyAlloc`。
+
+``` c++
+// 使用别名声明
+template<typename T>
+using MyAllocList = std::list<T, MyAlloc<T>>;
+
+MyAllocList<Widget> lw;
+```
+
+``` c++
+// 使用 typedef
+template<typename T>
+struct MyAllocList {
+    typedef std::list<T, MyAlloc<T>> type;
+};
+```
+
+如果想在模板内使用 `typedef` 来创建一个链表，它容纳的对象型别由模板形参指定的话，那你就要给 `typedef` 的名字加一个 `typename` 前缀。
+
+``` c++
+template<typename T>
+class Widget {
+private:
+    typename MyAllocList<T>::type list;
+};
+```
+
+这里，`MyAllocList<T>::type` 代表一个依赖于模板型别参数形参（T) 的型别，所以 `MyAllocList<T>::type` 称为带依赖型别，带依赖型别必须前面加一个 `typename`。
+
+但是如果 `MyAllocList` 是使用别名模板来定义的，那么要写 `typename` 的要求就消失了。
+
+``` c++
+template<typename T>
+using MyAllocList = std::list<T, MyAlloc<T>>;
+
+template<typename T>
+class Widget {
+private:
+    MyAllocList<T> list;
+};
+```
+
+
+
+**要点速记**
+
+- `typedef` 不支持模板化，但别名声明支持
+- 别名模板可以免写 "::type" 后缀，并且在模板内，对于内嵌 `typedef` 的引用经常要求加上 `typename` 前缀
+
+### 条款 10 优先选用限定作用域的枚举型别，而非不限作用域的枚举型别
+
+C++98 风格的枚举型别中定义的枚举量属于包含着这个枚举型别的作用域，这就意味着在此作用域内不能有其他实体取相同的名字。
+
+``` c++
+enum Color { black, white, red }; // black, white, red 的作用域和 Color 相同
+
+auto white = false; // 错误， white 重定义
+```
+
+C++11 添加的限定作用域的枚举类型
+
+``` c++
+enum class Color { black, white, red }; // black, white, red 所在作用域被限定在 Color 内
+
+auto white = false; // 正确
+```
+
+`enum class` 是强类型的，不会隐式转换到整数类型。
+
+
+
+**要点速记**
+
+- 限定作用域的枚举型别仅在枚举型别内可见，只能通过强制类型转换以转换到其他型别
+- 限定作用域的枚举类型和不限定作用域的枚举型别都支持底层型别指定。限定作用域的枚举型别的默认底层型别是 `int`，不限定作用域的枚举型别没有默认底层型别
+- 限定作用域的枚举型别总是可以进行前置声明，而不限定作用域的枚举型别只有在指定了默认底层型别的前提下才可以进行前置声明
+
+
+
+### 条款 11 优先选用删除函数，而非 private 未定义函数
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
