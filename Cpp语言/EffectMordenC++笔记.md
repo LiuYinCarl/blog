@@ -719,15 +719,93 @@ auto white = false; // 正确
 
 ### 条款 11 优先选用删除函数，而非 private 未定义函数
 
-待续
+删除函数申明为 `public` 的优点：
+
+-  在编译链接时，C++ 会先校验函数的可访问性，再校验删除状态，这样子的话，当试图调用某个 `private` 删除函数时，有些编译器可能只会报该函数为 `private`  的错误，所以，将删除函数声明为 `public` 可以得到更好的错误信息
+
+删除函数的另外一个优点是任何函数都可以成为删除函数，但只有成员函数可以声明成 `private`。
+
+举个例子，为了避免不想要的隐式转换，可以将含有某些类型的参数声明成删除函数。
+
+``` c++
+void foo(int n) {
+    // ... ...
+}
+
+void foo(char) = delete;
+void foo(bool) = delete;
+```
+
+尽管删除函数不可被使用，但是它们还是程序的一部分，所以在重载决议的时候他们还是会被考虑。看下面一个例子。
+
+``` c++
+bool func(int n) {
+    // ... ...
+}
+
+bool func(char) = delete; // 拒绝 char 型别
+bool func(double) = delete; // 拒绝 double 和 float 型别
+```
+
+为什么 `bool func(double) = delete;` 会拒绝 `float` 型别呢？这是因为当 `float` 型别面临转型到 `int` 还是 `double` 型别的时候， C++ 会优先转型到 `double` 型别。这样一来，对于 `func` 的调用如果传入一个 `float`, 则会尝试调用 `double` 型别形参的重载版本，但是由于这个重载版本已经是个删除版本，所以编译就被阻止了。
+
+还有一个删除函数能做到而 `private` 成员函数不能做到的事情就是阻止不应该进行的模板具现。
+
+``` c++
+template<typename T>
+void processPointer(T* p) {
+	// ... ...
+}
+
+template<typename T>
+void processPointer<void>(void*) = delete;
+
+template<typename T>
+void processPointer<char>(char*) = delete;
+```
+
+如果是类内部的函数模板，并且你想通过 `private` 声明来禁用某些具现，这是做不到的，因为你不可能给予成员函数模板的某个特化以不同于主模板的访问层级。如果 `processPointer` 是在 `Widget` 内部的一个成员函数模板，而你想禁止使用 `void*` 指针来调用它，下面是 C++98 的用法，但是通不过编译。
+
+``` c++
+class Widget {
+public:
+    template<typename T>
+    void processPointer(T* ptr) {
+        // ... ...
+    }
+   
+private:
+    template<>  // 错误
+    void processPointer<void>(void*);
+};
+```
+
+编译不过的原因是 **模板特化必须在名字空间作用域而不是类作用域内编写**。但是删除函数可以避免这个缺点，因为他们不需要不同的访问层级，也因为成员函数模板可以在类外（名字空间作用域）被删除。
+
+``` c++
+class Widget {
+public:
+    template<typename T>
+    void processPointer(T* ptr) {
+        // ... ...
+    }
+};
+
+// 仍然具有 public 访问层级但是被删除了
+template<>
+void Widget::processPointer<void>(void*) = delete;
+```
 
 
 
+**要点速记**
+
+- 优先选用删除函数，而非 `private` 未定义函数
+- 任何函数都可以删除，包括非成员函数和模板函数
 
 
 
-
-
+### 条款 12 为意在改写的函数添加 override 声明
 
 
 
