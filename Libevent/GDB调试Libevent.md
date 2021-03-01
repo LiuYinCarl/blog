@@ -220,10 +220,10 @@ RPATH                /home/carl/github/libevent/cmake-build-debug/lib
 
 ## 参考
 
-> [GCC 编译时指定动态库搜索路径](https://blog.csdn.net/qiuxin315/article/details/81771630)
->
-> [Linux 下获取 binary 中的 rpath 信息](https://blog.csdn.net/yasi_xi/article/details/45242113)
->
-> [Linux 运行时动态库搜索路径优先级](https://blog.csdn.net/value_he/article/details/84403828)
->
-> [gdb 显示共享链接库信息](https://wizardforcel.gitbooks.io/100-gdb-tips/info_sharedlibrary.html)
+[GCC 编译时指定动态库搜索路径](https://blog.csdn.net/qiuxin315/article/details/81771630)
+
+[Linux 下获取 binary 中的 rpath 信息](https://blog.csdn.net/yasi_xi/article/details/45242113)
+
+[Linux 运行时动态库搜索路径优先级](https://blog.csdn.net/value_he/article/details/84403828)
+
+[gdb 显示共享链接库信息](https://wizardforcel.gitbooks.io/100-gdb-tips/info_sharedlibrary.html)

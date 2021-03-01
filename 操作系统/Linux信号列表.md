@@ -1,6 +1,4 @@
-> 转载：https://blog.csdn.net/wesleyluo/article/details/5279482
-
-
+转载：https://blog.csdn.net/wesleyluo/article/details/5279482
 
 # Linux Signal 列表
 

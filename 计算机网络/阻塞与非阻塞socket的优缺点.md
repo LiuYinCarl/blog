@@ -1,6 +1,6 @@
 **转载**
 
-> [阻塞与非阻塞 socket 的优缺点](https://www.cnblogs.com/sunada2005/p/3591378.html)
+[阻塞与非阻塞 socket 的优缺点](https://www.cnblogs.com/sunada2005/p/3591378.html)
 
 ​		NIO 设计背后的基石：反应器模式，用于事件多路分离和分派的体系结构模式。 反应器（Reactor）：用于事件多路分离和分派的体系结构模式。
 

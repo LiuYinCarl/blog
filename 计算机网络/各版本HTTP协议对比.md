@@ -1,6 +1,4 @@
-> 转载：https://www.cnblogs.com/andashu/p/6441271.html
-
-
+转载：https://www.cnblogs.com/andashu/p/6441271.html
 
 # 各版本 HTTP 协议对比
 

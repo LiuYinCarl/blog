@@ -1,9 +1,5 @@
-> 转载：https://www.cnblogs.com/biyeymyhjob/archive/2012/07/28/2612910.html
-> 原作者：https://github.com/igithu
->
-> 具体的 RFC 文档见 /文档/RFC/目录
-
-
+转载：https://www.cnblogs.com/biyeymyhjob/archive/2012/07/28/2612910.html
+原作者：https://github.com/igithu
 
 # HTTP 请求和响应报文
 

@@ -398,7 +398,7 @@ if (pid == 0)  // 子进程
 
 ## 参考
 
-> [网络编程中的 SO_REUSEADDR 和 SO_REUSEPORT 参数详解](https://zhuanlan.zhihu.com/p/37278278)
-> [使用 libevent 进行多线程 socket 编程 demo](https://www.cnblogs.com/james6176/p/4285018.html)
-> [基于 epoll 机制的高并发聊天室](https://github.com/jwzh222/epoll)
+[网络编程中的 SO_REUSEADDR 和 SO_REUSEPORT 参数详解](https://zhuanlan.zhihu.com/p/37278278)
+[使用 libevent 进行多线程 socket 编程 demo](https://www.cnblogs.com/james6176/p/4285018.html)
+[基于 epoll 机制的高并发聊天室](https://github.com/jwzh222/epoll)
 

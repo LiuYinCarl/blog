@@ -1,6 +1,6 @@
 ## 参考代码
 
-> [Linux ping 简单实现](https://blog.csdn.net/tuantuanlin/article/details/17006867)
+[Linux ping 简单实现](https://blog.csdn.net/tuantuanlin/article/details/17006867)
 
 
 

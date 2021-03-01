@@ -1,10 +1,7 @@
-# glibc 不应该静态链接的原因
-
+# glibc涓嶅簲璇ラ潤鎬侀摼鎺ョ殑鍘熷洜
 
 [Why is statically linking glibc discouraged?
 ](https://stackoverflow.com/questions/57476533/why-is-statically-linking-glibc-discouraged)
-
-
 
 The reasons given in other answers are correct, but they are not the most important reason.
 

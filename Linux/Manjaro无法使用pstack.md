@@ -64,4 +64,4 @@ EOF
 
 ## 参考
 
-> [Linux 下 pstack 的实现](http://blog.yufeng.info/archives/873)
+[Linux 下 pstack 的实现](http://blog.yufeng.info/archives/873)

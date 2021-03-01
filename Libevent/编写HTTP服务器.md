@@ -182,9 +182,7 @@ int main(int argc, char *argv[])
 
 主要是将网上的代码改了下，使得能够读取同目录下的 HTML 文件，当然，没有做什么错误处理。
 
-[测试地址/libevent-book 阅读地址](http://47.93.196.173:7878/TOC.html)
-
 ## 参考
 
-> [ubuntu 下安装 libevent](https://blog.csdn.net/qq_19004627/article/details/79919341)
-> [使用 libevent 编写高并发 HTTP server](https://www.cnblogs.com/keepsimple/archive/2013/05/06/3063251.html)
+[ubuntu 下安装 libevent](https://blog.csdn.net/qq_19004627/article/details/79919341)
+[使用 libevent 编写高并发 HTTP server](https://www.cnblogs.com/keepsimple/archive/2013/05/06/3063251.html)
