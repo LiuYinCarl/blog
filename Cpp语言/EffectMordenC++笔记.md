@@ -807,6 +807,80 @@ void Widget::processPointer<void>(void*) = delete;
 
 ### 条款 12 为意在改写的函数添加 override 声明
 
+C++98 对虚函数重写的要求：
+
+- 基类中的函数必须是虚函数
+- 基类和派生类中的函数名字必须完全相同（析构函数除外）
+- 基类和派生类中的函数形参型别必须完全相同
+- 基类和派生类中的函数常量性必须完全相同
+- 基类和派生类中的函数返回值和异常规格必须兼容
+
+C++ 11 中新加的限制：
+
+基类和派生类中的函数引用饰词必须完全相同。成员函数引用饰词是 C++11 的一个新特性，是为了限制成员函数仅用于左值或右值。带有引用饰词的成员函数，不必是虚函数。
+
+``` c++
+class Widget {
+public:
+    void doWork() &; // 仅在 *this 是左值时调用
+    void doWork() &&; // 仅在 *this 时右值时调用
+};
+
+Widget makeWidget(); // 工厂函数，返回右值
+Widget w;  // 普通对象，左值
+
+w.doWork(); // 以左值调用 Widget::doWork(即 Widget::doWork &)
+makeWidget().doWork(); // 以右值调用 Widget::doWork(即 Widget::doWork &&)
+```
+
+
+
+所以在重写(override)函数的时候，最好加上 `override` 声明。
+
+C++11 添加了两个语境关键字 `override` 和 `final`。它们的特色是，语言保留这两个关键字，但仅在特定语境下保留。对于 `override` 的情况而言，它仅于出现在成员函数声明的末尾时才有保留意义。
+
+引用饰词的一个使用场景：防止多余的复制
+
+``` c++
+class Widget {
+public:
+    using DataType = std::vector<double>;
+    
+    DataType& data() & { return values; }
+    
+    DataType data() && { return std::move(values); }
+    
+private:
+    DataType values;
+};
+```
+
+上面这种情况下如果是一个左值 `Wdiget` 对象调用 `data()`，就会返回 `values` 的左值引用，如果一个右值 `Widget` 对象调用 `data()`，则返回一个右值。
+
+
+
+**要点速记**
+
+- 为意在改写的函数添加 `override` 声明
+- 成员函数引用饰词使得对于左值和右值对象的处理可以区分开来
+
+
+
+### 条款 13 优先选用 const_iterator, 而非 iterator
+
+`const_iterator` 是 STL 中相当于指涉到 `const` 的指针的等价物，它们指涉到不可被修改的值。
+
+
+
+**要点速记**
+
+- 优先选用 `const_iterator` 而非 `iterator`
+- 在最通用的代码中，优先选用非成员函数版本的 `begin`，`end` 和 `rbegin` 等，而非其成员函数版本
+
+
+
+### 条款 14 只要函数不会抛出异常，就为其加上 noexcept 声明
+
 
 
 
