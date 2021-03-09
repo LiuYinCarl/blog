@@ -1046,3 +1046,35 @@ C++11 中特种函数的规则：
 - 引用计数的内存必须动态分配。
 - 引用计数的递增和递减必须是原子操作。原子操作一般比非原子操作要慢。
 
+由于移动 `std::sharder_ptr` 不需要修改资源的引用计数，所以移动 `std::shared_ptr` 比复制它们要快。
+
+`std::shared_ptr` 也使用 `delete` 运算符作为其默认资源析构机制，但也同样支持自定义析构器。但是这种支持的设计却与 `std::unique_ptr` 有所不同。对于 `std::unique_ptr` 来说，析构器的型别是智能指针的一部分。对于 `std::shared_ptr` 来说却不是。
+
+与 `std::unique_ptr` 不同的另一点是：自定义析构器不会改变 `std::shared_ptr` 的尺寸。无论析构器是怎么样的型别，`std::shared_ptr` 对象的尺寸都是裸指针的两倍。
+
+`std::shared_ptr` 的模型
+
+![image-20210309224538880](E:\blog\Cpp语言\images\EffectMordenC++笔记\image-20210309224538880.png)
+
+一个对象的控制块由创建首个指涉到该对象的 `std::shared_ptr` 的函数来确定。因为，正在创建指涉到某对象的 `std::shared_ptr` 的函数是无从得知是否有其他的 `std::shared_ptr` 已经指涉到该对象。因此，控制块的创建遵循如下规则：
+
+- `std::make_shared` 总是创建一个控制块。
+- 从具备装束所有权的指针 (`std::unique_ptr` 和 `std::auto_ptr`指针) 出发构建一个 `std::shared_ptr` 时，会创建一个控制块。
+- 当 `std::shared_ptr` 构造函数使用裸指针作为实参来调用时，会创建一个控制块。
+
+由以上规则可以知道，千万不要对一个对象创建多个控制块，不然会引发多次析构。
+
+`std::shared_ptr` 没有提供对数组的操作。
+
+**要点速记**
+
+- 避免使用裸指针型别的变量来创建 `std::shared_ptr`，而应该直接使用 `new` 的返回值。
+
+
+
+### 条款 20 对于类似 std::shared_ptr 但有可能空悬的指针使用 std::weak_ptr
+
+`std::weak_ptr` 是作为 `std::shared_ptr` 的一种扩充，不会影响所指涉到的对象的引用计数。
+
+
+
