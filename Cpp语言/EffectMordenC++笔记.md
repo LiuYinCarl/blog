@@ -1076,5 +1076,60 @@ C++11 中特种函数的规则：
 
 `std::weak_ptr` 是作为 `std::shared_ptr` 的一种扩充，不会影响所指涉到的对象的引用计数。
 
+从效率的角度来看，`std::weak_ptr` 和 `std::shared_ptr` 从本质上来说是一致的。`std::erak_ptr` 的对象和 `std::shared_ptr` 的对象尺寸相同，它们和 `std::shared_ptr` 使用同样的控制块，其构造，析构，赋值操作都包含了对引用计数的原子操作。实际上 `std::shared_ptr` 的控制块里面还有第二个引用计数，`std::weak_ptr` 操作的就是这第二个引用计数。
+
+**要点速记**
+
+- 使用 `std::weak_ptr` 来替代可能空悬的 `std::shared_ptr`。
+- `std::weak_ptr` 的使用场景包括缓存，观察者列表，以及避免 `std::shared_ptr` 指针循环引用等。
+
+
+
+### 条款 21 优先使用 std::make_unique 和 std::make_shared，而非直接使用 new
+
+ `std::make_shared` 是 C++11 的时候加入标准库的， `std::make_unique` 是 C++14 的时候加入标准库的。
+
+``` c++
+// 在 C++11 中实现简单的 make_unique
+template<typename T, typename... Ts>
+std::unique_ptr<T> make_unique(Ts&&... params) {
+    return std::unique_ptr<T>(new T(std::forward<Ts>(params)...));
+}
+```
+
+`std::make_shared` 和 `std::make_unique` 会把一个任意实参集合完美转发给动态分配内存的对象的构造函数，并返回一个指涉到该对象的智能指针。make 系列的另一个函数是 `std::allocate_shared`，它的行为和 `std::make_shared` 一样，只不过它的第一个实参是个用以动态分配内存的分配器对象。
+
+**要点速记**
+
+- 相对于直接使用 `new` 表达式，`make` 系列函数消除了重复代码，改进了异常安全性，并且对于 `std::make_shared` 和 `std::allocated_shared` 而言，生成的目标代码尺寸更小，速度更快。
+- 不适于使用 make 系列函数的场景包括需要定制删除器，以及期望直接传递大括号初始化物。
+- 对于 `std::shared_ptr` ，不建议使用 make 系列函数的额外场景包括：自定义内存管理的类。内存紧张的系统，非常大的对象，以及存在比指涉到相同对象的 `std::shared_ptr` 生存期更久的 `std::weak_ptr`，因为 `std::make_shared` 函数创建对象的时候，会将控制块和对象的内存一起申请，所以，在控制块还存在引用的时候，对象使用的内存也无法释放。
+
+
+
+### 条款 22 使用 Pimpl 习惯用法时，将特殊成员函数的定义放到实现文件中
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
