@@ -1109,13 +1109,133 @@ std::unique_ptr<T> make_unique(Ts&&... params) {
 
 ### 条款 22 使用 Pimpl 习惯用法时，将特殊成员函数的定义放到实现文件中
 
+Pimpl 习惯用法就是 “pointer to implementation”, 即指涉到实现的指针。这种技巧就是把某类的数据成员用一个指涉到某实现类的指针替代，然后把原来在主类中的数据成员放置到实现类中，并通过指针间接访问这些数据成员。Pimpl 是一种可以在类实现和类使用者之间减少编译依赖的方法。
+
+``` c++
+// widget.h
+class Widget {
+public:
+    Widget();
+private:
+    std::string name;
+    std::vector<double> data;
+    Gadget g1, g2, g3;  // Gadget 是某种用户自定义型别
+};
+```
+
+上面这种写法，widget.h 必须包含 string, vector, Gadget 等的头文件，这些头文件会增加使用了 widget.h 的程序的编译时间，而且假如某个头文件发生了变化，使用了 widget.h 的程序都必须重新编译。
+
+使用 Pimpl 进行修改
+
+(C++98 过时写法)
+
+``` c++
+// widget.h
+class Widget {
+public:
+    Widget();
+    ~Widget();  // 析构函数变得必要,因为需要管理实现类
+private:
+    struct Impl;  // 声明实现结构体(非完整型别)
+    Impl* pImpl;  // 以及指涉到它的指针
+};
+```
+
+``` c++
+// widget.cpp
+#include "widget.h"
+#include "gadget.h"
+#include <string>
+#include <vector>
+
+struct Widget::Impl {
+    std::string name;
+    std::vector<double> data;
+    Gadget g1, g2, g3;
+};
+
+Widget::Widget() : pImpl(new Impl) {}
+
+Widget::~Widget() { delete pImpl; }
+```
+
+（C++14 潮流写法）
+
+``` c++
+// widget.h
+class Widget {
+public:
+    Widget();
+	// 使用智能指针，可以不用写析构函数了
+private:
+    struct Impl;
+    std::unique_ptr<Impl> pImpl;
+};
+```
 
 
 
+``` c++
+// widget.cpp
+#include "widget.h"
+#include "gadget.h"
+#include <string>
+#include <vector>
 
+struct Widget::Impl {
+    std::string name;
+    std::vector<double> data;
+    Gadget g1, g2, g3;
+};
 
+Widget::Widget() : pImpl(std::make_unique<Impl>()) {}
+```
 
+``` c++
+// 客户代码
+#include "widget.h"
+Widget w;  // 编译错误
+```
 
+但是这种写法很可能无法通过编译。原因是为 w 生成析构代码错误。在使用 `std::unique_ptr` 的类定义中，我们未声明析构函数。编译器会为我们生成一个析构函数，在该析构函数内，编译器会插入代码来调用 `Widget` 的数据成员 `pImpl`。`pImpl` 是一个 `std::unique_ptr<Widget::Impl>` 型别的对象，即一个使用了默认析构器的 `std::unique_ptr`。默认析构器是在 `std::unique_ptr` 内部使用 `delete` 运算符来针对裸指针实施析构的函数。然而，在实施 `delete` 运算符之前，典型的实现会使用 C++11 中的 `static_assert` 确保裸指针未指涉到非完整型别，但是 widget.h 中的 `Impl` 就是个非完整型别。
+
+为了解决这个问题，只需要在生成析构 `std::unique_ptr<Widget::Impl>` 代码处，`Widget::Impl` 是个完整型别就好了。只要型别的定义可以被看到，它就是完整的。而 `Widget::Impl` 的定义位于 widget.cpp 中。因此，只要在 widget.cpp 内部的 `Widget::Impl` 定义之后定义 `Widget` 的析构函数就好了。
+
+``` c++
+// widget.h
+class Widget {
+public:
+    Widget();
+	~Widget(); // 仅声明
+private:
+    struct Impl;
+    std::unique_ptr<Impl> pImpl;
+};
+```
+
+``` c++
+// widget.cpp
+#include "widget.h"
+#include "gadget.h"
+#include <string>
+#include <vector>
+
+struct Widget::Impl {
+    std::string name;
+    std::vector<double> data;
+    Gadget g1, g2, g3;
+};
+
+Widget::Widget() : pImpl(std::make_unique<Impl>()) {}
+Widget::~Widget() {}  // ~Widget 的定义要位于 Impl 的定义之后
+```
+
+**要点速记**
+
+- Pimpl 惯用法通过降低类的客户和类实现者之间的依赖性，减少了构建遍数。
+- 对于采用 `std::unique_ptr` 来实现的 pImpl 指针，需要在类的头文件中声明特种成员函数，并且在实现文件中实现它们，以防止非完整对象造成的编译错误。
+
+## 右值引用、移动语义和完美转发
 
 
 
