@@ -14,7 +14,8 @@ z.lua 在命令行下用来做目录跳转很方便，但是我自己使用的�
 
 ```bash
 #!/bin/bash
-# this is a script to auto install z.lua. Now, only support fish shell
+# this is a script to auto install z.lua
+# Now, only support fish shell
 
 function f_check_program_exist() {
     if ! type ${1} >/dev/null 2>&1; then
@@ -26,14 +27,22 @@ function f_check_program_exist() {
 
 function f_prepare() {
     cd
-    
+
     if [ ! -d ~/.config ]; then
         mkdir ~/.config
     fi
-    
+
     cd .config
+
     rm "z.lua" -rf
+
     git clone https://github.com/skywind3000/z.lua.git --depth=1
+
+    if [ $? != 0 ]; then
+        echo "git clone failed"
+        exit
+    fi
+
     return 0
 }
 
@@ -65,9 +74,9 @@ function f_main() {
     f_fish_install_zlua
 
     echo "install z.lua success. reopen a terminal to use z.lua"
-    echo "if you are using WSL, to avoid bugs, install lua-filesystem first"
     echo "visit https://github.com/skywind3000/z.lua/blob/master/README.cn.md to see more info"
 }
+
 
 f_main
 ```
