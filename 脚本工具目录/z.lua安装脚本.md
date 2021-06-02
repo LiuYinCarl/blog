@@ -74,6 +74,8 @@ f_main
 
 
 
+
+
 ## Windows
 
 Windows 下我一般使用 Power Shell，所以简单说下 Power Shell 下的 z.lua 的安装。
