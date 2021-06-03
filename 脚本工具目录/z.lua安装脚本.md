@@ -87,6 +87,8 @@ f_main
 
 Windows 下我一般使用 Power Shell，所以简单说下 Power Shell 下的 z.lua 的安装。
 
+Windows 下Lua 的安装，可以直接使用官方编译好的[二进制程序](http://luabinaries.sourceforge.net/)，安装好之后将 Lua 程序的路径放到系统路径下即可（可能需要将所有.exe 文件的名字从类似`lua5.*.exe` 改成 `lua.exe`，即去掉名字的数字后缀，但是 dll 文件是不需要改名字的，不然会找不到动态库）。
+
 以下所有命令均在 Power Shell 下输入。
 
 ```powershell
