@@ -164,7 +164,7 @@ q
 
 
 
-![image-20210605111516085](E:\blog\脚本工具目录\images\使用tinyproxy配置git代理服务器\image-20210605111516085.png)
+![image-20210605111516085](.\images\使用tinyproxy配置git代理服务器\image-20210605111516085.png)
 
 最后一列即为总流量。
 
