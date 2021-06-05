@@ -157,6 +157,9 @@ sudo apt install iftop
 
 # 查看流量情况
 iftop
+
+# 推出 iftop
+q
 ```
 
 
