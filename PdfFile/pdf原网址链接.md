@@ -12,3 +12,5 @@
 
 [图解 Functor, Applicative 和 Monad](http://blog.forec.cn/2017/03/02/translation-adit-faamip/)
 
+[重新認識 Pixel、DPI / PPI 以及像素密度](https://blog.infolink.com.tw/2021/rediscover-pixel-dpi-ppi-and-pixel-density/)
+
