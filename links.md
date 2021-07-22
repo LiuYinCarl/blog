@@ -24,6 +24,8 @@
 
 [Scheme Benchmarks](https://ecraven.github.io/r7rs-benchmarks/)
 
+[The Scheme Programming Language](https://www.scheme.com/tspl4/)
+
 ## Ocaml
 
 [Functional Programming in OCaml](http://www.cs.cornell.edu/courses/cs3110/2019sp/textbook/)
