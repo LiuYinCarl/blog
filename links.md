@@ -4,9 +4,9 @@
 
 [The Open Group Base Specifications Issue 7, 2018 edition](https://pubs.opengroup.org/onlinepubs/9699919799/functions/contents.html)
 
+## GNU Manual
 
-
-
+[The GNU C Library](https://www.gnu.org/software/libc/manual/)
 
 
 # git
@@ -65,4 +65,6 @@
 [https://gamedev.net/](https://gamedev.net/)
 
 [https://www.codewars.com/](https://www.codewars.com/)
+
+[whatacold 的空间](https://whatacold.io/zh-cn/)
 
