@@ -68,3 +68,5 @@
 
 [whatacold 的空间](https://whatacold.io/zh-cn/)
 
+[技术日志](https://panzhongxian.cn/cn/log/)
+
