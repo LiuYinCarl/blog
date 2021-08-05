@@ -4,6 +4,23 @@
 
 googletest 版本：1.11.0
 
+## googletest CMakeLists.txt 修改
+
+我们需要修改下 googletest 的CMakeLists.txt，来使得编译出来的库带有调试信息。
+
+需要修改的位置如下
+
+```cmake
+# googletest/CMakeLists.txt
+
+cmake_minimum_required(VERSION 2.8.12)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+# 添加这一行即可
+add_compile_options(-g -O0)
+```
+
+
+
 
 
 ## TestSuite
