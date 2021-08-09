@@ -13,8 +13,8 @@
 Windows 的所有盘的目录都在 WSL 的 `/mnt` 目录下。
 
 ```bash
-➜  mnt cd /mnt
-➜  mnt ls
+➜  cd /mnt
+➜  ls
 c/  d/  e/
 ```
 
@@ -31,15 +31,14 @@ WSL 与 Windows 共享目录的需求是这样产生的：有些工程项目，�
 假设我们在 Windows 下的工程目录为 `E:\testProject`，WSL 中想在 `~/Dev` 目录下建立共享目录，在 WSL 下进行如下设置即可。
 
 ``` bash
-➜  ~ mkdir Dev
-➜  ~ cd Dev/
-➜  Dev ln -s /mnt/e/testProject testProject
-➜  Dev ls
+➜  mkdir Dev
+➜  cd Dev/
+➜  ln -s /mnt/e/testProject testProject
+➜  ls
 testProject@
-➜  Dev cd testProject/
-➜  testProject pwd
+➜  cd testProject/
+➜  pwd
 /home/lzh/Dev/testProject
-➜  testProject
 ```
 
 
