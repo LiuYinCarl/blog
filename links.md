@@ -30,6 +30,12 @@
 
 [Functional Programming in OCaml](http://www.cs.cornell.edu/courses/cs3110/2019sp/textbook/)
 
+## Rust
+
+[Rust 程序设计语言](https://kaisery.github.io/trpl-zh-cn/title-page.html)
+
+[The Rust Programming Language](https://doc.rust-lang.org/stable/book/)
+
 
 ## Terra
 
