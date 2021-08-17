@@ -14,3 +14,6 @@
 
 [重新認識 Pixel、DPI / PPI 以及像素密度](https://blog.infolink.com.tw/2021/rediscover-pixel-dpi-ppi-and-pixel-density/)
 
+[Cache coherence in shared-memory architectures](https://www.cs.utexas.edu/~pingali/CS377P/2018sp/lectures/mesi.pdf)
+
+[The MESI protocol](http://people.cs.pitt.edu/~melhem/courses/2410p/ch5-4.pdf)
