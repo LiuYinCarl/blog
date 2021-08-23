@@ -78,3 +78,4 @@
 
 [https://i6448038.github.io](https://i6448038.github.io/archives/)
 
+[中科技大学系统能力竞赛战队官方网站](https://qf.rs/)
