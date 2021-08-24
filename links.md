@@ -52,6 +52,10 @@
 
 [100个gdb小技巧](https://github.com/hellogcc/100-gdb-tips)
 
+## C++
+
+[C++ Concurrency In Action](https://www.bookstack.cn/read/CPP-Concurrency-In-Action-2ed-2019/README.md)
+
 
 
 ## Blog list
@@ -79,3 +83,5 @@
 [https://i6448038.github.io](https://i6448038.github.io/archives/)
 
 [中科技大学系统能力竞赛战队官方网站](https://qf.rs/)
+
+[开源开发工具技术博客](https://hellogcc.github.io/)

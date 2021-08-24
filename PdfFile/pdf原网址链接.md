@@ -17,3 +17,6 @@
 [Cache coherence in shared-memory architectures](https://www.cs.utexas.edu/~pingali/CS377P/2018sp/lectures/mesi.pdf)
 
 [The MESI protocol](http://people.cs.pitt.edu/~melhem/courses/2410p/ch5-4.pdf)
+
+[100个gdb小技巧](https://github.com/hellogcc/100-gdb-tips)
+
