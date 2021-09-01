@@ -20,3 +20,5 @@
 
 [100个gdb小技巧](https://github.com/hellogcc/100-gdb-tips)
 
+[optimizing_cpp](https://www.agner.org/optimize/optimizing_cpp.pdf)
+
