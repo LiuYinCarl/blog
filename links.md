@@ -42,6 +42,8 @@
 
 [The Scheme Programming Language](https://www.scheme.com/tspl4/)
 
+[The Rust Reference](https://doc.rust-lang.org/stable/reference/)
+
 ### Ocaml
 
 [Functional Programming in OCaml](http://www.cs.cornell.edu/courses/cs3110/2019sp/textbook/)
@@ -51,6 +53,8 @@
 [Rust 程序设计语言](https://kaisery.github.io/trpl-zh-cn/title-page.html)
 
 [The Rust Programming Language](https://doc.rust-lang.org/stable/book/)
+
+[Rust by Example](https://doc.rust-lang.org/stable/rust-by-example/#rust-by-example)
 
 
 ### Terra
@@ -99,4 +103,10 @@
 [开源开发工具技术博客](https://hellogcc.github.io/)
 
 [yooooooo](https://home.cnblogs.com/u/linhaostudy/)
+
+
+
+## 文章链接
+
+[CPU高速缓存行与内存关系 及并发MESI 协议](https://www.cnblogs.com/jokerjason/p/9584402.html)
 
