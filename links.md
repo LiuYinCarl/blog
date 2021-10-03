@@ -4,57 +4,73 @@
 
 [The Open Group Base Specifications Issue 7, 2018 edition](https://pubs.opengroup.org/onlinepubs/9699919799/functions/contents.html)
 
-## GNU Manual
+## TOOLS
+
+### man pages
+
+[dir_all_by_section](https://man7.org/linux/man-pages/dir_all_by_section.html)
+
+
+
+### GNU Manual
 
 [The GNU C Library](https://www.gnu.org/software/libc/manual/)
 
-
-# git
+### git
 
 [Git使用命令行解决冲突](https://docs.github.com/cn/github/collaborating-with-issues-and-pull-requests/resolving-a-merge-conflict-using-the-command-line)
 
+### GDB
 
-## Emacs
+[100个gdb小技巧](https://github.com/hellogcc/100-gdb-tips)
+
+### awk
+[awk 入门教程](https://www.ruanyifeng.com/blog/2018/11/awk.html)
+
+
+### Emacs
 
 [建立etags文件](https://www.emacswiki.org/emacs/BuildTags)
 
 [使用etags](https://www.emacswiki.org/emacs/EmacsTags)
 
-## scheme
+## LANGUAGES
+
+### scheme
 
 [Scheme Benchmarks](https://ecraven.github.io/r7rs-benchmarks/)
 
 [The Scheme Programming Language](https://www.scheme.com/tspl4/)
 
-## Ocaml
+[The Rust Reference](https://doc.rust-lang.org/stable/reference/)
+
+### Ocaml
 
 [Functional Programming in OCaml](http://www.cs.cornell.edu/courses/cs3110/2019sp/textbook/)
 
-## Rust
+### Rust
 
 [Rust 程序设计语言](https://kaisery.github.io/trpl-zh-cn/title-page.html)
 
 [The Rust Programming Language](https://doc.rust-lang.org/stable/book/)
 
+[Rust by Example](https://doc.rust-lang.org/stable/rust-by-example/#rust-by-example)
 
-## Terra
+
+### Terra
 
 [Terra: A Multi-Stage Language for High-Performance Computing](https://cs.stanford.edu/~zdevito/pldi071-devito.pdf)
 
-## Guile
+### Guile
 
 [Guile is a programming language](https://www.gnu.org/software/guile/)
 
 [Tutorial Introduction to Guile](https://www.gnu.org/software/guile/docs/guile-tut/tutorial.html)
 
-
-## GDB
-
-[100个gdb小技巧](https://github.com/hellogcc/100-gdb-tips)
-
-## C++
+### C++
 
 [C++ Concurrency In Action](https://www.bookstack.cn/read/CPP-Concurrency-In-Action-2ed-2019/README.md)
+
 
 
 
@@ -85,3 +101,12 @@
 [中科技大学系统能力竞赛战队官方网站](https://qf.rs/)
 
 [开源开发工具技术博客](https://hellogcc.github.io/)
+
+[yooooooo](https://home.cnblogs.com/u/linhaostudy/)
+
+
+
+## 文章链接
+
+[CPU高速缓存行与内存关系 及并发MESI 协议](https://www.cnblogs.com/jokerjason/p/9584402.html)
+
