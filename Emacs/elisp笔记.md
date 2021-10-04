@@ -598,4 +598,269 @@ Emacs 的一种特殊的局部变量。
 
 ### 变量的作用域
 
+elisp 的变量作用域是动态作用域。所以一个符号在使用之前可能为空。可以使用 `boundp` 来测试一个变量是否有定义。对于一个 buffer-local 变量，它的缺省值可能没有定义，直接使用会出错，可以先用 `default-boundp` 进行测试。使一个变量的值变为空，可以使用 `makunbound`，消除一个 buffer-local 变量，可以使用 `kill-local-variable`。消除所有 buffer-local 变量可以使用 `kill-all-local-variables`，但是有属性的 permanent-local 不会消除。
 
+```elisp
+(make-local-variable 'foo)
+(setq foo "local variable")
+foo
+(boundp 'foo)
+(default-boundp 'foo)
+(makunbound 'foo)
+foo
+(kill-local-variable 'foo)
+```
+
+### 常见变量命名规则
+
+- hook                一个在特定情况下调用的函数列表，比如关闭缓冲区时，进入某个模式时
+- function            值为一个函数
+- functions           值为一个函数列表
+- flag                值为 nil 或 non-nil
+- predicate           值是一个作判断的函数，返回 nil 或 non-nil
+- program 或 -command 一个程序或 shell 命令名
+- form                一个表达式
+- forms               一个表达式列表。
+- map                 一个按键映射(keymap)
+
+## 函数和命令
+
+参数列表的语法
+
+```elisp
+(required-vars...
+	[&optional optional-vars...]
+	[&rest rest-vars])
+```
+
+把必须提供的参数放在前面，可选的参数放在后面，最后用一个符号表示剩余的所有参数。
+
+```elisp
+(defun foo (var1 var2 &optional opt1 opt2 &rest rest)
+	(list var1 var2 opt1 opt2 rest))
+	
+(foo 1 2)         ; => (1 2 nil nil nil)
+(foo 1 2 3)       ; => (1 2 3 nil nil)
+(foo 1 2 3 4 5 6) ; => (1 2 3 4 (5 6))
+```
+
+从上面的例子可以看出，当调用函数时如果没有提供可选参数，则可选参数为 nil，当没有提供剩余参数时，剩余参数也为 nil，如果提供了剩余参数，剩余参数表现为列表的形式。
+
+### 调用函数
+
+函数调用一般使用 `funcall` 和 `apply` 函数。这两个函数都是将第一个参数作为要调用的函数名，其余参数作为函数参数。区别在于 `funcall` 直接将其余参数传入要调用的函数，而 `apply` 的最后一个参数是作为列表，会将列表进行一次平铺(将列表解为多个参数)后再传给函数。
+
+```elisp
+(funcall 'list 'x '(y) '(a b)) ; => (x (y) (a b))
+(apply 'list 'x '(y) '(a b))   ; => (x (y) a b)
+```
+
+### 宏
+
+传给宏的参数会出现在最后拓展后的表达式中，所以可能会出现副作用，例子如下。可以使用 `macroexpand` 函数来看宏拓展后代码。
+
+```elisp
+(defmacro foo (arg)
+	(require 'cl) ; to import incl function
+	(list 'message "%d %d" arg arg))
+	
+(defun bar (arg)
+	(message "%d %d" arg arg))
+	
+(let ((i 1))
+	(bar (+ 1 i))) ; => "2 2"
+	
+(let ((i 1))
+	(foo (incf i))) ; => "2 3"
+
+(macroexpand '(foo (incf i))) ; => (message "%d %d" (incf i) (incf i))
+```
+
+### 命令
+
+elisp 编写的命令都含有一个 `interactive` 表达式，用来指明这个命令的参数。
+
+```elisp
+(defun hello (name)
+	(interactive "sWhat's your name:")
+	(message "hello, %s" name))
+```
+
+`interactive` 表达式的参数的第一个字符 `s` 叫做代码字符，表示参数是一个字符串。如果命令有多个参数，可以使用换行符将多个提示字符串分开。
+
+```elisp
+(defun hello (name age)
+	(interactive "sWhat's your name: \nnWhat's your age:")
+	(message "hello, %d years old's %s" age name))
+```
+其他的代码字符可以通过 `C-h f` 查看。
+
+## 操作对象：缓冲区
+
+缓冲区是用来保存文本的对象。通常缓冲区和文件关联，但是也有些缓冲去没有对应的文件，Emacs 可以同事打开多个文件，同时存在多个缓冲区，但是只有一个缓冲区被称为当前缓冲区。
+
+可以用 `buffer-name` 函数获得缓冲区对象的名字，如果不指定参数，则返回当前缓冲区的名字。可以用 `rename-buffer` 对缓冲区重命名，如果指定的名字与当前存在的缓冲区名字冲突，则会产生一个错误。也可以用 `generate-new-buffer-name` 来产生一个唯一的缓冲区名。
+
+### 当前缓冲区
+
+当前缓冲去不一定是光标所在的那个缓冲区，可以用 `set-buffer` 来指定当前缓冲区。但是需要注意，当返回到命令循环时，光标所在的缓冲区会自动成为当前缓冲区。可以参考下面这个例子。
+
+```elisp
+(set-buffer "*Messages*")
+(message (buffer-name))  ;=> not *Messages* buffer
+
+(progn
+	(set-buffer "*Messages*")
+	(message (buffer-name))) ; => *Messages* buffer
+```
+
+但是我们在编写 elisp 代码的时候，最好不要使用 `set-buffer` 来设置 current-buffer，因为 `set-buffer` 不能处理错误或退出情况。正确的做法是使用 `save-current-buffer` `with-current-buffer` `save-excursion` 等方法。`save-current-buffer` 的作用是保存当前缓冲区，执行其中的表达式，最后恢复为原来的缓冲区，如果原来的缓冲区被关闭了，则使用最后一次被设置为当前缓冲区的缓冲区。elisp 中很多以 `with` 开头的宏都是在不改变当前状态的情况下，临时用另一个变量代替现有变量执行语句。
+
+```elisp
+(with-current-buffer BUFFER-OR-NAME
+	body)
+```
+
+相当于
+
+```elisp
+(save-current-buffer
+	(set-buffer BUFFER-OR-NAME)
+	body)
+```
+
+`save-excursion` 与 `save-current-buffer` 不同之处在于，它不仅保存当前缓冲区，还保存了当前的位置和 mark。
+
+### 创建和关闭缓冲区
+
+`get-buffer-create` 参数为一个表示缓冲区的名字，如果这个缓冲区已经存在，则返回这个缓冲区对象，否则新建一个缓冲区。
+
+`generate-new-buffer` 参数为一个表示缓冲区的名字，如果这个缓冲区已经存在，则使用名字加一个后缀 n(n 为整数，从 2 开始) 的新名字创建一个新缓冲区。
+
+`kill-buffer` 关闭一个缓冲区，如果要用户确认，可以加到 `kill-buffer-query-functions` 中，如果需要执行关联操作，可以使用 `kill-buffer-hook`。
+
+`buffer-live-p` 检查一个缓冲区是否存在。
+
+`buffer-list` 获取包含所有缓冲区的列表。
+
+`with-temp-buffer` 使用一个临时缓冲区。
+
+### 在缓冲区中移动
+
+位置(position) 和标记(marker) 的概念。
+
+位置是指某个字符在缓冲区中的下标，从 1 开始。标记和位置的区别在于位置会随文本插入和删除而改变位置。一个标记包含了缓冲区和位置两个信息。在插入和删除缓冲区里的文本时，所有的标记都会检查一遍，并重新设置位置。这对于含有大量标记的缓冲区处理是很花时间的，所以当你确认某个标记不用的话应该释放这个标记。
+
+`make-marker` 创建标记，创建的标记不指向任何位置，需要使用 `set-market` 来设置标记的缓冲区和位置。
+
+`point-marker` 得到 point 处的标记，point 是当前缓冲区中光标所在位置的标记。
+
+`copy-marker` 复制或产生一个标记。
+
+```elisp
+(setq foo (make-marker))
+(set-marker foo (point))
+
+(copy-marker 20)
+(copy-marker foo)
+```
+
+`marker-position` `marker-buffer` 得到一个 mark 的位置以及缓冲区信息。
+
+``` elisp
+(marker-position (point-marker))
+(marker-buffer (point-marker))
+```
+
+和 point 类似，有一个特殊的标记称为 "the mark"。它指定了一个区域的文本用于某些命令，比如  `kill-region`，`indent-region`。可以用 `mark` 函数返回当前 mark 的值。如果使用  `transient-mark-mode`，而且 `mark-even-if-inactive` 值是 `nil` 的话，在 mark 没有激活时（也就是  `mark-active` 的值为 `nil`），调用 `mark` 函数会产生一个错误。如果传递一个参数 `force` 才能返回当前缓冲区 mark 的位置。`mark-marker` 能返回当前缓冲区的 mark，这不是 mark 的拷贝，所以设置它的值会改变当前 mark 的值。`set-mark` 可以设置 mark 的值，并激活 mark。每个缓冲区还维护一个 `mark-ring`，这个列表里保存了 mark 的前一个值。当一个命令修改了 mark 的值时，通常要把旧的值放到 `mark-ring` 里。可以用 `push-mark` 和 `pop-mark` 加入或删除 `mark-ring` 里的元素。当缓冲区里 mark 存在且指向某个位置时，可以用 `region-beginning` 和 `region-end` 得到 point 和 mark 中较小的和较大的值。当然如果使用 `transient-mark-mode` 时，需要激活 mark，否则会产生一个错误。
+
+按单个字符位置来移动的函数主要使用 `goto-char` 和 `forward-char`、`backward-char`。前者是按缓冲区的绝对位置移动，而后者是按 point 的偏移位置移动。
+
+```elisp
+(goto-char (point-min)) ; 光标跳到缓冲区开始位置
+
+(forward-char 10)       ; 光标向前移动 10 个字符
+(backward-char 10)      ; 光标向后移动 10 个字符
+
+(forward-word 1)        ; 光标向前移动 1 个单词
+(backward-word 1)       ; 光标向后移动 1 个单词
+
+(forward-line 1)        ; 光标向下移动 1 行，移动到下一行的行首
+(forward-line 0)        ; 光标移动到当前行的行首
+
+(line-beginning-position) ; 得到行首位置
+(line-end-position)       ; 得到行尾位置
+(line-number-at-pos)      ; 得到当前行的行号
+```
+
+### 获取缓冲区的内容
+
+```elisp
+(buffer-string)              ; 获取当前缓冲区的内容
+(buffer-substring START END) ; 获取当前缓冲区一个区域内的文本
+```
+
+### 修改缓冲区的内容
+
+- `insert` 插入一个或多个字符串到当前缓冲区的 point 后面
+- `insert-char` 插入单个字符到当前缓冲区的 point 后面
+- `insert-buffer-substring` 插入内容到另一个缓冲区
+- `delete-char` 删除 point 后的一个或多个字符
+- `delete-backward-char` 删除 poing 前的一个或多个字符
+- ` delete-region` 删除一个区间
+- `delete-and-extract-region` 删除一个区间并返回被删除的区间
+- `re-search-forward` 向后查找内容
+- `re-search-backward` 向前查找内容
+
+## 操作对象：窗口
+
+Window 是屏幕中用来显示一个缓冲区的部分。Frame 是 Emacs 能够使用的屏幕的部分。Emacs 可以有多个 Frame，每个 Frame 中可以容纳多个 Window。
+
+### 分割窗口
+
+```elisp
+(split-window &optional window size horizontal)
+```
+`split-window` 函数的功能是将指定窗口进行分割，分割后的两个窗口里的缓冲区是同一个缓冲区，使用这个函数后，光标仍然在原窗口，函数返回新窗口对象。
+
+### 删除窗口
+
+删除窗口使用 `delete-window` 函数，默认删除当前选中的窗口，如果要删除除了当前窗口之外的其他窗口，可以使用 `delete-other-windows`。
+
+### 配置窗口
+
+窗口配置(window configuration) 包含了 frame 中所有窗口的位置信息：窗口 大小，显示的缓冲区，缓冲区中光标的位置和 mark，还有 fringe，滚动条等等。 用 `current-window-configuration` 得到当前窗口配置，用 `set-window-configuration` 来设置。
+
+### 选择窗口
+
+使用 `selected-window` 来获取当前被选中的窗口。使用 `select-window` 来选中某个窗口。
+
+`save-selected-window` 和 `with-selected-window` 两个宏可以不修改当前窗口执行语句。它们的作用是在执行语句结束后选择的窗口仍留在执行 语句之前的窗口。`with-selected-window` 和 `save-selected-window` 几乎相同， 只不过 `save-selected-window` 选择了其它窗口。这两个宏不会保存窗口的位置信息，如果执行语句结束后，保存的窗口已经消失，则会选择z之前最后一个被选中的窗口。
+
+```elisp
+(save-selected-window
+	(select-window (next-window))
+	(goto-char (point-min))) ; 让另一个窗口光标移动到缓冲区开头
+```
+
+当前 frame 中的所有窗口可以通过 `window-list` 得到。可以用 `next-window` 来得到 `window-list` 中排在某个 window 后面的 window，用 `previous-window` 得到排在某个 window 之前的 window。`walk-window` 可以遍历窗口，`get-window-with-predicate` 可以查找符合某个条件的 window。
+
+### 窗口大小信息
+
+窗口的高表示窗口可以容纳的行数，窗口的宽指每一行可以容纳的字符数。mode line 和 header line 包含在窗口的高度中，所以有 `window-height` 和 `window-body-height` 用来获取包含即不包含 mode line/header line 的窗口高度。
+
+`window-width` 返回窗口的宽度。`window-edges` 返回窗口各个顶点的坐标信息。`window-inside-edges` 返回窗口的文本区域的各个顶点的坐标信息。
+
+### 窗口对应的缓冲区
+
+`window-buffer` 用来获取窗口对应的缓冲区。`get-buffer-window` 用来获取缓冲区对应的窗口，如果多个窗口显示同一个缓冲区，则只返回其中的一个，如果要得到所有显示该缓冲区的窗口，使用 `get-buffer-window-list`。
+
+`set-window-buffer` 用来让某个窗口i希纳是某个缓冲区。`switch-to-buffer` 让被选中的窗口显示某个缓冲区。`set-buffer` 让某个缓冲区成为当前缓冲区。
+
+让一个缓冲区可见可以用 `display-buffer`。默认的行为是当缓冲区已经显示在某 个窗口中时，如果不是当前选中窗口，则返回那个窗口，如果是当前选中窗口， 且如果传递的 `not-this-window` 参数为 `non-nil` 时，会新建一个窗口，显示缓 冲区。如果没有任何窗口显示这个缓冲区，则新建一个窗口显示缓冲区，并返回这个窗口。
+
+### 改变窗口显示区域
+
+每个窗口会保存一个显示缓冲区的起点位置，这个位置对应于窗口左上角光标在 缓冲区里的位置。可以用 `window-start` 函数得到某个窗口的起点位置。可以通过 `set-window-start` 来改变显示起点位置。可以通过 `pos-visible-in-window-p` 来检测缓冲区中某个位置是否是可见的。 但是直接通过 `set-window-start` 来控制显示比较容易出现错误，因为 `set-window-start` 并不会改变 point 所在的位置，在窗口调用 `redisplay` 函数之后 point 会跳到相应的位置。如果你确实有这个需要，建议还是用 `(with-selected-window window (goto-char pos))` 来代替。
+
+## 操作对象：文件
