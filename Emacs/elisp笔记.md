@@ -1,5 +1,7 @@
 # elisp笔记
 
+参考及摘抄自 [Emacs Lisp 简明教程](http://smacs.github.io/elisp/)
+
 ## 如何执行 elisp
 
 两种方式
@@ -864,3 +866,97 @@ Window 是屏幕中用来显示一个缓冲区的部分。Frame 是 Emacs 能够
 每个窗口会保存一个显示缓冲区的起点位置，这个位置对应于窗口左上角光标在 缓冲区里的位置。可以用 `window-start` 函数得到某个窗口的起点位置。可以通过 `set-window-start` 来改变显示起点位置。可以通过 `pos-visible-in-window-p` 来检测缓冲区中某个位置是否是可见的。 但是直接通过 `set-window-start` 来控制显示比较容易出现错误，因为 `set-window-start` 并不会改变 point 所在的位置，在窗口调用 `redisplay` 函数之后 point 会跳到相应的位置。如果你确实有这个需要，建议还是用 `(with-selected-window window (goto-char pos))` 来代替。
 
 ## 操作对象：文件
+
+### 文件读写
+
+打开文件的命令是 `find-file`。这命令使一个缓冲区访问某个文件，并让这 个缓冲区成为当前缓冲区。在打开文件过程中会调用 `find-file-hook`。 `find-file-noselect` 是所有访问文件的核心函数。与 `find-file 不同`，它只返回访问文件的缓冲区。这两个函数都有一个特点，如果 Emacs 里已经有一个缓冲 区访问这个文件的话，则不会创建另一个缓冲区来访问文件，只是简单返 回或者转到这个缓冲区。怎样检查有没有缓冲区访问某个文件呢？所有和文件关联的缓冲区里都有一个 buffer-local 变量 `buffer-file-name`。但是不要直接设置这个变量来改变缓冲区关联的文件。而是使用 `set-visited-file-name` 来修改。同样不要直接从 `buffer-list` 里搜索 `buffer-file-name` 来查找和某个文件关联的缓冲区。应该使用 `get-file-buffer` 或者 `find-buffer-visiting`。
+
+```elisp
+(find-file "~/test.txt")            ; 会打开一个新 buffer
+(with-current-buffer
+	(find-file-noselect "~/test.txt")
+	buffer-file-name)               ; => "/home/lzh/test.txt"
+(find-buffer-visiting "~/test.txt") ; => #<buffer test.txt>
+(get-file-buffer "~/test.txt")      ; => #<buffer test.txt>
+```
+
+保存文件的命令是 `save-buffer`
+
+### 文件信息
+
+```elisp
+(file-exists-p "~/test.txt")     ; 判断文件是否存在，对于文件和目录都可判断
+(file-readable-p "~/test.txt")   ; 判断文件是否可读
+(file-writable-p "~/test.txt")   ; 判断文件是否可写
+(file-executable-p "~/test.txt") ; 判断文件是否可执行
+(format "%o" (file-mode "~/test.txt")) ; 获取文件的位模式
+```
+
+```elisp
+(file-regular-p "~/test.txt")   ; 判断是否是普通文件
+(file-directory-p "~/test.txt") ; 判断是否是存在的目录
+(file-symlink-p "~/test.txt")   ; 判断是否是符号链接
+(file-truename "~/test.txt")    ; 获取文件真实路径
+```
+
+### 修改文件信息
+
+- `rename-file` 文件重命名。
+- `copy-file` 复制文件
+- `delete-file` 删除文件
+- `make-directory` 创建目录
+- `delete-directory` 删除目录
+- `set-file-times` 设置文件修改时间
+- `set-file-modes` 设置文件位模式
+
+
+### 临时文件
+
+```elisp
+(make-temp-file "foo") ; 创建一个临时文件 
+(make-temp-name "foo") ; 产生一个临时文件名
+```
+
+### 目录操作
+
+```elisp
+(directory-files "~/tmp/") ; 获取 "~/tmp/"目录下所有文件名
+(directory-files "~/tmp/" nil "\\.py$") ; 获取 "~/tmp/" 目录下所有 .py 拓展名的文件
+```
+## 操作对象：文本
+
+如果使用过其它图形界面的文本组件进行编程，它们对于文本的高亮一般都是采 用给对应文本贴上相应标签的方法。Emacs 的处理方法也是类似的。在 Emacs 里，在不同位置上的每个字符都可以有一个属性列表。 这个属性列表和符号的属性列表很相似，都是由一个名字和值构成的对组成。名字和值都可以是一个 lisp 对象，但是通常名字都是一个符号，这样可以用这个 符号来查找相应的属性值。复制文本通常都会复制相应的字符的文本属性，但是 也可以用相应的函数只复制文本字符串，比如 `substring-no-properties`、 `insert-buffer-substring-no-properties`、`buffer-substring-no-properties`。
+
+产生一个带属性的字符串可以用 propertize 函数。
+
+```elisp
+(propertize "abc" 'face 'bold) ; => #("abc" 0 3 (face bold))
+```
+
+### 查看文本属性
+
+由于字符串和缓冲区都可以有文本属性，所以下面的函数通常不提供特定参数就是检 查当前缓冲区的文本属性，如果提供文本对象，则是操作对应的文本属性。查看文本对象在某处的文本属性可以用 `get-text-property` 函数。
+
+```elisp
+(setq foo (concat "abc"
+	               (propertize "cde" 'face 'bold)))
+(get-text-property 3 'face foo)
+(save-excursion
+	(goto-char (point-max))
+	(insert foo))
+(get-text-property 4 'face)
+```
+`get-char-property` 和 `get-text-property` 相似，但是它是先查找 overlay 的 文本属性。overlay 是缓冲区文字在屏幕上的显示方式，它属于某个缓冲区，具 有起点和终点，也具有文本属性，可以修改缓冲区对应区域上文本的显示方式。`get-text-property` 是查找某个属性的值，用 `text-properties-at` 可以得到某个位置上文本的所有属性。
+
+### 修改文本属性
+
+`put-text-property` 可以给文本对象添加一个属性。
+
+```elisp
+(let ((str "abc"))
+	(put-text-property 0 3 'face 'bold str)
+	str) ; => #("abc" 0 3 (face bold))
+```
+
+和 `put-text-property` 类似，`add-text-properties` 可以给文本对象添加一系列的属性。和 `add-text-properties` 不同，可以用 `set-text-properties` 直接设置文本属性列表。也可以用 `remove-text-properties` 和 `remove-list-of-text-properties` 来除去某个区域的指定文本属性。这两个函数的属性列表参数只有名字起作用，值是被忽略的。
+
