@@ -1,5 +1,7 @@
 # git 技巧
 
+
+
 ## 修改 git 的默认编辑器
 
 ```bash
@@ -7,6 +9,35 @@ git config core.editor vim
 ```
 
 将 git 的默认编辑器修改为 vim。
+
+
+
+## 将 git 部分命令的输出中的中文从八进制改成中文
+
+针对部分命令如 `git log`  `git status` 中含中文的路径名会以八进制显示的情况，可以进行如下设置，让 git 以中文显示路径。
+
+```bash
+git config --global core.quotepath false
+```
+
+
+
+## 按条件查看提交历史
+
+[2.3 Git 基础 - 查看提交历史](https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2)
+
+查看提交历史使用的命令是 `git log`。下面介绍几个常用的选项。
+
+```bash
+git log -2 # 输出最近的两次提交
+git log -p 2 # 按 patch 格式输出最近的两次提交
+git log --since 2021-01-01 # 输出 2021-01-01 之后的提交
+git log --until 2021-01-01 # 输出最晚到 2021-01-01 的提交
+git log --author carl  # 输出作者字符串中包含 "carl" 的提交
+git log --committer carl # 输出提交者字符串中包含 "carl" 的提交
+git log --grep carl # 输出提交说明中包含 "carl" 的提交
+git log -S carl # 输出提交的内容中添加或删除了该字符串的提交，例如可以用来查看函数的改动
+```
 
 
 
@@ -164,4 +195,6 @@ Date:   Wed Oct 20 20:50:30 2021 +0800
 ```
 
 通过 `git log` 命令可以看到第一次提交的 commit 信息发生了变化。
+
+## 去除错误提交的文件
 
