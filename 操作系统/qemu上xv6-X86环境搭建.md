@@ -22,4 +22,5 @@ make qemu-nox # qemu-nox 是不使用 GUI 界面的，适合在终端下操作
 ## xv6-X86 资料
 
 [xv6 book](https://iitd.github.io/os/nptel21/book.pdf)
+
 [xv6 中文文档](http://staff.ustc.edu.cn/~chizhang/OS/Labs/MIT-XV6-%D6%D0%CE%C4%B7%AD%D2%EB%B0%E6.pdf)

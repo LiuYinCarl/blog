@@ -1,0 +1,167 @@
+# git 技巧
+
+## 修改 git 的默认编辑器
+
+```bash
+git config core.editor vim
+```
+
+将 git 的默认编辑器修改为 vim。
+
+
+
+## 重写提交说明
+
+当执行了 `git commit "some message"` 命令之后发现提交的 "some message"  存在问题，需要修改，可以下列操作来修改提交信息。
+
+如果要修改的是**最近一次** `git commit` 的提交信息，使用如下修补提交的命令。
+
+```bash
+git commit --amend
+```
+
+执行这条命令后就会打开一个 Nano 的编辑窗口，然后就可以修改上一次的提交信息了。
+
+如果不想打开 Nano，可以使用 `-m` 参数加上新的提交信息。
+
+```bash
+git commit --amend -m "new commit message"
+```
+
+如果需要修改的是历史提交信息（即不是最近一次提交信息）的话，就需要使用 `git rebase` 命令，下面是一个完整的例子。
+
+```bash
+➜ mkdir test1
+➜ cd test1/
+➜ git init
+Initialized empty Git repository in /home/lzh/test/git/test1/.git/
+➜ touch a.txt
+➜ git add -A
+➜ git commit -m "create a.txt"
+[master (root-commit) 39d83ee] create a.txt
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 a.txt
+➜ touch b.txt
+➜ git add -A
+➜ git commit -m "create b.txt"
+[master 8958708] create b.txt
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 b.txt
+➜ git log
+commit 895870830338c9fcd3700fe0c4da98747ef6fd7b (HEAD -> master)
+Author: LiuYinCarl <bearcarl@qq.com>
+Date:   Wed Oct 20 20:50:53 2021 +0800
+
+    create b.txt
+
+commit 39d83eec2dc0aa84bc5b921b4c81524c29345504
+Author: LiuYinCarl <bearcarl@qq.com>
+Date:   Wed Oct 20 20:50:30 2021 +0800
+
+    create a.txt
+```
+
+`git rebase -i` 后接的参数如果是 `--root` 表示从第一个提交记录开始查看。如果是一个提交记录的散列值，比如 `39d83eec2dc0aa84bc5b921b4c81524c29345504` 则表示从该提交记录开始查看，不包含这个提交。
+
+这是是 执行 `rebase` 命令后打开的文件。从上到下一次是我们的提交记录。
+
+```bash
+pick 39d83ee create a.txt
+pick 8958708 create b.txt
+
+# Rebase 8958708 onto 009e0bc (2 commands)
+#
+# Commands:
+# p, pick <commit> = use commit
+# r, reword <commit> = use commit, but edit the commit message
+# e, edit <commit> = use commit, but stop for amending
+# s, squash <commit> = use commit, but meld into previous commit
+# f, fixup <commit> = like "squash", but discard this commit's log message
+# x, exec <command> = run command (the rest of the line) using shell
+# b, break = stop here (continue rebase later with 'git rebase --continue')
+# d, drop <commit> = remove commit
+# l, label <label> = label current HEAD with a name
+# t, reset <label> = reset HEAD to a label
+# m, merge [-C <commit> | -c <commit>] <label> [# <oneline>]
+# .       create a merge commit using the original merge commit's
+# .       message (or the oneline, if no original merge commit was
+# .       specified). Use -c <commit> to reword the commit message.
+#
+# These lines can be re-ordered; they are executed from top to bottom.
+#
+# If you remove a line here THAT COMMIT WILL BE LOST.
+#
+# However, if you remove everything, the rebase will be aborted.
+#
+# Note that empty commits are commented out
+```
+
+根据命令提示，修改成下面这个样子, 第一行改成 r，表示我们要修改这次历史提交的提交信息。
+
+```bash
+r 39d83ee create a.txt
+pick 8958708 create b.txt
+
+# Rebase 8958708 onto 009e0bc (2 commands)
+# 未修改部分，省略 ...
+```
+
+保存退出后，git 会自动打开另一个编辑页面，让你编辑这次历史提交的提交信息，内容如下
+
+```bash
+create a.txt
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Date:      Wed Oct 20 20:50:30 2021 +0800
+#
+# interactive rebase in progress; onto 009e0bc
+# Last command done (1 command done):
+#    r 39d83ee create a.txt
+# Next command to do (1 remaining command):
+#    pick 8958708 create b.txt
+# You are currently editing a commit while rebasing branch 'master' on '009e0bc'.
+#
+#
+# Initial commit
+#
+# Changes to be committed:
+#       new file:   a.txt
+#
+```
+
+最上面一行就是我们之前的提交信息，现在将它改成下面这个样子
+
+```bash
+create rebase commit
+
+# 未修改部分，省略 ...
+
+```
+
+保存退出
+
+```bash
+➜ git rebase -i --root
+[detached HEAD 1c19a3b] create rebase commit
+ Date: Wed Oct 20 20:50:30 2021 +0800
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 a.txt
+Successfully rebased and updated refs/heads/master.
+➜ git log
+commit c771c4b14d78f6779cb6b77615562cf8ea65206d (HEAD -> master)
+Author: LiuYinCarl <bearcarl@qq.com>
+Date:   Wed Oct 20 20:50:53 2021 +0800
+
+    create b.txt
+
+commit 1c19a3b8a5d60b6af9b8c87a6ac1aeecaac65727
+Author: LiuYinCarl <bearcarl@qq.com>
+Date:   Wed Oct 20 20:50:30 2021 +0800
+
+    create rebase commit
+```
+
+通过 `git log` 命令可以看到第一次提交的 commit 信息发生了变化。
+
