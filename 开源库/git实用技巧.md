@@ -196,5 +196,142 @@ Date:   Wed Oct 20 20:50:30 2021 +0800
 
 通过 `git log` 命令可以看到第一次提交的 commit 信息发生了变化。
 
+
+
 ## 去除错误提交的文件
 
+如果是要删除最近一次提交的话，可以使用 `git rm` 和 `git commit` 命令。
+
+```bash
+➜ mkdir testrm
+➜ cd testrm/
+➜ git init
+Initialized empty Git repository in /Users/zhl/dev/test/git/testrm/.git/
+➜ touch a.txt b.txt
+➜ git add -A
+➜ git commit -m "add two file"
+[master (root-commit) 01a8038] add two file
+ Committer: ZH L <zhl@ZHdeMacBook-Air.local>
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 a.txt
+ create mode 100644 b.txt
+➜ git log -p
+commit 01a80384a8c60881d9ffb72b9f4cada684468474 (HEAD -> master)
+Author: ZH L <zhl@ZHdeMacBook-Air.local>
+Date:   Sat Oct 23 00:55:35 2021 +0800
+
+    add two file
+
+diff --git a/a.txt b/a.txt
+new file mode 100644
+index 0000000..e69de29
+diff --git a/b.txt b/b.txt
+new file mode 100644
+index 0000000..e69de29
+➜ git rm --cached a.txt
+rm 'a.txt'
+➜ git commit --amend
+[master ca0da34] add two file
+ Date: Sat Oct 23 00:55:35 2021 +0800
+ Committer: ZH L <zhl@ZHdeMacBook-Air.local>
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 b.txt
+➜ git log -p
+commit ca0da344170a84afe1f5ecfe3b01223db536613f (HEAD -> master)
+Author: ZH L <zhl@ZHdeMacBook-Air.local>
+Date:   Sat Oct 23 00:55:35 2021 +0800
+
+    add two file
+
+diff --git a/b.txt b/b.txt
+new file mode 100644
+index 0000000..e69de29
+```
+
+可以看到，使用 `git rm --cached a.txt` 和 `git commit --amend` 后成功地从提交记录中删除了之前提交的 `a.txt` 文件。
+
+如果需要修改文件的不是最近一次提交，而是历史提交记录，则需要使用 `rebase` 操作。
+
+ ```bash
+ ➜ mkdir test
+ ➜ cd test/
+ ➜ git init
+ Initialized empty Git repository in /Users/zhl/dev/test/git/test/.git/
+ ➜ touch a.txt b.txt
+ ➜ git add -A
+ ➜ git commit -m "add a.txt b.txt"
+ [main (root-commit) 9a4b1c4] add a.txt b.txt
+  2 files changed, 0 insertions(+), 0 deletions(-)
+  create mode 100644 a.txt
+  create mode 100644 b.txt
+ ➜ touch c.txt
+ ➜ git add -A
+ ➜ git commit -m "add c.txt"
+ [main 82f1a7c] add c.txt
+  1 file changed, 0 insertions(+), 0 deletions(-)
+  create mode 100644 c.txt
+ ➜  test git:(main) git log
+ commit 82f1a7c929007fbc175d2164f700ca46a324c45c (HEAD -> main)
+ Author: LiuYinCarl <1427518212@qq.com>
+ Date:   Sat Oct 23 01:23:36 2021 +0800
+ 
+     add c.txt
+ 
+ commit 9a4b1c4bd21c963722cfd29aefb9e95fa3f054bf
+ Author: LiuYinCarl <1427518212@qq.com>
+ Date:   Sat Oct 23 01:23:05 2021 +0800
+ 
+     add a.txt b.txt
+ ➜  test git:(main) git rebase -i --root
+ ```
+
+执行 `git rebase` 后，会打开一个文件，内容如下（省略操作提示行）
+
+```bash
+pick 9a4b1c4 add a.txt b.txt
+pick 82f1a7c add c.txt
+```
+
+根据提示，使用 `edit` 命令将提交记录修改为如下
+
+```bash
+edit 9a4b1c4 add a.txt b.txt
+pick 82f1a7c add c.txt
+```
+
+然后继续在终端执行如下命令
+
+```bash
+➜ git rebase -i --root
+Stopped at 9a4b1c4...  add a.txt b.txt
+You can amend the commit now, with
+
+  git commit --amend
+
+Once you are satisfied with your changes, run
+
+  git rebase --continue
+➜ git rm --cached a.txt
+rm 'a.txt'
+➜ git commit --amend -m "add b.txt"
+[detached HEAD 4729a73] add b.txt
+ Date: Sat Oct 23 01:23:05 2021 +0800
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 b.txt
+➜ git rebase --continue
+Successfully rebased and updated refs/heads/main.
+➜ git log
+commit 4f59d2381da0f791649d413718fd1c81f5248da0 (HEAD -> main)
+Author: LiuYinCarl <1427518212@qq.com>
+Date:   Sat Oct 23 01:23:36 2021 +0800
+
+    add c.txt
+
+commit 4729a73942ef9be65953d9f1e0148b6979528b85
+Author: LiuYinCarl <1427518212@qq.com>
+Date:   Sat Oct 23 01:23:05 2021 +0800
+
+    add b.txt
+```
+
+可以看到，提交记录已经发生了变化，原先错误提交的 `a.txt` 也被从提交记录中去除了。
