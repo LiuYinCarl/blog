@@ -335,3 +335,56 @@ Date:   Sat Oct 23 01:23:05 2021 +0800
 ```
 
 可以看到，提交记录已经发生了变化，原先错误提交的 `a.txt` 也被从提交记录中去除了。
+
+## git 暂存区的概念
+
+可以通过 `git add` 命令将文件存入 git 暂存区。
+
+存入到了 git 暂存区中的文件在没有再次修改之前不会在 `git diff` 的输出中出现。如果存入了暂存区之后再次修改了这个文件，那么 `git diff` 的输出也只会展示存入了暂存区后的修改内容。
+
+## git 按单词进行差异比较
+
+git 默认是基于行进行差异比较的。如果我们想要看基于单词的比较的话，可以使用如下命令。
+
+```bash
+git diff --word-diff
+```
+
+但是这样不能看到暂存区中的变更，如果想看到添加到暂存区中的文件的变更，可以使用如下命令。
+
+```bash
+git diff --cached --word-diff
+```
+
+下面是一个具体的例子。
+
+```bash
+➜ mkdir test
+➜ cd test/
+➜ git init
+Initialized empty Git repository in /Users/zhl/dev/test/git/test/.git/
+➜ touch a.txt
+➜ echo "when where how" > a.txt
+➜ git add a.txt
+➜ git diff
+➜ echo "when you how" > a.txt
+➜ git add a.txt
+➜ git diff # 存入暂存区后，看不到差异
+➜ echo "when you me" > a.txt
+➜ git diff --word-diff
+diff --git a/a.txt b/a.txt
+index 9d4e288..0ad843e 100644
+--- a/a.txt
++++ b/a.txt
+@@ -1 +1 @@
+when you [-how-]{+me+}
+➜ git diff --cached --word-diff # 使用 --cached 可以看到暂存区中的差异了
+diff --git a/a.txt b/a.txt
+new file mode 100644
+index 0000000..9d4e288
+--- /dev/null
++++ b/a.txt
+@@ -0,0 +1 @@
+{+when you how+}
+```
+
