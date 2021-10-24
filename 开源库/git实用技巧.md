@@ -536,3 +536,8 @@ Date:   Mon Oct 25 05:39:16 2021 +0800
 
 
 
+## git diff 的几个参数说明
+
+对于一个 git 仓库某个分支中的文件，最多会有三个不同的版本(不考虑 git stash)：版本库中的版本，暂存区 stage 中的版本，工作区中的版本。
+
+`git diff` 比较的是工作区和暂存区的差异。`git diff HEAD` 比较的是工作区和版本库当前分支的差异。`git diff --cache` 或者 `git diff --staged`比较的是暂存区 stage 和版本库当前分支的差异。
