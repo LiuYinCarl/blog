@@ -388,3 +388,151 @@ index 0000000..9d4e288
 {+when you how+}
 ```
 
+
+
+## 用 git stash 临时保存进度
+
+ 在开发一个功能开发到一半的过程中需要紧急处理另一个 bug 的时候，需要将未开发完成的功能临时进程保存，恢复一个没有修改的工作区，或者切换到其他分支进行 bug 修复。
+
+下面是一个具体的例子。
+
+```bash
+➜ mkdir test
+➜ cd test/
+➜ git init
+Initialized empty Git repository in /Users/zhl/dev/test/git/test/.git/
+➜ echo "when where how" > a.txt # 创建一个有一行的文件
+➜ git add -A
+➜ git commit -m "add a.txt" # 提交这个文件
+[main (root-commit) 5912fc5] add a.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 a.txt
+➜ echo "when you how" > a.txt # 修改第一行，模拟开发一个功能到一半
+➜ git stash # 处理其他bug,将未完成的功能的修改暂存
+Saved working directory and index state WIP on main: 5912fc5 add a.txt
+➜ git status # 查看状态，发现修改被暂存，工作区变干净了
+On branch main
+nothing to commit, working tree clean
+➜ echo "add line 2" >> a.txt # 添加第二行，模拟修复bug
+➜ cat a.txt
+when where how
+add line 2
+➜ git add -A
+➜ git commit -m "add line 2" # 提交bug修复代码
+[main 76f297c] add line 2
+ 1 file changed, 1 insertion(+)
+➜ git stash pop # 将暂存的文件取出，发现出现了冲突
+Auto-merging a.txt
+CONFLICT (content): Merge conflict in a.txt
+The stash entry is kept in case you need it again.
+➜ cat a.txt # 查看冲突
+<<<<<<< Updated upstream
+when where how
+add line 2
+=======
+when you how
+>>>>>>> Stashed changes
+➜  test git:(main) ✗ emacs a.txt # 手动合并冲突
+➜  test git:(main) ✗ git stash drop # 删除最近的一个 stash
+Dropped refs/stash@{0} (5d47bf44053352dc2546e7df39a39440b641eab9)
+➜  test git:(main) ✗ git add -A # 将之前开发的部分功能加到暂存区
+➜  test git:(main) ✗ em a.txt # 将第一行改成 "when you me",模拟继续开发功能
+➜  test git:(main) ✗ git diff
+diff --git a/a.txt b/a.txt
+index 97f50a5..13fef9d 100644
+--- a/a.txt
++++ b/a.txt
+@@ -1,2 +1,2 @@
+-when you how
++when you me
+ add line 2
+➜ git add -A
+➜ git commit -m "modify line 1" # 提交开发完成的功能
+[main 4b97569] modify line 1
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+➜ git log
+commit 4b975698536fea6b2b66bc0e4fe0675097711875 (HEAD -> main)
+Author: LiuYinCarl <1427518212@qq.com>
+Date:   Sun Oct 24 21:23:02 2021 +0800
+
+    modify line 1
+
+commit 76f297c168d0d2e4fdcfd041e793509333774be6
+Author: LiuYinCarl <1427518212@qq.com>
+Date:   Sun Oct 24 21:15:05 2021 +0800
+
+    add line 2
+
+commit 5912fc5d54f9970127e862d394903aa2d99c3fa1
+Author: LiuYinCarl <1427518212@qq.com>
+Date:   Sun Oct 24 21:13:24 2021 +0800
+
+    add a.txt
+➜ cat a.txt # 查看内容
+when you me
+add line 2
+```
+
+
+
+## git 的配置文件
+
+git 有三个优先级不同的配置文件。
+
+- 项目级别的配置文件，在项目的  `.git/config` 位置
+- 用户级别的配置文件，在 `~/.gitconfig` 位置
+- 系统级别的配置文件，在 `/etc/gitconfig` 位置
+
+三个配置文件的优先级依次降低。
+
+- 进行项目级别的配置，使用的命令是 `git config`。
+
+- 进行用户级别的配置，使用的命令是 `git config --global`。
+
+- 进行系统级别的配置，使用的命令是 `git config --system`。
+
+
+
+## 修改错误的提交者信息
+
+有些时候，如果没有设置项目的作者就进行了提交，会导致提交者信息出现错误，所以 git 提供了命令来进行提交者信息的修改。
+
+下面是一个修改最近一次提交的 author 信息的例子。
+
+```bash
+➜ git init test
+Initialized empty Git repository in /Users/zhl/dev/test/git/test/.git/
+➜ cd test/
+# 配置一个错误的 author 信息
+➜ git config user.name "wrong name"
+➜ git config user.email "wrong email"
+➜ touch a.txt
+➜ git add -A
+➜ git commit -m "commit by wrong author info"
+[main (root-commit) ba2de4c] commit by wrong author info
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 a.txt
+➜ git log # 查看提交记录，发现 author 信息错误
+commit ba2de4c567cf2696bdf6be0719ff6b6e02646422 (HEAD -> main)
+Author: wrong name <wrong email>
+Date:   Mon Oct 25 05:38:27 2021 +0800
+
+    commit by wrong author info
+# 配置正确的 author 信息
+➜ git config user.name "right name"
+➜ git config user.email "right email"
+# 使用 --amend --reset-author 重制最近一次提交的 author 信息
+➜ git commit --amend --reset-author
+[main 78b6b11] commit by right author info
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 a.txt
+➜  test git:(main) git log
+commit 78b6b11363a58319111e259118e8f66ef3a3101a (HEAD -> main)
+Author: right name <right email>
+Date:   Mon Oct 25 05:39:16 2021 +0800
+
+    commit by right author info
+```
+
+
+
