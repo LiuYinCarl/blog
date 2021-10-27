@@ -541,3 +541,134 @@ Date:   Mon Oct 25 05:39:16 2021 +0800
 对于一个 git 仓库某个分支中的文件，最多会有三个不同的版本(不考虑 git stash)：版本库中的版本，暂存区 stage 中的版本，工作区中的版本。
 
 `git diff` 比较的是工作区和暂存区的差异。`git diff HEAD` 比较的是工作区和版本库当前分支的差异。`git diff --cache` 或者 `git diff --staged`比较的是暂存区 stage 和版本库当前分支的差异。
+
+
+
+## 工作区，版本库，暂存区关系示意图
+
+图源：Git权威指南 图5-1 蒋鑫著
+
+![image-20211025080231220](git实用技巧.assets/image-20211025080231220-5357305.png)
+
+## 浏览工作区，暂存区，版本库的目录树
+
+查看当前版本库的目录树可以使用命令
+
+```bash
+git ls-tree -lr HEAD
+```
+
+`git ls-tree` 可使用的参数如下
+
+```bash
+usage: git ls-tree [<options>] <tree-ish> [<path>...]
+
+    -d                    only show trees
+    -r                    recurse into subtrees
+    -t                    show trees when recursing
+    -z                    terminate entries with NUL byte
+    -l, --long            include object size
+    --name-only           list only filenames
+    --name-status         list only filenames
+    --full-name           use full path names
+    --full-tree           list entire tree; not just current directory (implies --full-name)
+    --abbrev[=<n>]        use <n> digits to display SHA-1s
+```
+
+查看暂存区的目录树可以使用命令 `git ls-files`
+
+```bash
+git ls-files -s
+```
+
+
+
+## 错误使用了 git reset 后如何恢复
+
+下面的例子先创建三个提交记录，然后执行 `git reset --hard` 命令丢弃最近的一个提交记录，最后使用 `git reflog` 协助找回最后的提交记录。
+
+```bash
+➜ git init test
+Initialized empty Git repository in /home/lzh/test/git/test/.git/
+➜ cd test/
+➜ touch a.txt
+➜ git add -A
+➜ git commit -m "a.txt"
+[master (root-commit) 0d1d1db] a.txt
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 a.txt
+➜ touch b.txt
+➜ git add -A
+➜ git commit -m "b.txt"
+[master 07f700a] b.txt
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 b.txt
+➜ touch c.txt
+➜ git add -A
+➜ git commit -m "c.txt"
+[master 07b75df] c.txt
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 c.txt
+➜ ls
+a.txt  b.txt  c.txt
+➜ git log
+commit 07b75df1e74cb38ca6433deafcc9a1cf453a4a2e (HEAD -> master)
+Author: LiuYinCarl <bearcarl@qq.com>
+Date:   Mon Oct 25 17:30:13 2021 +0800
+
+    c.txt
+
+commit 07f700adba787eada6fc3057d633aaa435500f73
+Author: LiuYinCarl <bearcarl@qq.com>
+Date:   Mon Oct 25 17:29:57 2021 +0800
+
+    b.txt
+
+commit 0d1d1db59bc26063dc792b19a0e7af5688719e14
+Author: LiuYinCarl <bearcarl@qq.com>
+Date:   Mon Oct 25 17:29:39 2021 +0800
+
+    a.txt
+➜ git reset --hard 07f700adba # 丢弃最近一个提交记录
+HEAD is now at 07f700a b.txt
+➜ git log
+commit 07f700adba787eada6fc3057d633aaa435500f73 (HEAD -> master)
+Author: LiuYinCarl <bearcarl@qq.com>
+Date:   Mon Oct 25 17:29:57 2021 +0800
+
+    b.txt
+
+commit 0d1d1db59bc26063dc792b19a0e7af5688719e14
+Author: LiuYinCarl <bearcarl@qq.com>
+Date:   Mon Oct 25 17:29:39 2021 +0800
+
+    a.txt
+➜ git reflog show master | head -5 # 查看最近 5 次 master 的 HEAD 变更
+07f700a master@{0}: reset: moving to 07f700adba
+07b75df master@{1}: commit: c.txt
+07f700a master@{2}: commit: b.txt
+0d1d1db master@{3}: commit (initial): a.txt
+➜ git reset --hard master@{1}  # 将 master 的 HEAD 恢复到最近的一次提交
+HEAD is now at 07b75df c.txt
+➜ git log
+commit 07b75df1e74cb38ca6433deafcc9a1cf453a4a2e (HEAD -> master)
+Author: LiuYinCarl <bearcarl@qq.com>
+Date:   Mon Oct 25 17:30:13 2021 +0800
+
+    c.txt
+
+commit 07f700adba787eada6fc3057d633aaa435500f73
+Author: LiuYinCarl <bearcarl@qq.com>
+Date:   Mon Oct 25 17:29:57 2021 +0800
+
+    b.txt
+
+commit 0d1d1db59bc26063dc792b19a0e7af5688719e14
+Author: LiuYinCarl <bearcarl@qq.com>
+Date:   Mon Oct 25 17:29:39 2021 +0800
+
+    a.txt
+➜ ls
+a.txt  b.txt  c.txt
+```
+
