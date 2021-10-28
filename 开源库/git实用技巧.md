@@ -581,9 +581,32 @@ usage: git ls-tree [<options>] <tree-ish> [<path>...]
 git ls-files -s
 ```
 
+## git reset 常见用法
+
+下面列举一些 `git reset` 的常见用法和说明。
+
+```bash
+# 替换 HEAD 的指向变为 commitid, 并修改暂存区和工作区，使得内容与 HEAD 一致
+git reset --hard commitid
+
+# 替换 HEAD 的指向变为 commitid, 不修改暂存区和工作区
+git reset --soft commitid
+
+# 替换 HEAD 的指向变为 commitid, 修改暂存区，使得内容与 HEAD 一致，但是不修改工作区
+git reset commitid
+git reset --mixed commited
+
+# 将文件 file 的改动从暂存区去除, 注意 -- 和文件名之间有空格
+git reset -- file
+```
+
+
+
 
 
 ## 错误使用了 git reset 后如何恢复
+
+master 分支的变更文件保存在 `.git/logs/refs/heads/master` 中，通知通过查看该文件了解分支 HEAD 的变化，最新的变化放在最上面。
 
 下面的例子先创建三个提交记录，然后执行 `git reset --hard` 命令丢弃最近的一个提交记录，最后使用 `git reflog` 协助找回最后的提交记录。
 
