@@ -695,3 +695,139 @@ Date:   Mon Oct 25 17:29:39 2021 +0800
 a.txt  b.txt  c.txt
 ```
 
+
+
+## 查看一个摘要值对应的 git 对象的信息
+
+```bash
+git cat-file -p 摘要值
+```
+
+
+
+## git 引用的概念
+
+[Git 内部原理 - Git 引用](https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-Git-%E5%BC%95%E7%94%A8)
+
+
+
+## 将 checkout 到某个提交记录后新添加的内容合并到分支中
+
+HEAD 指向当前工作区的 “最新” 版本，当工作区提交新内容时，会以 HEAD 指向的提交号作为新提交的父提交。
+
+`git checkout` 命令就是将 HEAD 指针指向某个提交。在未执行 `git checkout` 时， HEAD 会指向当前分支。执行了 `git checkout 摘要值` 之后，HEAD 就会指向这个摘要，这个时候，版本库就处于分离头指针的状态，意思就是说 HEAD 指向的内容和分支最新提交不再保持同步了。
+
+如果 checkout 到了一个提交之后，又做了新的提交会怎么样？新的提交会作为这个提交的子提交， HEAD 也会更新为子提交，但是会出现一个问题：子提交并不属于任何一个分支。这样的提交是很危险的，因为当再次 checkout 到了另一个提交记录的时候，刚才的提交由于不属于任何一个分支，可以理解为 “丢失” 了。虽然可以用 reflog 找到，但是 reflog 可能会被删除，而且这中处理方式也很不合理。那么如何将这个提交合并到一个分支中呢？
+
+下面是一个例子，首先在 main 分支上创建两次提交，分别创建文件 `a.txt` 和 `b.txt`，然后 checkout 到创建 `a.txt` 的这次提交上，这个时候创建文件 `c.txt` 并进行一次提交，然后再 checkout 到 main 分支，并将创建 `c.txt` 的这次提交合并到 main 分支上。
+
+
+
+```bash
+➜ git init test
+Initialized empty Git repository in /Users/zhl/dev/test/git/test/.git/
+➜ cd test/
+➜ touch a.txt
+➜ git add a.txt
+➜ git commit -m "add a.txt"
+[main (root-commit) 1396738] add a.txt
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 a.txt
+➜ touch b.txt
+➜ git add b.txt
+➜ git commit -m "add b.txt"
+[main 886b357] add b.txt
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 b.txt
+➜ git log --pretty=oneline
+886b357188b4910cdeceaaa79a0e6f0ff79ef9a4 (HEAD -> main) add b.txt
+139673827ea6d4f25d6796871ceb57348152fdd9 add a.txt
+➜ git checkout 139673
+Note: switching to '139673'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at 1396738 add a.txt
+➜ git log --pretty=oneline
+139673827ea6d4f25d6796871ceb57348152fdd9 (HEAD) add a.txt
+➜ touch c.txt
+➜ git add c.txt
+➜ git commit -m "add c.txt"
+[detached HEAD 486a076] add c.txt
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 c.txt
+➜ git log --pretty=oneline
+486a076ee1255a9993eb9369f33307552b0c7dc3 (HEAD) add c.txt
+139673827ea6d4f25d6796871ceb57348152fdd9 add a.txt
+➜ git checkout main
+Warning: you are leaving 1 commit behind, not connected to
+any of your branches:
+
+  486a076 add c.txt
+
+If you want to keep it by creating a new branch, this may be a good time
+to do so with:
+
+ git branch <new-branch-name> 486a076
+
+Switched to branch 'main'
+➜ git log --pretty=oneline
+886b357188b4910cdeceaaa79a0e6f0ff79ef9a4 (HEAD -> main) add b.txt
+139673827ea6d4f25d6796871ceb57348152fdd9 add a.txt
+➜ git merge 486a07 -m "merge c.txt to main branch"
+Merge made by the 'recursive' strategy.
+ c.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 c.txt
+➜  test git:(main) git log --pretty=oneline
+e541944c6c5cb0070939f8cfa950167e75683e05 (HEAD -> main) merge c.txt to main branch
+486a076ee1255a9993eb9369f33307552b0c7dc3 add c.txt
+886b357188b4910cdeceaaa79a0e6f0ff79ef9a4 add b.txt
+139673827ea6d4f25d6796871ceb57348152fdd9 add a.txt
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
