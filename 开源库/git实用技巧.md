@@ -801,7 +801,33 @@ e541944c6c5cb0070939f8cfa950167e75683e05 (HEAD -> main) merge c.txt to main bran
 
 
 
+## 删除多余的文件
 
+### 删除未加入版本控制的文件
+
+1. 直接使用 `rm` 命令删除。
+
+2. `git clean` 命令可以帮助删除本地未加入版本控制的文件和目录。如果想在删除前预先知道将会删除哪些文件，可以使用参数 `-n`, 意思是不真正执行删除操作，而是展示将会删除那些文件和目录。
+
+
+
+### 删除加入到了暂存区的文件
+
+1. 使用 `git rm -f filename` 将文件 filename 从暂存区和工作区删除。使用 `git rm --cached filename` 只将文件 filename 从暂存区删除，工作区保留。
+2. 使用 shell 命令 `rm filename` 将文件 filename 删除，然后使用 `git add -u filename`  更新暂存区将已加入到暂存区的文件 filename 删除。
+
+
+
+## 恢复从工作区和暂存区都被删除的文件
+
+1. 使用 `git checkout HEAD^ -- filename` 恢复被删除的文件 filename，接着使用 `git add filename` 将文件加入到暂存区。
+
+
+
+## 文件改名
+
+1. 使用 `git mv old_name new_name`。
+2. 使用 shell 命令 `mv old_name new_name`。
 
 
 
