@@ -831,15 +831,45 @@ e541944c6c5cb0070939f8cfa950167e75683e05 (HEAD -> main) merge c.txt to main bran
 
 
 
+## 撤销最近一次提交中错误删除的文件
 
+下面是一个具体的例子，在第一次提交中创建 `a.txt` `b.txt` 两个文件，在第二次提交中删除 `a.txt`, `b.txt` 两个文件。假设 `a.txt` 是我们错误删除的文件，现在需要修改最后一次提交，将 `a.txt` 的删除从提交中撤销。
 
-
-
-
-
-
-
-
+```bash
+➜ git init test
+Initialized empty Git repository in /Users/zhl/test/.git/
+➜ cd test/
+➜ touch a.txt b.txt
+➜ git add a.txt b.txt
+➜ git commit -m "add a.txt b.txt"
+[main (root-commit) 2bdbbb0] add a.txt b.txt
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 a.txt
+ create mode 100644 b.txt
+➜ git rm a.txt b.txt
+rm 'a.txt'
+rm 'b.txt'
+➜ git commit -m "rm a.txt b.txt"
+[main 103b5a1] rm a.txt b.txt
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ delete mode 100644 a.txt
+ delete mode 100644 b.txt
+➜ ls
+➜ git log --pretty=oneline
+103b5a15a7bdb9991ec623f9c87029215fe11a09 (HEAD -> main) rm a.txt b.txt
+2bdbbb01ab1f6b34a926251afb47d0095c47fc1e add a.txt b.txt
+➜ git checkout HEAD^ -- a.txt
+➜ git commit --amend -m "just rm b.txt"
+[main 35ea4a3] just rm b.txt
+ Date: Mon Nov 1 17:33:30 2021 +0800
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ delete mode 100644 b.txt
+➜ git log --pretty=oneline
+35ea4a30754288c45fee97030376cd2e1ad5eda9 (HEAD -> main) just rm b.txt
+2bdbbb01ab1f6b34a926251afb47d0095c47fc1e add a.txt b.txt
+➜ ls
+a.txt
+```
 
 
 
