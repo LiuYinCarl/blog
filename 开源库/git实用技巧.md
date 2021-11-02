@@ -873,7 +873,112 @@ a.txt
 
 
 
+## 撤销最近的多次提交，将最近的多次提交合并为一次
 
+git 撤销最近的多次提交可以使用如下方式
+
+1. 使用 `git reset --soft` 将 HEAD 重制到要开始撤销的提交 ID，这次提交之后的所有修改仍然会保存在暂存区的树中。
+2. 如果需要将这些提交合并成一次提交，只需要使用 `git commit` 将暂存区中的修改提交一次即可。
+
+```bash
+➜ git init test
+Initialized empty Git repository in /Users/zhl/dev/test/git/test/.git/
+➜ cd test/
+➜ touch a.txt
+➜ git add a.txt
+➜ git commit -m "add a.txt"
+[main (root-commit) 8651256] add a.txt
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 a.txt
+➜ touch b.txt
+➜ git add b.txt
+➜ git commit -m "add b.txt"
+[main d722c0b] add b.txt
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 b.txt
+➜ touch c.txt
+➜ git add c.txt
+➜ git commit -m "add c.txt"
+[main 188f880] add c.txt
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 c.txt
+➜ git log --pretty=oneline
+188f880c06cdd5d3d2bfcf60c47bb02cc126881d (HEAD -> main) add c.txt
+d722c0b9efd673985b9d12759e8b97ad53578ed1 add b.txt
+86512568e385db638fe60ad10ddefe707069db37 add a.txt
+➜ git reset --soft 86512568
+➜ git status
+On branch main
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	new file:   b.txt
+	new file:   c.txt
+
+➜ git log --pretty=oneline
+86512568e385db638fe60ad10ddefe707069db37 (HEAD -> main) add a.txt
+➜ git commit -m "merge two commit to one commit"
+[main b4ebe2d] merge two commit to one commit
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 b.txt
+ create mode 100644 c.txt
+➜ git log --pretty=oneline
+b4ebe2d40dbd9908155305e3c93f7d45b96b54e3 (HEAD -> main) merge two commit to one commit
+86512568e385db638fe60ad10ddefe707069db37 add a.txt
+```
+
+
+
+如果想将从第一次提交到最新提交的多次提交合并成一次提交，可以使用 `git update-ref` 命令。
+
+```bash
+➜ git init test
+Initialized empty Git repository in /Users/zhl/dev/test/git/test/.git/
+➜ cd test/
+➜ touch a.txt
+➜ git add a.txt
+➜ git commit -m "add a.txt"
+[main (root-commit) b51e302] add a.txt
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 a.txt
+➜ touch b.txt
+➜ git add b.txt
+➜ git commit -m "add b.txt"
+[main 322de03] add b.txt
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 b.txt
+➜ touch c.txt
+➜ git add c.txt
+➜ git commit -m "add c.txt"
+[main abb88cd] add c.txt
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 c.txt
+➜ git log --pretty=oneline
+abb88cd241a25b0ea1229ae96c8f33ac6a471176 (HEAD -> main) add c.txt
+322de032ca9fb9e57fbba3c730670af7010ca9a5 add b.txt
+b51e30245c877da3a7d8cfde0f000f009c839e19 add a.txt
+➜ git update-ref -d HEAD
+➜ git log --pretty=oneline
+fatal: your current branch 'main' does not have any commits yet
+➜  test git:(main) ✗ git status
+On branch main
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+	new file:   a.txt
+	new file:   b.txt
+	new file:   c.txt
+
+➜ git commit -m "merge all commits into one commit"
+[main (root-commit) 46d36fe] merge all commits into one commit
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 a.txt
+ create mode 100644 b.txt
+ create mode 100644 c.txt
+➜ git log --pretty=oneline
+46d36fedd301cec3728ad1967bbb7cc2859b18c5 (HEAD -> main) merge all commits into one commit
+```
 
 
 
