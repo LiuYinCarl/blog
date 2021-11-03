@@ -982,6 +982,244 @@ Changes to be committed:
 
 
 
+## 删除某个历史提交记录
+
+为了简化创建测试用的仓库，使用如下 shell 脚本来创建仓库。这个脚本会传遍一个含有四次提交的仓库。
+
+```shell
+#!/bin/bash
+
+set -x
+
+git init test
+
+cd test
+
+touch a.txt
+
+echo "line 1" >> a.txt
+git add a.txt
+git commit -m "add a.txt and line 1"
+
+echo "line 2" >> a.txt
+git add a.txt
+git commit -m "add line 2"
+
+echo "line 3" >> a.txt
+git add a.txt
+git commit -m "add line 3"
+
+echo "line 4" >> a.txt
+git add a.txt
+git commit -m "add line 4"
+
+git log --pretty=oneline
+```
+
+删除某次历史提交需要使用到 `git cherry-pick` 命令。`git cherry-pick` 命令的作用是将指定的提交（commit）应用于其他分支。`git cherry-pick commitid` 会将指定的提交`commitid`，应用于当前分支。这会在当前分支产生一个新的提交，这个新的提交的哈希值和 `commitid` 不一样。更多的对 `git cherry-pick` 的提交参考 [git cherry-pick 教程](https://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html)。
+
+有了这个命令，就可以删除某个历史提交了，具体的步骤如下：
+
+假设测试用的仓库中有 4 次提交，按提交时间先后分别叫他们 `commit1`, `commit2`, `commit3`, `commit4`。我们想要删除 `commit2` 这次提交。
+
+1. `git checkout commit1` ，将 HEAD 检出到 `commit1`
+2. `git cherry-pick commit3`，将 `commit3` 应用到当前分支，现在 HEAD 变成了 `commit3` 的内容，注意新的提交的 hash 值一定不是 `commit3`
+3. `git cherry-pick commit4`，将 `commit4` 应用到当前分支，现在 HEAD 变成了 `commit4` 的内容，注意新的提交的 hash 值一定不是 `commit4`。现在查看仓库的提交记录，就会发现 `commit2` 已经不见了。
+
+上面这种删除某次历史提交的方式需要考虑几个问题。
+
+### 如果 `git cherry-pick` 出现了冲突怎么办
+
+如果操作过程中发生代码冲突，`git cherry-pick` 会停下来，让用户决定如何继续操作，有三种结局方案。
+
+`--continue`
+
+用户解决代码冲突后，第一步将修改的文件重新加入暂存区（`git add .`），第二步使用下面的命令，让 `git cherry-pick` 过程继续执行。
+
+> ```bash
+> $ git cherry-pick --continue
+> ```
+
+`--abort`
+
+发生代码冲突后，放弃合并，回到操作前的样子。
+
+`--quit`
+
+发生代码冲突后，退出 `git cherry-pick`，但是不回到操作前的样子。
+
+### 如果需要删除的一次很早之前的提交记录，在那次提交之后有成千上万个提交，难道需要对这些提交都执行一次 `git checcy-pick` 吗？
+
+`git cherry-pick` 支持一次转移多个提交。
+
+> ```bash
+> $ git cherry-pick <HashA> <HashB>
+> ```
+
+上面的命令将 A 和 B 两个提交应用到当前分支。这会在当前分支生成两个对应的新提交。
+
+如果想要转移一系列的连续提交，可以使用下面的简便语法。
+
+> ```bash
+> $ git cherry-pick A..B 
+> ```
+
+上面的命令可以转移从 A 到 B 的所有提交。它们必须按照正确的顺序放置：提交 A 必须早于提交 B，否则命令将失败，但不会报错。
+
+注意，使用上面的命令，提交 A 将不会包含在 Cherry pick 中。如果要包含提交 A，可以使用下面的语法。
+
+> ```bash
+> $ git cherry-pick A^..B 
+> ```
+
+
+
+接下来使用上面的脚本创建的仓库来进行一次真实的操作。
+
+```bash
+➜ git log --pretty=oneline
+d375a054c393724f2ce53edd776f2140a2554ec4 (HEAD -> main) add line 4
+51c81e15a3e445c76bfdb6672df7bb47e5dd2e45 add line 3
+470b8fd86542f38c315e0a795f6e3312aabd20a8 add line 2
+debf14fddf140c0a826ee3009088ca7a3a95b974 add a.txt and line 1
+➜ git checkout debf14fddf
+Note: switching to 'debf14fddf'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at debf14f add a.txt and line 1
+➜ git cherry-pick 51c81e15a3
+Auto-merging a.txt
+CONFLICT (content): Merge conflict in a.txt
+error: could not apply 51c81e1... add line 3
+hint: after resolving the conflicts, mark the corrected paths
+hint: with 'git add <paths>' or 'git rm <paths>'
+hint: and commit the result with 'git commit'
+➜ emacs a.txt # 使用 emacs 编辑 a.txt 文件，解决冲突
+➜ git add a.txt # 将解决了冲突的文件加入到暂存区
+➜ git cherry-pick --continue # 继续 cherry-pick 过程
+[detached HEAD f23c710] add line 3
+ Date: Wed Nov 3 10:43:57 2021 +0800
+ 1 file changed, 1 insertion(+)
+➜ git log --pretty=oneline
+f23c710da64f08314409a9f00cf99818e4a98b4d (HEAD) add line 3
+debf14fddf140c0a826ee3009088ca7a3a95b974 add a.txt and line 1
+➜ git cherry-pick d375a054c3
+Auto-merging a.txt
+[detached HEAD aed8a06] add line 4
+ Date: Wed Nov 3 10:43:57 2021 +0800
+ 1 file changed, 1 insertion(+)
+➜ git log --pretty=oneline
+aed8a064ce80b353e35d2901ca4b8544dddf0005 (HEAD) add line 4
+f23c710da64f08314409a9f00cf99818e4a98b4d add line 3
+debf14fddf140c0a826ee3009088ca7a3a95b974 add a.txt and line 1
+➜ cat a.txt
+line 1
+line 3
+line 4
+```
+
+
+
+## 合并某几个历史提交记录
+
+合并 git 的某几个历史提交需要使用到 `git reset` 和 `git cherry-pick` 命令。
+
+使用如下脚本构建测试仓库
+
+```bash
+#!/bin/bash
+
+set -x
+
+git init test
+
+cd test
+
+touch a.txt
+
+echo "line 1" >> a.txt
+git add a.txt
+git commit -m "add a.txt and line 1"
+
+echo "line 2" >> a.txt
+git add a.txt
+git commit -m "add line 2"
+
+echo "line 3" >> a.txt
+git add a.txt
+git commit -m "add line 3"
+
+echo "line 4" >> a.txt
+git add a.txt
+git commit -m "add line 4"
+
+git log --pretty=oneline
+```
+
+ 测试将第二个提交和第三个提交合并成一个提交。
+
+```bash
+➜ git log --pretty=oneline
+7b5b7e35b2c9a92f7c98e20a0a7f5ad6f24271b9 (HEAD -> main) add line 4
+cd9dac13b4e0b7360c8bd89474683199731efc1f add line 3
+77a1dca443a48a7a91daf18a2ee1609ae5934e05 add line 2
+8d14c6f3d104d6127de0a17bb8e0d38ec257b7b7 add a.txt and line 1
+➜ git checkout cd9dac13b4e # checkout 到第三个提交
+Note: switching to 'cd9dac13b4e'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at cd9dac1 add line 3
+➜ git reset --soft HEAD^^ # reset 第二个和第三个提交，将他们的修改移入暂存区
+➜ git commit -m "merge line 2 and line 3" # 合并第二次和第三次提交
+[detached HEAD 552a914] merge line 2 and line 3
+ 1 file changed, 2 insertions(+)
+➜ git cherry-pick 7b5b7e35b2c # 将之后的第四次提交加到当前 HEAD
+[detached HEAD a055792] add line 4
+ Date: Wed Nov 3 11:22:26 2021 +0800
+ 1 file changed, 1 insertion(+)
+➜ git log --pretty=oneline # 查看 log 发现原来的第二次和第三次提交合并了
+a05579234b70af83d3fc34d5634f7f20d476d7c8 (HEAD) add line 4
+552a914489e3e68d0c7cabd43548131af9e974ba merge line 2 and line 3
+8d14c6f3d104d6127de0a17bb8e0d38ec257b7b7 add a.txt and line 1
+➜  test git:(a055792) cat a.txt
+line 1
+line 2
+line 3
+line 4
+```
+
+
+
+
+
 
 
 
