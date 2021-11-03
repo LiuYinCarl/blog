@@ -1016,7 +1016,7 @@ git commit -m "add line 4"
 git log --pretty=oneline
 ```
 
-删除某次历史提交需要使用到 `git cherry-pick` 命令。`git cherry-pick` 命令的作用是将指定的提交（commit）应用于其他分支。`git cherry-pick commitid` 会将指定的提交`commitid`，应用于当前分支。这会在当前分支产生一个新的提交，这个新的提交的哈希值和 `commitid` 不一样。更多的对 `git cherry-pick` 的提交参考 [git cherry-pick 教程](https://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html)。
+删除某次历史提交需要使用到 `git cherry-pick` 命令。`git cherry-pick` 命令的作用是将指定的提交（commit）应用于其他分支。`git cherry-pick commitid` 会将指定的提交`commitid`，应用于当前分支。这会在当前分支产生一个新的提交，这个新的提交的哈希值和 `commitid` 不一样。更多的对 `git cherry-pick` 的提交参考 [git cherry-pick 教程](https://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html)，本节部分内容就是从这篇文章中摘抄的。
 
 有了这个命令，就可以删除某个历史提交了，具体的步骤如下：
 
@@ -1036,9 +1036,9 @@ git log --pretty=oneline
 
 用户解决代码冲突后，第一步将修改的文件重新加入暂存区（`git add .`），第二步使用下面的命令，让 `git cherry-pick` 过程继续执行。
 
-> ```bash
-> $ git cherry-pick --continue
-> ```
+```bash
+$ git cherry-pick --continue
+```
 
 `--abort`
 
@@ -1052,26 +1052,25 @@ git log --pretty=oneline
 
 `git cherry-pick` 支持一次转移多个提交。
 
-> ```bash
-> $ git cherry-pick <HashA> <HashB>
-> ```
+```bash
+$ git cherry-pick <HashA> <HashB>
+```
 
 上面的命令将 A 和 B 两个提交应用到当前分支。这会在当前分支生成两个对应的新提交。
 
 如果想要转移一系列的连续提交，可以使用下面的简便语法。
 
-> ```bash
-> $ git cherry-pick A..B 
-> ```
+```bash
+$ git cherry-pick A..B 
+```
 
 上面的命令可以转移从 A 到 B 的所有提交。它们必须按照正确的顺序放置：提交 A 必须早于提交 B，否则命令将失败，但不会报错。
 
 注意，使用上面的命令，提交 A 将不会包含在 Cherry pick 中。如果要包含提交 A，可以使用下面的语法。
 
-> ```bash
-> $ git cherry-pick A^..B 
-> ```
-
+```bash
+$ git cherry-pick A^..B 
+```
 
 
 接下来使用上面的脚本创建的仓库来进行一次真实的操作。
