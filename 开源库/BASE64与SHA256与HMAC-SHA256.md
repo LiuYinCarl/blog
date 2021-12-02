@@ -1,6 +1,8 @@
 # BASE64与SHA256与HMAC-SHA256.md
 
-介绍一下 C++ 计算 BASE64 SHA256 HMAC-SHA256 的代码
+介绍一下 C++ 计算 BASE64 SHA256 HMAC-SHA256 的代码。
+
+实现代码 `demo.h`
 
 ```c++
 #include <iostream>
@@ -10,10 +12,8 @@
 #include <openssl/sha.h>
 #include <openssl/hmac.h>
 
-#include <curl/curl.h>
-#include <curl/easy.h>
-
 //********************** base64 algorithm  **********************//
+// code come from https://stackoverflow.com/questions/180947/base64-decode-snippet-in-c
 
 static const std::string base64_chars =
              "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -162,10 +162,10 @@ std::string hmac_sha256_hex(const std::string& secret_key, const std::string& st
 ```
 
 
-测试代码
+测试代码 `demo.cpp`
 
 ```c++
-#include "http_demo.h"
+#include "demo.h"
 #include <assert.h>
 #include <stdio.h>
 
