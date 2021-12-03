@@ -139,6 +139,16 @@ int hmac_sha256(const std::string& secret_key, const std::string& str,
     HMAC_Final(&ctx, output, &output_len);
     HMAC_CTX_cleanup(&ctx);
 
+    // 如果使用的 openssl 的版本大于等于 1.1.0, 那么 HMAC_CTX 是不允许直接进行构造的，
+    // 上面这段代码需要改成下面这种格式
+    // https://stackoverflow.com/questions/63256081/error-aggregate-hmac-ctx-ctx-has-incomplete-type-and-cannot-be-defined
+    // HMAC_CTX* ctx;
+    // ctx = HMAC_CTX_new();
+    // HMAC_Init_ex(ctx, (const void*)secret_key.c_str(), secret_key.size(), engine, NULL);
+    // HMAC_Update(ctx, (const unsigned char*)str.c_str(), str.size());
+    // HMAC_Final(ctx, output, &output_len);
+    // HMAC_CTX_free(ctx);
+
     return 0;
 }
 
