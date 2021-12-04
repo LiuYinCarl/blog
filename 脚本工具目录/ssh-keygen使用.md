@@ -56,16 +56,17 @@ usage: ssh-keygen [-q] [-b bits] [-C comment] [-f output_keyfile] [-m format]
 $ ssh-keygen
 ```
 
-使用 `ssh-kengen` 会在~/.ssh/目录下生成两个文件，不指定文件名和密钥类型的时候，默认生成的两个文件是 `i_rsa` 和 `id_rsa.pub`，分别是私钥和公钥。私钥是你自己要保留的，公钥是给其他人的。
+使用 `ssh-kengen` 会在~/.ssh/目录下生成两个文件，不指定文件名和密钥类型的时候，默认生成的两个文件是 `id_rsa` 和 `id_rsa.pub`，分别是私钥和公钥。私钥是你自己要保留的，公钥是给其他人的。
 
 
 
 ## 将公钥添加到远程服务器上
 
 ```bash
-ssh-copy-id -i 公钥文件 远程服务器IP
+ssh-copy-id -i 公钥文件 username@远程服务器IP
 # 这个命令会让远程服务器将你上面生成的公钥文件添加到 ~/.ssh/authorized_keys 文件中
 # 如果生成的公钥是准备给 gitlab/github 使用的，可以找一下网上的教程看一下在网页上哪个位置添加
+# 如果你的服务器默认的SSH 修改了的话，还需要注意需要指定 -p port 参数来设置 SSH 端口
 ```
 
 
