@@ -71,6 +71,11 @@
 
 [C++ Concurrency In Action](https://www.bookstack.cn/read/CPP-Concurrency-In-Action-2ed-2019/README.md)
 
+### OpenSSL
+
+[OpenSSL Docs](https://www.openssl.org/docs/)
+
+[OpenSSl Cookbook](https://www.feistyduck.com/books/openssl-cookbook/)
 
 
 
