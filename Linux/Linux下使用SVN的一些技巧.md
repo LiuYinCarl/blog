@@ -20,6 +20,12 @@ vim ~/.subversion/config
 # 查看本地文件的修改
 svn diff filename
 
+# 比较本地文件和任意版本号 A 的区别
+svn diff -rA
+
+# 比较任意两个版本号 A 和 B 的区别
+svn diff -rA:B
+
 # 回退文件的本地修改
 svn revert filename
 
