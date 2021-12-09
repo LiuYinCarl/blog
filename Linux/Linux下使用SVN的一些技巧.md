@@ -43,4 +43,7 @@ svn diff dirname | grep Index
 
 # 查看所有的分支
 svn ls http://xxxx/branches
+
+# 更新代码库, dir 代表目录，如果不添加这个参数，表示更新当前目录及子目录到最新版本
+svn update dir
 ```
