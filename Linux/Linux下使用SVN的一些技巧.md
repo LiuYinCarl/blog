@@ -26,6 +26,12 @@ svn diff -rA
 # 比较任意两个版本号 A 和 B 的区别
 svn diff -rA:B
 
+# 查看 SVN 的 log
+svn log ur1
+
+# 或者进入 SVN 版本库的目录，执行
+svn log
+
 # 回退文件的本地修改
 svn revert filename
 
