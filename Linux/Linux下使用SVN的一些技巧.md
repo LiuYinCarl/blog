@@ -29,6 +29,10 @@ svn diff -rA:B
 # 查看 SVN 的 log
 svn log ur1
 
+# 查看 SVN 最近的 10 次 log
+svn log -l 10
+svn log | head -n 10
+
 # 或者进入 SVN 版本库的目录，执行
 svn log
 
