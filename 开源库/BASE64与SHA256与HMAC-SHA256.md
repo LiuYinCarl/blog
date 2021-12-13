@@ -169,6 +169,49 @@ std::string hmac_sha256_hex(const std::string& secret_key, const std::string& st
     return buf;
 }
 
+//********************** HMAC-SHA1 algorithm  **********************//
+int hmac_sha1(const std::string& secret_key, const std::string& str,
+                        unsigned char* output, unsigned int& output_len) {    
+    const EVP_MD * engine = EVP_sha1();
+
+    HMAC_CTX ctx;
+    HMAC_CTX_init(&ctx);
+    HMAC_Init_ex(&ctx, (const void*)secret_key.c_str(), secret_key.size(), engine, NULL);
+    HMAC_Update(&ctx, (const unsigned char*)str.c_str(), str.size());
+    HMAC_Final(&ctx, output, &output_len);
+    HMAC_CTX_cleanup(&ctx);
+
+    // 如果使用的 openssl 的版本大于等于 1.1.0, 那么 HMAC_CTX 是不允许直接进行构造的，
+    // 上面这段代码需要改成下面这种格式
+    // https://stackoverflow.com/questions/63256081/error-aggregate-hmac-ctx-ctx-has-incomplete-type-and-cannot-be-defined
+    // HMAC_CTX* ctx;
+    // ctx = HMAC_CTX_new();
+    // HMAC_Init_ex(ctx, (const void*)secret_key.c_str(), secret_key.size(), engine, NULL);
+    // HMAC_Update(ctx, (const unsigned char*)str.c_str(), str.size());
+    // HMAC_Final(ctx, output, &output_len);
+    // HMAC_CTX_free(ctx);
+
+    std::cout << "output: " << output << std::endl;
+
+    return 0;
+}
+
+std::string hmac_sha1_hex(const std::string& secret_key, const std::string& str) {
+    unsigned char output[EVP_MAX_MD_SIZE];
+    memset(output, 0, sizeof(output));
+    unsigned int output_len = 0;
+
+    hmac_sha1(secret_key, str, output, output_len);
+
+    char buf[2*EVP_MAX_MD_SIZE];
+    memset(buf, 0, sizeof(buf));
+
+    for (int i = 0; i < 20; ++i) {
+        sprintf(buf+i*2, "%02x", output[i]);
+    }
+
+    return buf;
+}
 ```
 
 
@@ -210,10 +253,21 @@ void test_hmac_sha256_hex(void) {
     printf("[SUCCESS] test_hmac_sha256_hex\n");
 }
 
+void test_hmac_sha1_hex(void) {
+    std::string secret_key = "hello_world";
+    std::string test_str = "this is a example!";
+    std::string expected_hmac_sha1_hex_str = "e48e00c826ed49434801d1adc8324e5f3a90f651";
+
+    std::string hmac_sha1_hex_str = hmac_sha1_hex(secret_key, test_str);
+    assert(expected_hmac_sha1_hex_str == hmac_sha1_hex_str);
+    printf("[SUCCESS] test_hmac_sha1_hex\n");
+}
+
 int main() {
     test_base64_encode();
     test_base64_decode();
     test_hmac_sha256_hex();
+    test_hmac_sha1_hex();
 
     return 0;
 }
