@@ -38,7 +38,7 @@ wget https://curl.se/download/curl-7.62.0.tar.gz
 tar -zxf curl-7.62.0.tar.gz
 
 # 进入解压后的目录
-cd cd curl-7.62.0
+cd curl-7.62.0
 
 # 配置 /data/test/ssl_test2/curl 是要自己设置的安装目录
 ./configure --prefix=/data/test/ssl_test2/curl --with-ssl=/data/test/ssl_test2/openssl --disable-shared
