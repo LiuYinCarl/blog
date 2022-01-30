@@ -145,6 +145,30 @@ public:
 };
 
 
+class Env {
+private:
+  map<string, Symbol*> table;
+
+protected:
+  Env* prev;
+
+public:
+  void put(string s, Symbol* sym) {
+    table.insert({s, sym});
+  }
+
+  Symbol* get(string s) {
+    for (Env* e = this; e != null; e = e->prev) {
+      auto iter = e->table.find(s);
+      if (iter != e->table.end()) {
+	return iter.second;
+      }
+    }
+    return nullptr;
+  }
+};
+
+
 
 int main() {
   freopen("./code.txt", "r", stdin);
