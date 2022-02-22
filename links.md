@@ -15,6 +15,8 @@
 
 [lshort](http://ctan.mirror.rafal.ca/info/lshort/english/lshort.pdf)
 
+[lshort-zh-cn](http://ctan.mirror.rafal.ca/info/lshort/chinese/lshort-zh-cn.pdf)
+
 ### GNU Manual
 
 [The GNU C Library](https://www.gnu.org/software/libc/manual/)
