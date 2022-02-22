@@ -11,6 +11,9 @@
 [dir_all_by_section](https://man7.org/linux/man-pages/dir_all_by_section.html)
 
 
+### LaTex Manual
+
+[lshort](http://ctan.mirror.rafal.ca/info/lshort/english/lshort.pdf)
 
 ### GNU Manual
 
