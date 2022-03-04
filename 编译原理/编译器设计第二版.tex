@@ -1,0 +1,92 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{ctex}
+\usepackage{amsmath}
+
+\usepackage[ruled]{algorithm2e} % 算法包
+
+\usepackage{listings}
+\usepackage{framed} % 解决代码分页之后代码框不闭合的问题
+
+\usepackage{booktabs} % 三线表
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% listings设置
+%%%%%%%%%%%%%%%%%%%%%%%
+\lstset{
+    basicstyle = \small\ttfamily,           % 基本样式 + 小号字体
+    breaklines = true,                  % 代码过长则换行
+    frame = shadowbox,                  % 用（带影子效果）方框框住代码块
+    showspaces = false,                 % 不显示空格
+    columns = fixed,                    % 字间距固定
+}
+
+% Will Robertson's fontspec.sty can be used to simplify font choices.
+% To experiment, open /Applications/Font Book to examine the fonts provided on Mac OS X,
+% and change "Hoefler Text" to any of these choices.
+
+\usepackage{fontspec,xltxtra,xunicode}
+\defaultfontfeatures{Mapping=tex-text}
+\setromanfont[Mapping=tex-text]{Hoefler Text}
+\setsansfont[Scale=MatchLowercase,Mapping=tex-text]{Gill Sans}
+\setmonofont[Scale=MatchLowercase]{Andale Mono}
+
+\title{《编译器设计 第二版》笔记}
+\author{KenshinLiu}
+%\date{}                                           % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+\newpage
+
+\section*{编译器检查变量在使用前已经声明}
+
+要达到的效果：要求某些类别的变量在使用前已经声明，但允许程序员将声明和可执行语句混合起来。
+
+解决方案：编译器创建一个名字表。编译器在处理声明时向表中插入一个名字，而在每次引用名字时去表中查找，查找失败就表示缺少对应的声明。
+
+
+\section*{类型系统判断类型是否等价的两种方案}
+
+\textbf{名字等价：} 该规则断言两个类型等价的充分必要条件是二者同名，认为相同的类型名即代表同一种类型。
+
+\textbf{结构等价性：} 该规则断言两个类型等价的充分必要条件是二者具有相同的结构。如果两个对象由同一组字段组成，且字段排列顺序相同，对应的字段具有等价的类型，则这两个对象为同一种类型。
+
+\section*{属性求值的方法}
+
+(1) \textbf{动态方法} 这种技术使用特定的属性化语法分析树的结构，来确定求值次序。Knuth关于属性语法的原始论文提出了一种求值程序，以类似于数据流计算机体系结构的方式运作，即每个规则在其所有操作数就绪后即“击发”。实际上，这可以使用就绪属性（即可求值的属性）的队列来实现。随着对每个属性的求值，求值程序会检查其在属性依赖关系图中的后继属性，判断后继属性 “就绪” 与否（参见12.3节）一种相关的方案是建立属性依赖关系图，对其拓扑排序，使用拓扑次序对属性进行求值。
+
+(2）\textbf{无关方法} 在这一类方法中，求值的次序与属性语法和特定的属性化语法分析树都是无关的。大体上，系统的设计者可以从其自身的考虑出发，选择一种他认为适合于属性语法和求值环境的方法。这种风格的求值方法包括：从左到右重复多趟（直至所有属性的值都确定为止）、从右到左重复多趟和从左到右与从右到左交替多趟处理。这些方法有简单的实现，其运行时开销也相对较小。当然，它们也缺之根据对特定属性语法树的认识进行改进的能力。
+
+(3）\textbf{基于规则的方法} 基于规则的方法依赖于对属性语法的静态分析，来构造出一个求值次序。在该框架下，求值程序依赖于语法结构，因而，对规则的应用受到了语法分析树的引导。在有符号进制数的示例中，对产生式4的求值次序应该使用第一个规则设置Bit.position，递归向下到Bit， 返回后，使用Bit value设置List.value。。类似地，对于产生式5，它应该首先对前两个规则求值，以便为产生式的右侧定 义position屆性，然后递归向下来处理各个子结点。在返回后，就可以对第三个规则求值，来设置父结点List的List.value字段。如果工具能够离线执行必要的静态分析，那么可以利用这种工具来生成快速的基于规则的求值程序。
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
