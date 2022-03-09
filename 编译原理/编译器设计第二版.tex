@@ -20,6 +20,10 @@
 \geometry{a4paper,centering,scale=0.8}
 % environment derived from framed.sty: see leftbar environment definition
 \definecolor{formalshade}{rgb}{0.95,0.95,1} % 文本框颜色
+\definecolor{greenshade}{rgb}{0.90,0.99,0.91} % 绿色文本框，竖线颜色设为 Green
+\definecolor{redshade}{rgb}{1.00,0.90,0.90}% 红色文本框，竖线颜色设为 LightCoral
+\definecolor{brownshade}{rgb}{0.99,0.97,0.93} % 莫兰迪棕色，竖线颜色设为 BurlyWood
+
 % ------------------******-------------------
 % 注意行末需要把空格注释掉，不然画出来的方框会有空白竖线
 \newenvironment{formal}{%
@@ -40,16 +44,10 @@
 % ------------------******-------------------
 
 
-
-
-
 \usepackage[ruled]{algorithm2e} % 算法包
-
 \usepackage{listings}
 \usepackage{framed} % 解决代码分页之后代码框不闭合的问题
-
 \usepackage{booktabs} % 三线表
-
 
 %%%%%%%%%%%%%%%%%%%%%%%
 %% listings设置
@@ -61,10 +59,6 @@
     showspaces = false,                 % 不显示空格
     columns = fixed,                    % 字间距固定
 }
-
-% Will Robertson's fontspec.sty can be used to simplify font choices.
-% To experiment, open /Applications/Font Book to examine the fonts provided on Mac OS X,
-% and change "Hoefler Text" to any of these choices.
 
 \usepackage{fontspec,xltxtra,xunicode}
 \defaultfontfeatures{Mapping=tex-text}
@@ -78,7 +72,6 @@
 
 \begin{document}
 \maketitle
-
 \newpage
 
 \section*{编译器检查变量在使用前已经声明}
@@ -122,10 +115,31 @@ DAG 是具有共享机制的一种 AST。
 
 \textbf{动态作用域规则：} 自由变量绑定到在运行时最近创建的同名变量。因此，在执行遇到自由变量时，即将绑定到改名字最新创建的实例。
 
+\section*{AR与栈的关系}
+
+为实现过程调用和作用域化的命名空间这两个“孪生”抽象，编译器在转换时必须建立一组运行时结构。在控制和命名两方面都涉及的一个关键数据结构是活动记录（Activation Record, AR)，这是与对特定过程的特定调用相关联的一块私有内存。
+
+如果过程的激活期超过器调用者的激活期，那么在栈上分配 AR 的规范就被破坏了。类似地，如果过程可能返回一个对象（如闭包），其中显式或隐式引用了已返回过程的局部变量，那么在栈上分配活动记录是不合适的，因为会出现悬挂指针。在这种情况下，AR 可以保存在堆中。
+
+\section*{面向对象语言中符号表的使用}
+
+\begin{formal}
+TODO 三种表具体指什么表，整理笔记的时候完善下
+\end{formal}
+为了支持面向对象语言中类层次之类的命名环境，编译器通过特定的链接顺序组成符号表的链接集合。在面向对象语言中，编译器使用比类 Algol 语言中更多的表，且使用这些表的方式必须反映实际的命名环境。编译器可以将这些表按适当的顺序链接在一起，也可以分别维持三种表，并按适当的顺序查找表。
+
+某些面向对象语言的主要复杂性并不在于类层次结构的存在，而是从何时起定义了该层次结构。如果面向对象语言要求类定义出现在编译时且编译后不能发生改变，那么方法内部的名字解析可以在编译时进行。我们说这样的语言有封闭的类结构（closed class structure）。在另一方面，如果语言允许运行的程序改变类结构，或者像Java那样在运行时导人头，或者像Smalltalk那样允许在运行时编辑类，那么，这样的语言有开放的类结构 ( open class structure ).
+
+\begin{formal}
+\textbf{封闭的类结构}\ 如果应用程序的类结构在编译时就已经固定下来，那么这种面向对象语言具有封闭的类层次结构。\\
+\textbf{开放的类结构}\ 如果应用程序可以在运行时改变其类结构，那么语言具有开放的类层次结构。
+\end{formal}
+
+\section*{面向对象中继承关系的实现}
+
+见 6.3.4 节。
+
 \end{document}
-
-
-
 
 
 
