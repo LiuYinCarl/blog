@@ -53,6 +53,21 @@ clangd 的工作原理与代码编译过程联系紧密，需要为目标项目�
 
 这里介绍一下如何使用 [Bear](https://github.com/rizsotto/Bear) 工具来生成 `compile_commands.json` 文件。
 
+**更新：在新版本的 bear，例如 3.0.18 中，生成 compile_commands.json 的默认参数有了变化。**
+
+```bash
+$ bear --help
+Usage: bear [--output <arg>] [--verbose] -- ...
+
+  --output <arg>       path of the result file (default: compile_commands.json)
+  --verbose            run in verbose mode
+  -- ...               command to execute
+```
+
+根据使用提示，新版本的 bear 需要至少使用 `bear -- make` 才可以生成默认配置文件，相比之前多了一个 `--` 参数. 
+
+
+
 如果使用的是 Ubuntu, 使用 `apt install bear` 安装 Bear。
 
 #### 以 [Lua 项目](https://github.com/lua/lua)为例子，介绍如何使用 Bear 为 make 工程生成  compile_commands.json
