@@ -52,11 +52,15 @@
 %% listings设置
 %%%%%%%%%%%%%%%%%%%%%%%
 \lstset{
-    basicstyle = \small\ttfamily,           % 基本样式 + 小号字体
-    breaklines = true,                  % 代码过长则换行
+    basicstyle = \small\ttfamily,    % 基本样式 + 小号字体
+    breaklines = true,                      % 代码过长则换行
     frame = shadowbox,                  % 用（带影子效果）方框框住代码块
-    showspaces = false,                 % 不显示空格
-    columns = fixed,                    % 字间距固定
+    showspaces = false,                    % 不显示空格
+    columns = fixed,                         % 字间距固定
+    numbers=left,                             %左侧显示行号 往左靠,
+    breaklines=true,                         %对过长的代码自动换行
+    numberstyle=\scriptsize,           %行号字体用小号
+    numbersep=7pt,                          %设置行号与代码的距离，默认是5pt
 }
 
 \usepackage{ctex}
