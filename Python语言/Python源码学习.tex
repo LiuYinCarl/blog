@@ -241,8 +241,68 @@ PyTypeObject PyLong_Type = {
 
 \end{lstlisting}
 
+\section*{对象的析构}
+
+PyObject 是根据 ob\_refcnt 来判断是否需要释放一个对象，当对象的引用增加 1，ob\_refcnt 增加 1，当对象的引用减少 1，ob\_refcnt 减少 1
+，在 ob\_refcnt 变为 0 时，对象被释放。但是存在一个特例，所有的类型对象也有一个 ob\_refcnt 变量，但是永远也不会释放。
+
+至于不会释放的原理，是因为它的释放函数被设置为了空。
+
+一个 PyObject 对象在 ob\_refcnt 到达 0 的时候，会被调用 Py\_DECREF 宏进行对象的释放，具体代码如下
+
+\begin{lstlisting}[caption={PyObject 释放过程}]
+static inline void Py_DECREF(PyObject *op) {
+    // ... ...
+    if (--op->ob_refcnt != 0) {
+	    // ... ...
+    }
+    else {
+        _Py_Dealloc(op);
+    }
+#endif
+}
+
+void
+_Py_Dealloc(PyObject *op)
+{
+    destructor dealloc = Py_TYPE(op)->tp_dealloc;
+    (*dealloc)(op);  // 在此处调用对象释放函数
+}
+\end{lstlisting}
+
+但是对于类型对象来说，tp\_dealloc 函数指针都被设置为了 0，所以类型对象永远不会被释放。虽然 tp\_dealloc 被设置为 0，并不代表类型类型的释放函数不会被调用，相反，这个函数的调用其实很频繁。可以修改如下位置的源码进行验证。
+
+\begin{lstlisting}[caption={修改 PyLong\_Type 源码}]
+#include <stdio.h>
+int long_tp_dealloc(PyObject* obj) {
+    printf("this is PyLong_Type tp_dealloc function");
+}
+
+PyTypeObject PyLong_Type = {
+    PyVarObject_HEAD_INIT(&PyType_Type, 0)
+    "int",                                      /* tp_name */
+    offsetof(PyLongObject, ob_digit),           /* tp_basicsize */
+    sizeof(digit),                              /* tp_itemsize */
+    // 修改此处源码，从 0 改为上面添加的 long_tp_dealloc 函数指针
+    long_tp_dealloc,                        /* tp_dealloc */
+    0,                                                /* tp_vectorcall_offset */
+}
+\end{lstlisting}
+
+修改完成重新编译之后，使用如下代码进行验证。
+
+\begin{lstlisting}[caption={test.py}]
+a = 10
+\end{lstlisting}
 
 
+使用编译出的新 Python 解释器执行 test.py 即可发现有大量的 “this is PyLong\_Type tp\_dealloc function” 句子输出，说明此函数被频繁调用。
+
+
+\newpage
+\section*{备注}
+
+上面的代码分析步骤主要是跟着 《Python 源码剖析》，对照着 Python 3.11 代码进行学习，引用了部分书中内容。
 
 \end{document}
 
