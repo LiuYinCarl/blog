@@ -8,15 +8,11 @@ GitHub [链接](https://github.com/LiuYinCarl/basic_algorithm/tree/master)
 ## 效果图
 
 **二维图形上的 A Star 算法**
-
 ![二维图形上的A Star 算法](./images/astar_1.png)
 
 **三维图形上的 A Star 算法**
-
-![三维图形上的 A Star 算法](./images/astar_1.png)
-
-![三维图形上的 A Star 算法](./images/astar_1.png)
-
+![三维图形上的 A Star 算法](./images/astar_2.png)
+![三维图形上的 A Star 算法](./images/astar_3.png)
 
 ## 二维地图上的 A* 算法实现
 
