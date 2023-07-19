@@ -1,0 +1,334 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{newtxtext}
+\usepackage{geometry}
+\usepackage{lipsum} % 该宏包是通过 \lipsum 命令生成一段本文，正式使用时不需要引用该宏包
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[strict]{changepage} % 提供一个 adjustwidth 环境
+\usepackage{framed} % 实现方框效果
+
+\geometry{a4paper,centering,scale=0.8}
+% environment derived from framed.sty: see leftbar environment definition
+\definecolor{formalshade}{rgb}{0.95,0.95,1} % 文本框颜色
+\definecolor{greenshade}{rgb}{0.90,0.99,0.91} % 绿色文本框，竖线颜色设为 Green
+\definecolor{redshade}{rgb}{1.00,0.90,0.90}% 红色文本框，竖线颜色设为 LightCoral
+\definecolor{brownshade}{rgb}{0.99,0.97,0.93} % 莫兰迪棕色，竖线颜色设为 BurlyWood
+
+% ------------------******-------------------
+% 注意行末需要把空格注释掉，不然画出来的方框会有空白竖线
+\newenvironment{formal}{%
+\def\FrameCommand{%
+\hspace{1pt}%
+{\color{DarkBlue}\vrule width 2pt}%
+{\color{formalshade}\vrule width 4pt}%
+\colorbox{formalshade}%
+}%
+\MakeFramed{\advance\hsize-\width\FrameRestore}%
+\noindent\hspace{-4.55pt}% disable indenting first paragraph
+\begin{adjustwidth}{}{7pt}%
+\vspace{2pt}\vspace{2pt}%
+}
+{%
+\vspace{2pt}\end{adjustwidth}\endMakeFramed%
+}
+% ------------------******-------------------
+
+
+\usepackage[ruled]{algorithm2e} % 算法包
+\usepackage{listings}
+\usepackage{framed} % 解决代码分页之后代码框不闭合的问题
+\usepackage{booktabs} % 三线表
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% listings设置
+%%%%%%%%%%%%%%%%%%%%%%%
+\lstset{
+    basicstyle = \small\ttfamily,    % 基本样式 + 小号字体
+    breaklines = true,                      % 代码过长则换行
+    frame = shadowbox,                  % 用（带影子效果）方框框住代码块
+    showspaces = false,                    % 不显示空格
+    columns = fixed,                         % 字间距固定
+    numbers=left,                             %左侧显示行号 往左靠,
+    breaklines=true,                         %对过长的代码自动换行
+    numberstyle=\scriptsize,           %行号字体用小号
+    numbersep=7pt,                          %设置行号与代码的距离，默认是5pt
+}
+
+\usepackage{ctex}
+% 设置中文字体
+\setCJKmainfont {Kai Regular}
+% 设置正文罗马族的CJK字体，影响\rmfamily和\textrm 的字体
+\setCJKsansfont {Kai Regular}
+% 设置正文无衬线族的CJK字体，影响\sffamily和\textsf 的字体
+\setCJKmonofont {Kai Regular}
+% 设置正文等宽族的CJK字体，影响\ttfamily 和 \texttt 的字体
+
+
+\usepackage{fontspec,xltxtra,xunicode}
+\defaultfontfeatures{Mapping=tex-text}
+\setromanfont[Mapping=tex-text]{Hoefler Text}
+\setsansfont[Scale=MatchLowercase,Mapping=tex-text]{Gill Sans}
+\setmonofont[Scale=MatchLowercase]{Andale Mono}
+
+
+\usepackage{fontspec,xltxtra,xunicode}
+\defaultfontfeatures{Mapping=tex-text}
+\setromanfont[Mapping=tex-text]{Hoefler Text}
+\setsansfont[Scale=MatchLowercase,Mapping=tex-text]{Gill Sans}
+\setmonofont[Scale=MatchLowercase]{Andale Mono}
+
+
+
+\title{Python源码学习}
+\author{KenshinLiu}
+\date{Last Update: \today}                                           % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+\newpage
+
+\section*{编译Python}
+
+\begin{lstlisting}[caption={编译使用的操作系统和 Python 版本信息}]
+$ sw_vers
+ProductName:	macOS
+ProductVersion:	12.3
+BuildVersion:	21E230
+
+$ git branch
+* main
+
+$ git log -n 1
+commit df9f7597559b6256924fcd3a1c3dc24cd5c5edaf (HEAD -> main, origin/main, origin/HEAD)
+Author: Inada Naoki <songofacandy@gmail.com>
+Date:   Tue Mar 1 10:27:20 2022 +0900
+    compiler: Merge except_table and cnotab (GH-31614)
+    
+\end{lstlisting}
+
+
+\begin{lstlisting}[caption={编译命令}]
+# debug 模式编译
+$ ./configure --with-pydebug
+$ make
+\end{lstlisting}
+
+
+\begin{lstlisting}[caption={doxygen生成调用关系}]
+$ doxygen -g doxygen.config
+$ doxygen doxygen.config
+\end{lstlisting}
+
+\section*{Object}
+
+Python 所有对象的基础都是 Object. Object 在堆上进行分配。每个 Object 上都有一个表示引用计数的变量，
+当引用计数变为 0 之后，Object 会被回收。 Object 上有一个表示类型的变量，每个 Object 的类型在 Object
+ 被创建出来的时候就被固定，之后不会在改变。这个类型也是使用一个对象来进行表示，对象内部包含一个
+ 指针，指针指向被称为类型对象。这个类型对象包含一个表示类型的指针，指向自身。
+ 
+ Object 一旦分配之后，分配的内存大小以及内存地址都不会再发生改变。如果 Object 需要保存可变大小的数据，
+ 那么 Object 可以持有指向可变大小数据的一个指针。
+
+Python 中的对象总是通过 PyObject* 类型的指针进行访问。 PyObject 结构体只包含引用计数和一个类型指针。
+Python 中的对象的内存地址的前部都是一个 PyObject 结构体，通过这个 PyObject 结构体，就可以知道一个对象的引用计数和真实的类型。
+
+\begin{lstlisting}[caption={PyObject定义}]
+struct _object {
+    _PyObject_HEAD_EXTRA // 这个字段用来编译一个 debug 版本，不用关注
+    Py_ssize_t ob_refcnt;
+    PyTypeObject *ob_type;
+};
+typedef struct _object PyObject;
+\end{lstlisting}
+
+PyObject 只能表示单个的对象，如果需要表示含有多个对象的结构，需要用到另一个结构体 PyVarObject。其中的ob\_size 字段表示对象的数量。
+
+\begin{lstlisting}[caption={PyVarObject 定义}]
+typedef struct {
+    PyObject ob_base;
+    Py_ssize_t ob_size; /* Number of items in variable part */
+} PyVarObject;
+\end{lstlisting}
+
+
+上面提到了 Object 上有一个表示类型的变量。这个变量就是 PyObject 中的 ob\_type 字段，类型为 PyTypeObject。Object 真正的类型就存储在这个结构体中。
+
+\begin{lstlisting}[caption={PyTypeObject 的定义}]
+struct _typeobject {
+    PyObject_VAR_HEAD
+    const char *tp_name; /* For printing, in format "<module>.<name>" */
+    // ... ...
+};
+
+typedef struct _typeobject PyTypeObject;
+\end{lstlisting}
+
+定义中可以看到有一个 tp\_name 字段，这个字段以字符串形式存储了类型名。
+
+在定义的开始位置还可以看到一个 PyObject\_VAR\_HEAD，也就是上面提到的 PyVarObject，这说明 PyTypeObject 对象自身也有一个指针指向一个 PyTypeObject 类型的对象。那么这里就会有一个疑问：其他的 Object 的类型名存储在 PyTypeObject 的实例中，那么 PyTypeObject 实例自身的类型又是什么？存储在什么位置？要解答这个问题需要看一下 PyTypeObject 的实例化过程，下面以 Python 中最基础的类型类 class type 来举例子。 
+
+
+\begin{lstlisting}[caption={PyTypeObject 实例化}]
+PyTypeObject PyType_Type = {
+    PyVarObject_HEAD_INIT(&PyType_Type, 0) // 对象的指针指向自身
+    "type",                                     /* tp_name */
+    // ... ...
+};
+\end{lstlisting}
+
+PyType\_Type 就是 class type 的实例，在实例化的代码中可以看到 PyType\_Type 对象的 PyObject\_VAR\_HEAD 字段设置为了它自身，tp\_name 字段设置为 "type"。这样子就成功的让类的继承体系中的每个类型都有了一个类型定义。
+
+使用如下代码可以进行验证。
+
+\begin{lstlisting}[caption={修改 typeobject.c}]
+PyTypeObject PyType_Type = {
+    PyVarObject_HEAD_INIT(&PyType_Type, 0) // 对象的指针指向自身
+    "PyTypeObject",   // tp_name 从 "type" 修改为 "PyTypeObject"
+    // ... ...
+};
+\end{lstlisting}
+
+\begin{lstlisting}[caption={创建 test.py}]
+class A(object):
+    pass
+
+class B(A):
+    pass
+
+a = A()
+b = B()
+
+print(A.__class__)
+print(B.__class__)
+
+print(a.__class__)
+print(b.__class__)
+\end{lstlisting}
+
+重新编译修改后的 Python，并使用生成的 Python 解释器执行 test.py，可以看到如下输出。
+
+\newpage
+\begin{lstlisting}[caption={test.py 运行输出}]
+# 修改 Python 源码前, 命令 python test.py 的输出
+<class 'type'>
+<class 'type'>
+<class '__main__.A'>
+<class '__main__.B'>
+
+# 修改 Python 源码后，命令 python test.py 的输出
+<class 'PyTypeObject'>
+<class 'PyTypeObject'>
+<class '__main__.A'>
+<class '__main__.B'>
+\end{lstlisting}
+
+从输出中可以看出，类型 A 和类型 B 的类型都变成了修改后的 “PyTypeObject”，但是对象 a 和 对象 b 的类型不变。
+
+再看一下 Python 中 int 类型的实例化。
+
+\begin{lstlisting}[caption={int 类型类的实例化}]
+PyTypeObject PyLong_Type = {
+    PyVarObject_HEAD_INIT(&PyType_Type, 0) // class int 的类型也是 class type
+    "int",                                      /* tp_name */
+    offsetof(PyLongObject, ob_digit),           /* tp_basicsize */
+    sizeof(digit), 
+}
+
+\end{lstlisting}
+
+\section*{对象的析构}
+
+PyObject 是根据 ob\_refcnt 来判断是否需要释放一个对象，当对象的引用增加 1，ob\_refcnt 增加 1，当对象的引用减少 1，ob\_refcnt 减少 1
+，在 ob\_refcnt 变为 0 时，对象被释放。但是存在一个特例，所有的类型对象也有一个 ob\_refcnt 变量，但是永远也不会释放。
+
+至于不会释放的原理，是因为它的释放函数被设置为了空。
+
+一个 PyObject 对象在 ob\_refcnt 到达 0 的时候，会被调用 Py\_DECREF 宏进行对象的释放，具体代码如下
+
+\begin{lstlisting}[caption={PyObject 释放过程}]
+static inline void Py_DECREF(PyObject *op) {
+    // ... ...
+    if (--op->ob_refcnt != 0) {
+	    // ... ...
+    }
+    else {
+        _Py_Dealloc(op);
+    }
+#endif
+}
+
+void
+_Py_Dealloc(PyObject *op)
+{
+    destructor dealloc = Py_TYPE(op)->tp_dealloc;
+    (*dealloc)(op);  // 在此处调用对象释放函数
+}
+\end{lstlisting}
+
+但是对于类型对象来说，tp\_dealloc 函数指针都被设置为了 0，所以类型对象永远不会被释放。虽然 tp\_dealloc 被设置为 0，并不代表类型类型的释放函数不会被调用，相反，这个函数的调用其实很频繁。可以修改如下位置的源码进行验证。
+
+\begin{lstlisting}[caption={修改 PyLong\_Type 源码}]
+#include <stdio.h>
+int long_tp_dealloc(PyObject* obj) {
+    printf("this is PyLong_Type tp_dealloc function");
+}
+
+PyTypeObject PyLong_Type = {
+    PyVarObject_HEAD_INIT(&PyType_Type, 0)
+    "int",                                      /* tp_name */
+    offsetof(PyLongObject, ob_digit),           /* tp_basicsize */
+    sizeof(digit),                              /* tp_itemsize */
+    // 修改此处源码，从 0 改为上面添加的 long_tp_dealloc 函数指针
+    long_tp_dealloc,                        /* tp_dealloc */
+    0,                                                /* tp_vectorcall_offset */
+}
+\end{lstlisting}
+
+修改完成重新编译之后，使用如下代码进行验证。
+
+\begin{lstlisting}[caption={test.py}]
+a = 10
+\end{lstlisting}
+
+
+使用编译出的新 Python 解释器执行 test.py 即可发现有大量的 “this is PyLong\_Type tp\_dealloc function” 句子输出，说明此函数被频繁调用。
+
+
+\newpage
+\section*{备注}
+
+上面的代码分析步骤主要是跟着 《Python 源码剖析》，对照着 Python 3.11 代码进行学习，引用了部分书中内容。
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
