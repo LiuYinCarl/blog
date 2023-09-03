@@ -32,14 +32,14 @@ init A
 
 ## 原因
 
-可以发现，`class B` 的 `__init__` 函数没有被调用。这是因为 `class A` 没有调用 `super().__init__` 方法。`super()` 的原型为：
+可以发现， `class B` 的 `__init__` 函数没有被调用。这是因为 `class A` 没有调用 `super().__init__` 方法。 `super()` 的原型为：
 
 ```python
 class super(type, object_or_type=None):
     pass
 ```
 
-`super()` 返回一个代理对象，它会将方法调用委托给 `type` 的父类或兄弟类。如果在类内调用了 `super()`，那么含义就是返回所在类的父类的一个代理类。然后所有正对 `super()` 返回值的方法调用，例如 `super().__init__()`,这个 `__init__()` 方法的调用会被转发给当前类的 `__mro__` 列表中拥有 `__init__` 方法的第一个类，在上面的例子中，也就是 `class A`。如果对上面的代码做一下修改，删除 `class A` 的 `__init__` 方法。
+`super()` 返回一个代理对象，它会将方法调用委托给 `type` 的父类或兄弟类。如果在类内调用了 `super()` ，那么含义就是返回所在类的父类的一个代理类。然后所有正对 `super()` 返回值的方法调用，例如 `super().__init__()` , 这个 `__init__()` 方法的调用会被转发给当前类的 `__mro__` 列表中拥有 `__init__` 方法的第一个类，在上面的例子中，也就是 `class A` 。如果对上面的代码做一下修改，删除 `class A` 的 `__init__` 方法。
 
 ```python
 class A(object):
@@ -150,7 +150,7 @@ super_getattro(PyObject *self, PyObject *name)
 }
 ```
 
-其中  `do` 循环做的事情也解释了如下代码运行的结果。
+其中 `do` 循环做的事情也解释了如下代码运行的结果。
 
 ```python
 class A(object):
@@ -181,7 +181,7 @@ init B
 init B
 ```
 
-调用 `super(C, c).__init__()` 之所以只输出了一行 `init B` 就是因为 `super(C, c)` 在 `MRO` 查找过程中找到的 `class C` 的第一个含有 `__init__` 方法的类为 `class B`。
+调用 `super(C, c).__init__()` 之所以只输出了一行 `init B` 就是因为 `super(C, c)` 在 `MRO` 查找过程中找到的 `class C` 的第一个含有 `__init__` 方法的类为 `class B` 。
 
 通过查看 `cpython` 的源代码，现在完全理解 `super().__init__()` 这句代码的含义了。
 
