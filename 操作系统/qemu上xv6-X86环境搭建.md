@@ -2,7 +2,6 @@
 
 使用的操作系统为 Ubuntu20。
 
-
 qemu 环境准备
 
 ```bash

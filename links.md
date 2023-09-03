@@ -10,7 +10,6 @@
 
 [dir_all_by_section](https://man7.org/linux/man-pages/dir_all_by_section.html)
 
-
 ### LaTex Manual
 
 [lshort](http://ctan.mirror.rafal.ca/info/lshort/english/lshort.pdf)
@@ -30,8 +29,8 @@
 [100个gdb小技巧](https://github.com/hellogcc/100-gdb-tips)
 
 ### awk
-[awk 入门教程](https://www.ruanyifeng.com/blog/2018/11/awk.html)
 
+[awk 入门教程](https://www.ruanyifeng.com/blog/2018/11/awk.html)
 
 ### Emacs
 
@@ -61,7 +60,6 @@
 
 [Rust by Example](https://doc.rust-lang.org/stable/rust-by-example/#rust-by-example)
 
-
 ### Terra
 
 [Terra: A Multi-Stage Language for High-Performance Computing](https://cs.stanford.edu/~zdevito/pldi071-devito.pdf)
@@ -81,8 +79,6 @@
 [OpenSSL Docs](https://www.openssl.org/docs/)
 
 [OpenSSl Cookbook](https://www.feistyduck.com/books/openssl-cookbook/)
-
-
 
 ## Blog list
 
@@ -114,9 +110,8 @@
 
 [yooooooo](https://home.cnblogs.com/u/linhaostudy/)
 
-
+[Andreas Fertig](https://andreasfertig.blog/)
 
 ## 文章链接
 
 [CPU高速缓存行与内存关系 及并发MESI 协议](https://www.cnblogs.com/jokerjason/p/9584402.html)
-

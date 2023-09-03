@@ -2,7 +2,6 @@
 
 近期有个从 UTF8 字符串中获取第一个可读的字符的需求，所以实现了下面这个函数，包含测试代码。
 
-
 ## UTF8 编码规则
 
 互联网的普及，强烈要求出现一种统一的编码方式。UTF-8 就是在互联网上使用最广的一种 Unicode 的实现方式。其他实现方式还包括 UTF-16（字符用两个字节或四个字节表示）和 UTF-32（字符用四个字节表示），不过在互联网上基本不用。重复一遍，这里的关系是，UTF-8 是 Unicode 的实现方式之一。
@@ -29,7 +28,6 @@ Unicode符号范围     |        UTF-8编码方式
 
 本节内容引用自 [字符编码笔记：ASCII，Unicode 和 UTF-8](https://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html)
 
-
 ## 实现及测试代码
 
 ```c++
@@ -51,7 +49,7 @@ std::string get_frist_word_from_utf8(std::string utf8_str) {
     return "";
 }
 
-// build command: g++ get_first_readable_word.cpp -std=c++11 &amp;&amp; ./a.out
+// build command: g++ get_first_readable_word.cpp -std=c++11 &amp; &amp; ./a.out
 int main() {
     std::vector<std::string> test_case;
     test_case.push_back(std::string("a你好"));

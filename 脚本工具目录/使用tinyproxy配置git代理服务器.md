@@ -8,15 +8,11 @@
 
 这个代理服务器只是用来提高访问 github 仓库的速度以及保证稳定性，所以实现一个最简单的配置即可。于是选择了 tinyproxy。
 
-
-
 ## 条件
 
 测试服务器：阿里云香港轻量服务器 Ubuntu20
 
 测试客户端：Winsows wsl Ubuntu20, Windows 10
-
-
 
 ## 部署
 
@@ -27,16 +23,12 @@
 sudo apt install tinyproxy
 ```
 
-
-
 修改 tinyproxy 配置文件
 
 ```bash
 # 修改配置文件
 vim /etc/tinyproxy/tinyproxy.conf
 ```
-
-
 
 打开配置文件后需要修改的是如下几个配置
 
@@ -53,8 +45,6 @@ Port 8888
 BasicAuth username password
 ```
 
-
-
 停启代理服务器
 
 ```bash
@@ -68,17 +58,11 @@ service tinyproxy stop
 service tinyproxy stop
 ```
 
-
-
 需要注意的是，如果使用的服务器是一些供应商如阿里云提供的，可能还得需要在服务器供应商的防火墙中将配置的代理端口开放。
-
-
 
 ## 客户端 git 代理的配置
 
 客户端需要先安装 git。
-
-
 
 配置 git http 代理
 
@@ -93,8 +77,6 @@ git config --global http.proxy http://ip:port
 git config --global --unset http.proxy
 ```
 
-
-
 配置 git https 代理
 
 ```bash
@@ -107,8 +89,6 @@ git config --global https.proxy https://ip:port
 # 取消 git 代理配置
 git config --global --unset https.proxy
 ```
-
-
 
 ### 如果使用的是 LInux 客户端，可以使用如下脚本进行快速的配置开关操作
 
@@ -145,8 +125,6 @@ bash git_proxy.sh set
 bash git_proxy.sh unset
 ```
 
-
-
 ## 如何确定 git 是否使用了代理
 
 在服务器中安装 iftop 工具，客户端在配置了 git 代理之后下载一个比较大的 git 项目，然后查看总流量以及实时流量的情况
@@ -162,13 +140,9 @@ iftop
 q
 ```
 
-
-
 ![image-20210605111516085](images/使用tinyproxy配置git代理服务器/image-20210605111516085.png)
 
 最后一列即为总流量。
-
-
 
 ## 参考
 
