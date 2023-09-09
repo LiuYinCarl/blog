@@ -149,5 +149,5 @@ TypeError: getattr(): Hi, you should use at least 2 args for it!!!
 从测试中可以发现，我们添加的 `getattr` 参数下限检查在执行 `getattr(Foo)` 的时候被触发。因为删除了参数上限检查，所以在执行
 `getattr(Foo, "val", "Not Exist", None, None, None, None)` 是也没有报错。
 
-到这里，就很清楚地知道了 `getattr` 可以有 2 或者 3 个参数的原因，并不是以为第三个参数是默认参数，而只是因为在C代码中强制限制
-了它的参数数量只能为 2 或者 3。如果去掉上限检查，那么 `getattr` 可以允许使用任意个参数。
+到这里，就很清楚地知道了 `getattr` 可以有 2 或者 3 个参数的原因，并不是因为第三个参数使用了默认参数，而只是因为在 C 代码中强制限制
+了它的参数数量只能为 2 或者 3。如果去掉上限检查， `getattr` 可以允许使用任意个参数。
