@@ -38,10 +38,11 @@ def getattr(obj, name, default=None):
 ```
 
 虽然这个猜测有一定道理，不过答案却是否定的。`getattr` 是一个 `builtins` 模块的函数，这个模块内的函数都是 C 语言编写的函数，
-注入到了 Python 的默认命名空间 `builtins`，也就是说，这个函数并没有 Python 形式，自然也不可能是使用了默认参数。需要进一步理解
+注入到了 Python 的默认命名空间 `builtins`，也就是说，这个函数并没有 Python 形式，自然也不可能是使用了默认参数。想要进一步理解
 这个问题，需要深入 Python 虚拟机，查看 `getattr` 函数的实现。
 
 ```c
+// Python/bltinmodule.c
 static PyMethodDef builtin_methods[] = {
     // ...
     {"getattr",         (PyCFunction)(void(*)(void))builtin_getattr, METH_FASTCALL, getattr_doc},
@@ -93,8 +94,8 @@ builtin_getattr(PyObject *self, PyObject *const *args, Py_ssize_t nargs)
 {
     PyObject *v, *name, *result;
     // 注释掉原来的参数数量检查
-    /* if (!_PyArg_CheckPositional("getattr", nargs, 2, 3)) */
-    /*     return NULL; */
+    // if (!_PyArg_CheckPositional("getattr", nargs, 2, 3))
+    //     return NULL;
     // 添加我们自己的参数检查，只检查参数下限，不检查上限
     if (nargs < 2) {
       PyErr_SetString(PyExc_TypeError, // 错误类型只是为了演示方便，不一定合适
