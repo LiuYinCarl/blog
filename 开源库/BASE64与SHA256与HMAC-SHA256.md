@@ -21,15 +21,15 @@ static const std::string base64_chars =
              "0123456789+/";
 
 static inline bool is_base64(unsigned char c) {
-  return (isalnum(c) || (c == '+') || (c == '/'));
+  return (isalnum(c) || (c == '+') || (c == '/')); 
 }
 
 std::string base64_encode(unsigned char const* bytes_to_encode, unsigned int in_len) {
-  std::string ret;
-  int i = 0;
-  int j = 0;
-  unsigned char char_array_3[3];
-  unsigned char char_array_4[4];
+  std::string ret; 
+  int i = 0; 
+  int j = 0; 
+  unsigned char char_array_3[3]; 
+  unsigned char char_array_4[4]; 
 
   while (in_len--) {
     char_array_3[i++] = *(bytes_to_encode++);
@@ -62,16 +62,16 @@ std::string base64_encode(unsigned char const* bytes_to_encode, unsigned int in_
       ret += '=';
   }
 
-  return ret;
+  return ret; 
 
 }
 std::string base64_decode(std::string const& encoded_string) {
-  int in_len = encoded_string.size();
-  int i = 0;
-  int j = 0;
-  int in_ = 0;
-  unsigned char char_array_4[4], char_array_3[3];
-  std::string ret;
+  int in_len = encoded_string.size(); 
+  int i = 0; 
+  int j = 0; 
+  int in_ = 0; 
+  unsigned char char_array_4[4], char_array_3[3]; 
+  std::string ret; 
 
   while (in_len-- && ( encoded_string[in_] != '=') && is_base64(encoded_string[in_])) {
     char_array_4[i++] = encoded_string[in_]; in_++;
@@ -103,9 +103,8 @@ std::string base64_decode(std::string const& encoded_string) {
     for (j = 0; (j < i - 1); j++) ret += char_array_3[j];
   }
 
-  return ret;
+  return ret; 
 }
-
 
 //********************** SHA256 algorithm  **********************//
 
@@ -124,7 +123,6 @@ std::string sha256_hex(const std::string& str) {
     }
     return buf;
 }
-
 
 //********************** HMAC-SHA256 algorithm  **********************//
 
@@ -167,10 +165,11 @@ std::string hmac_sha256_hex(const std::string& secret_key, const std::string& st
     }
 
     return buf;
+
 }
 
 //********************** HMAC-SHA1 algorithm  **********************//
-int hmac_sha1(const std::string& secret_key, const std::string& str,
+int hmac_sha1(const std::string& secret_key, const std::string& str, 
                         unsigned char* output, unsigned int& output_len) {    
     const EVP_MD * engine = EVP_sha1();
 
@@ -213,7 +212,6 @@ std::string hmac_sha1_hex(const std::string& secret_key, const std::string& str)
     return buf;
 }
 ```
-
 
 测试代码 `demo.cpp`
 

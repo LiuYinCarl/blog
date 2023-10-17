@@ -4,8 +4,6 @@
 
 主要使用 PyQt5 的 QTreeView 进行实现。
 
-
-
 ## 代码
 
 ```python
@@ -72,7 +70,6 @@ m = {
     }
 }
 
-
 class TreeView(QMainWindow):
     def __init__(self) -> None:
         super(TreeView, self).__init__()
@@ -121,15 +118,12 @@ class TreeView(QMainWindow):
         text = "[value:{}]".format(current.data())
         self.statusBar().showMessage(text)
 
-
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = TreeView()
     window.show()
     sys.exit(app.exec())
 ```
-
-
 
 ## 效果
 

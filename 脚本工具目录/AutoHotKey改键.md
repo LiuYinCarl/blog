@@ -21,5 +21,6 @@ CapsLock::LCtrl
 LCtrl::CapsLock
 #IfWinNotActive
 ```
+
 `#IfWinNotActive` 会对参数中的 `TscShellContainerClass` 远程桌面窗口做特殊处理，在除这个窗口外的其他窗口中才进行按键映射，
 使得本地 Windows 机器上的改键在远程软件窗口中不生效了。为了保持按键映射一致，只要在远程机器中再打开 AutoHotKey 使用第一个按键映射脚本即可。

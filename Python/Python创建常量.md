@@ -68,7 +68,6 @@ module1_const = constdef._constdef()
 module1_const.VAL = 100
 print(module1_const.VAL)
 
-
 module2_const = constdef._constdef()
 module2_const.VAL = 200
 print(module2_const.VAL)

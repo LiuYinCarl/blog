@@ -1,6 +1,5 @@
 ## 步骤
 
-
 ## 前置准备
 
 假设使用的是阿里云或者腾讯云等云服务器上的服务器，预计要给 jupyter notebook 使用的端口号为 23333。
@@ -49,7 +48,7 @@ Verify password:
 >>> exit()
 ```
 
-6.修改配置文件 
+6. 修改配置文件 
 
 ```bash
 $ vim /home/jupyter/.jupyter/jupyter_notebook_config.py
@@ -59,6 +58,7 @@ c.NotebookApp.port = 23333 # 设置 jupyter 服务的端口，默认是8888
 c.NotebookApp.open_browser = False # 打开 jupyter 不自动打开浏览器
 c.NotebookApp.notebook_dir = '/home/jupyter/jupyter_dir' # 设置Jupyter 服务器的根目录
 ```
+
 7. 启动 jupyter 服务器
 
 ```bash
@@ -67,4 +67,3 @@ $ jupyter notebook
 # 使用下面的命令让服务后台运行
 nohup jupyter notebook > jupyter.log 2>&1 &
 ```
-

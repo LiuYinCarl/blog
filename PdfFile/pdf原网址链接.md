@@ -4,8 +4,6 @@
 
 [PDF Mage](https://chrome.google.com/webstore/detail/pdf-mage/gknphemhpcknkhegndlihchfonpdcben)
 
-
-
 ### Links
 
 [Reversing GO binaries like a pro](https://rednaga.io/2016/09/21/reversing_go_binaries_like_a_pro/)
@@ -21,4 +19,3 @@
 [100个gdb小技巧](https://github.com/hellogcc/100-gdb-tips)
 
 [optimizing_cpp](https://www.agner.org/optimize/optimizing_cpp.pdf)
-

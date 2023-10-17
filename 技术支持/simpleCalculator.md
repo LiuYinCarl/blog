@@ -6,20 +6,12 @@
 
 邮箱2：kenshinliu@126.com
 
-
-
-
-
 ## 简洁计算器
 
 一款简单实用，界面清爽无广告的计算器软件，能够进行实时智能提示，对选中的计算表达式打上个性化标签进行保存。
 
 ![app截图1](simpleCalculator.assets/app截图1.jpeg)
 
-
-
 ![app截图2](simpleCalculator.assets/app截图2.jpeg)
-
-
 
 ![app截图3](simpleCalculator.assets/app截图3.jpeg)

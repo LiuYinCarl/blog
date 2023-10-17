@@ -93,8 +93,6 @@ struct epoll_event {
 >
 > [epoll--源码剖析](https://segmentfault.com/a/1190000014882854)
 
-
-
 再就是 ET 和 LT 实现的差异了
 
 > 先说 LT 模式对于同一个就绪事件会重复提醒，从源码可以看出来是因为它又把依旧就绪且未设置 ET 标志的事件重新 copy 到了 rdllist 中，所以下一次 epoll_wait 还是会把该事件返回给用户。那么 ET 这里就很好解释了，尽管该事件未处理完，但是你只要设置了 ET 标志，我就不会再次把该事件返回给用户。这就是 ET 的实现。[epoll--源码剖析](https://segmentfault.com/a/1190000014882854)

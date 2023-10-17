@@ -2,11 +2,9 @@
 
 [Linux ping 简单实现](https://blog.csdn.net/tuantuanlin/article/details/17006867)
 
-
-
 ## 实现
 
-``` c
+```c
 //mysock.h
 #ifndef MYSOCK_H_H
 #define MYSOCK_H_H
@@ -200,8 +198,6 @@ void alarm_send(int signo)
 }
 ```
 
-
-
 ## 测试
 
 **tips**
@@ -210,7 +206,7 @@ _编译该代码后需要在 root 权限下才可以执行_
 
 **测试 IP：47.93.196.173 **
 
-``` bash
+```bash
 [carl-pc test]# ./myping 47.93.196.173
 64 bytes from 47.93.196.173: icmp_req=0 ttl=52 time=24.63 ms
 64 bytes from 47.93.196.173: icmp_req=1 ttl=52 time=24.48 ms
@@ -220,7 +216,7 @@ _编译该代码后需要在 root 权限下才可以执行_
 
 **测试 IP： 47.93.196.999**
 
-``` bash
+```bash
 [carl-pc test]# ./myping 47.93.196.999
 catch a icmp Echo Request pack
 64 bytes from 127.0.0.1: icmp_req=0 ttl=64 time=0.10 ms

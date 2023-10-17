@@ -4,7 +4,7 @@
 
 一个简单的方式是在 Windows 的文件管理器的路径框中输入下面的命令，即可以立刻到达 WSL 的根目录了。
 
-``` powershell
+```powershell
 \\wsl$
 ```
 
@@ -28,9 +28,9 @@ WSL 与 Windows 共享目录的需求是这样产生的：有些工程项目，�
 
 那么，如何让 WSL 与 Windows 共享目录呢？办法是在 WSL 下使用软链接。通过上面第二节的内容，我们已经知道了在 WSL 下如何访问 Windows 下的所有目录，所以只需要在 WSL 的开发目录下构建一个软链接即可以在避免直接访问 `/mnt` 目录的同时访问到 Windows 下的目录。
 
-假设我们在 Windows 下的工程目录为 `E:\testProject`，WSL 中想在 `~/Dev` 目录下建立共享目录，在 WSL 下进行如下设置即可。
+假设我们在 Windows 下的工程目录为 `E:\testProject` ，WSL 中想在 `~/Dev` 目录下建立共享目录，在 WSL 下进行如下设置即可。
 
-``` bash
+```bash
 ➜  mkdir Dev
 ➜  cd Dev/
 ➜  ln -s /mnt/e/testProject testProject
@@ -40,6 +40,3 @@ testProject@
 ➜  pwd
 /home/lzh/Dev/testProject
 ```
-
-
-

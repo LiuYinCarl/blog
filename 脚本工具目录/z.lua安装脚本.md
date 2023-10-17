@@ -2,15 +2,11 @@
 
 z.lua 在命令行下用来做目录跳转很方便，但是我自己使用的环境比较多，所以写了一个脚本来方便的快速安装 z.lua。
 
-
-
 ## Linux
 
 因为我使用 fish shell 比较多，所以现在这个脚本只支持 fish shell，如果使用的是其他的 shell, 需要到[项目的 readme](https://github.com/skywind3000/z.lua/blob/master/README.cn.md) 里面去找下。
 
-注意：如果使用的是 WSL,  需要安装 lua-filesystem 库以避免 BUG。
-
-
+注意：如果使用的是 WSL, 需要安装 lua-filesystem 库以避免 BUG。
 
 ```bash
 #!/bin/bash
@@ -77,17 +73,14 @@ function f_main() {
     echo "visit https://github.com/skywind3000/z.lua/blob/master/README.cn.md to see more info"
 }
 
-
 f_main
 ```
-
-
 
 ## Windows
 
 Windows 下我一般使用 Power Shell，所以简单说下 Power Shell 下的 z.lua 的安装。
 
-Windows 下Lua 的安装，可以直接使用官方编译好的[二进制程序](http://luabinaries.sourceforge.net/)，安装好之后将 Lua 程序的路径放到系统路径下即可（可能需要将所有.exe 文件的名字从类似`lua5.*.exe` 改成 `lua.exe`，即去掉名字的数字后缀，但是 dll 文件是不需要改名字的，不然会找不到动态库）。
+Windows 下Lua 的安装，可以直接使用官方编译好的[二进制程序](http://luabinaries.sourceforge.net/)，安装好之后将 Lua 程序的路径放到系统路径下即可（可能需要将所有.exe 文件的名字从类似 `lua5.*.exe` 改成 `lua.exe` ，即去掉名字的数字后缀，但是 dll 文件是不需要改名字的，不然会找不到动态库）。
 
 以下所有命令均在 Power Shell 下输入。
 
@@ -120,10 +113,7 @@ set-executionpolicy remotesigned
 
 Restricted 执行策略不允许运行任何脚本。 AllSigned 和 RemoteSigned 执行策略阻止 PowerShell 运行没有数字签名的脚本。
 
-
-
 ```powershell
 # （不建议，没有特殊需求不用管）若要创建其他配置文件之一，如适用于所有用户和所有 Power Shell 的配置文件
 new-item -path $env:windir\System32\WindowsPowerShell\v1.0\profile.ps1 -itemtype file -force
 ```
-

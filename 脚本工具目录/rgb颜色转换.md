@@ -4,8 +4,6 @@
 
 使用给 Dear ImGui 定义一批常用颜色。
 
-
-
 ##　操作
 
 原文：https://vim.fandom.com/wiki/Xterm256_color_names_for_console_Vim
@@ -253,8 +251,6 @@ hi x254_Grey89 ctermfg=254 guifg=#e4e4e4 "rgb=228,228,228
 hi x255_Grey93 ctermfg=255 guifg=#eeeeee "rgb=238,238,238
 ```
 
-
-
 使用 awk 切出第二列和第五列
 
 ```bash
@@ -321,754 +317,751 @@ if __name__ == "__main__":
             processLine(f.readline())
 ```
 
-
-
 ## 处理结果
 
 ```c++
 #pragma once
 #include "3rd/imgui/imgui.h"
 
-#define RLVColor_NavyBlue_Alpha0 ImVec4{ 0.0,0.0,0.37, 0.0 }
-#define RLVColor_NavyBlue_Alpha1 ImVec4{ 0.0,0.0,0.37, 0.2 }
-#define RLVColor_NavyBlue_Alpha2 ImVec4{ 0.0,0.0,0.37, 0.4 }
-#define RLVColor_NavyBlue_Alpha3 ImVec4{ 0.0,0.0,0.37, 0.6 }
-#define RLVColor_NavyBlue_Alpha4 ImVec4{ 0.0,0.0,0.37, 0.8 }
-#define RLVColor_NavyBlue_Alpha5 ImVec4{ 0.0,0.0,0.37, 1.0 }
-
-#define RLVColor_Blue3_Alpha0 ImVec4{ 0.0,0.0,0.69, 0.0 }
-#define RLVColor_Blue3_Alpha1 ImVec4{ 0.0,0.0,0.69, 0.2 }
-#define RLVColor_Blue3_Alpha2 ImVec4{ 0.0,0.0,0.69, 0.4 }
-#define RLVColor_Blue3_Alpha3 ImVec4{ 0.0,0.0,0.69, 0.6 }
-#define RLVColor_Blue3_Alpha4 ImVec4{ 0.0,0.0,0.69, 0.8 }
-#define RLVColor_Blue3_Alpha5 ImVec4{ 0.0,0.0,0.69, 1.0 }
-
-#define RLVColor_Blue1_Alpha0 ImVec4{ 0.0,0.0,1.0, 0.0 }
-#define RLVColor_Blue1_Alpha1 ImVec4{ 0.0,0.0,1.0, 0.2 }
-#define RLVColor_Blue1_Alpha2 ImVec4{ 0.0,0.0,1.0, 0.4 }
-#define RLVColor_Blue1_Alpha3 ImVec4{ 0.0,0.0,1.0, 0.6 }
-#define RLVColor_Blue1_Alpha4 ImVec4{ 0.0,0.0,1.0, 0.8 }
-#define RLVColor_Blue1_Alpha5 ImVec4{ 0.0,0.0,1.0, 1.0 }
-
-#define RLVColor_DeepSkyBlue4_Alpha0 ImVec4{ 0.0,0.37,0.37, 0.0 }
-#define RLVColor_DeepSkyBlue4_Alpha1 ImVec4{ 0.0,0.37,0.37, 0.2 }
-#define RLVColor_DeepSkyBlue4_Alpha2 ImVec4{ 0.0,0.37,0.37, 0.4 }
-#define RLVColor_DeepSkyBlue4_Alpha3 ImVec4{ 0.0,0.37,0.37, 0.6 }
-#define RLVColor_DeepSkyBlue4_Alpha4 ImVec4{ 0.0,0.37,0.37, 0.8 }
-#define RLVColor_DeepSkyBlue4_Alpha5 ImVec4{ 0.0,0.37,0.37, 1.0 }
-
-#define RLVColor_DodgerBlue2_Alpha0 ImVec4{ 0.0,0.37,1.0, 0.0 }
-#define RLVColor_DodgerBlue2_Alpha1 ImVec4{ 0.0,0.37,1.0, 0.2 }
-#define RLVColor_DodgerBlue2_Alpha2 ImVec4{ 0.0,0.37,1.0, 0.4 }
-#define RLVColor_DodgerBlue2_Alpha3 ImVec4{ 0.0,0.37,1.0, 0.6 }
-#define RLVColor_DodgerBlue2_Alpha4 ImVec4{ 0.0,0.37,1.0, 0.8 }
-#define RLVColor_DodgerBlue2_Alpha5 ImVec4{ 0.0,0.37,1.0, 1.0 }
-
-#define RLVColor_SpringGreen4_Alpha0 ImVec4{ 0.0,0.53,0.37, 0.0 }
-#define RLVColor_SpringGreen4_Alpha1 ImVec4{ 0.0,0.53,0.37, 0.2 }
-#define RLVColor_SpringGreen4_Alpha2 ImVec4{ 0.0,0.53,0.37, 0.4 }
-#define RLVColor_SpringGreen4_Alpha3 ImVec4{ 0.0,0.53,0.37, 0.6 }
-#define RLVColor_SpringGreen4_Alpha4 ImVec4{ 0.0,0.53,0.37, 0.8 }
-#define RLVColor_SpringGreen4_Alpha5 ImVec4{ 0.0,0.53,0.37, 1.0 }
-
-#define RLVColor_DeepSkyBlue3_Alpha0 ImVec4{ 0.0,0.53,0.69, 0.0 }
-#define RLVColor_DeepSkyBlue3_Alpha1 ImVec4{ 0.0,0.53,0.69, 0.2 }
-#define RLVColor_DeepSkyBlue3_Alpha2 ImVec4{ 0.0,0.53,0.69, 0.4 }
-#define RLVColor_DeepSkyBlue3_Alpha3 ImVec4{ 0.0,0.53,0.69, 0.6 }
-#define RLVColor_DeepSkyBlue3_Alpha4 ImVec4{ 0.0,0.53,0.69, 0.8 }
-#define RLVColor_DeepSkyBlue3_Alpha5 ImVec4{ 0.0,0.53,0.69, 1.0 }
-
-#define RLVColor_DodgerBlue1_Alpha0 ImVec4{ 0.0,0.53,1.0, 0.0 }
-#define RLVColor_DodgerBlue1_Alpha1 ImVec4{ 0.0,0.53,1.0, 0.2 }
-#define RLVColor_DodgerBlue1_Alpha2 ImVec4{ 0.0,0.53,1.0, 0.4 }
-#define RLVColor_DodgerBlue1_Alpha3 ImVec4{ 0.0,0.53,1.0, 0.6 }
-#define RLVColor_DodgerBlue1_Alpha4 ImVec4{ 0.0,0.53,1.0, 0.8 }
-#define RLVColor_DodgerBlue1_Alpha5 ImVec4{ 0.0,0.53,1.0, 1.0 }
-
-#define RLVColor_SpringGreen3_Alpha0 ImVec4{ 0.0,0.69,0.37, 0.0 }
-#define RLVColor_SpringGreen3_Alpha1 ImVec4{ 0.0,0.69,0.37, 0.2 }
-#define RLVColor_SpringGreen3_Alpha2 ImVec4{ 0.0,0.69,0.37, 0.4 }
-#define RLVColor_SpringGreen3_Alpha3 ImVec4{ 0.0,0.69,0.37, 0.6 }
-#define RLVColor_SpringGreen3_Alpha4 ImVec4{ 0.0,0.69,0.37, 0.8 }
-#define RLVColor_SpringGreen3_Alpha5 ImVec4{ 0.0,0.69,0.37, 1.0 }
-
-#define RLVColor_LightSeaGreen_Alpha0 ImVec4{ 0.0,0.69,0.69, 0.0 }
-#define RLVColor_LightSeaGreen_Alpha1 ImVec4{ 0.0,0.69,0.69, 0.2 }
-#define RLVColor_LightSeaGreen_Alpha2 ImVec4{ 0.0,0.69,0.69, 0.4 }
-#define RLVColor_LightSeaGreen_Alpha3 ImVec4{ 0.0,0.69,0.69, 0.6 }
-#define RLVColor_LightSeaGreen_Alpha4 ImVec4{ 0.0,0.69,0.69, 0.8 }
-#define RLVColor_LightSeaGreen_Alpha5 ImVec4{ 0.0,0.69,0.69, 1.0 }
-
-#define RLVColor_DeepSkyBlue1_Alpha0 ImVec4{ 0.0,0.69,1.0, 0.0 }
-#define RLVColor_DeepSkyBlue1_Alpha1 ImVec4{ 0.0,0.69,1.0, 0.2 }
-#define RLVColor_DeepSkyBlue1_Alpha2 ImVec4{ 0.0,0.69,1.0, 0.4 }
-#define RLVColor_DeepSkyBlue1_Alpha3 ImVec4{ 0.0,0.69,1.0, 0.6 }
-#define RLVColor_DeepSkyBlue1_Alpha4 ImVec4{ 0.0,0.69,1.0, 0.8 }
-#define RLVColor_DeepSkyBlue1_Alpha5 ImVec4{ 0.0,0.69,1.0, 1.0 }
-
-#define RLVColor_Cyan3_Alpha0 ImVec4{ 0.0,0.84,0.69, 0.0 }
-#define RLVColor_Cyan3_Alpha1 ImVec4{ 0.0,0.84,0.69, 0.2 }
-#define RLVColor_Cyan3_Alpha2 ImVec4{ 0.0,0.84,0.69, 0.4 }
-#define RLVColor_Cyan3_Alpha3 ImVec4{ 0.0,0.84,0.69, 0.6 }
-#define RLVColor_Cyan3_Alpha4 ImVec4{ 0.0,0.84,0.69, 0.8 }
-#define RLVColor_Cyan3_Alpha5 ImVec4{ 0.0,0.84,0.69, 1.0 }
-
-#define RLVColor_Turquoise2_Alpha0 ImVec4{ 0.0,0.84,1.0, 0.0 }
-#define RLVColor_Turquoise2_Alpha1 ImVec4{ 0.0,0.84,1.0, 0.2 }
-#define RLVColor_Turquoise2_Alpha2 ImVec4{ 0.0,0.84,1.0, 0.4 }
-#define RLVColor_Turquoise2_Alpha3 ImVec4{ 0.0,0.84,1.0, 0.6 }
-#define RLVColor_Turquoise2_Alpha4 ImVec4{ 0.0,0.84,1.0, 0.8 }
-#define RLVColor_Turquoise2_Alpha5 ImVec4{ 0.0,0.84,1.0, 1.0 }
-
-#define RLVColor_SpringGreen2_Alpha0 ImVec4{ 0.0,1.0,0.37, 0.0 }
-#define RLVColor_SpringGreen2_Alpha1 ImVec4{ 0.0,1.0,0.37, 0.2 }
-#define RLVColor_SpringGreen2_Alpha2 ImVec4{ 0.0,1.0,0.37, 0.4 }
-#define RLVColor_SpringGreen2_Alpha3 ImVec4{ 0.0,1.0,0.37, 0.6 }
-#define RLVColor_SpringGreen2_Alpha4 ImVec4{ 0.0,1.0,0.37, 0.8 }
-#define RLVColor_SpringGreen2_Alpha5 ImVec4{ 0.0,1.0,0.37, 1.0 }
-
-#define RLVColor_MediumSpringGreen_Alpha0 ImVec4{ 0.0,1.0,0.69, 0.0 }
-#define RLVColor_MediumSpringGreen_Alpha1 ImVec4{ 0.0,1.0,0.69, 0.2 }
-#define RLVColor_MediumSpringGreen_Alpha2 ImVec4{ 0.0,1.0,0.69, 0.4 }
-#define RLVColor_MediumSpringGreen_Alpha3 ImVec4{ 0.0,1.0,0.69, 0.6 }
-#define RLVColor_MediumSpringGreen_Alpha4 ImVec4{ 0.0,1.0,0.69, 0.8 }
-#define RLVColor_MediumSpringGreen_Alpha5 ImVec4{ 0.0,1.0,0.69, 1.0 }
-
-#define RLVColor_Cyan1_Alpha0 ImVec4{ 0.0,1.0,1.0, 0.0 }
-#define RLVColor_Cyan1_Alpha1 ImVec4{ 0.0,1.0,1.0, 0.2 }
-#define RLVColor_Cyan1_Alpha2 ImVec4{ 0.0,1.0,1.0, 0.4 }
-#define RLVColor_Cyan1_Alpha3 ImVec4{ 0.0,1.0,1.0, 0.6 }
-#define RLVColor_Cyan1_Alpha4 ImVec4{ 0.0,1.0,1.0, 0.8 }
-#define RLVColor_Cyan1_Alpha5 ImVec4{ 0.0,1.0,1.0, 1.0 }
-
-#define RLVColor_DeepPink4_Alpha0 ImVec4{ 0.37,0.0,0.37, 0.0 }
-#define RLVColor_DeepPink4_Alpha1 ImVec4{ 0.37,0.0,0.37, 0.2 }
-#define RLVColor_DeepPink4_Alpha2 ImVec4{ 0.37,0.0,0.37, 0.4 }
-#define RLVColor_DeepPink4_Alpha3 ImVec4{ 0.37,0.0,0.37, 0.6 }
-#define RLVColor_DeepPink4_Alpha4 ImVec4{ 0.37,0.0,0.37, 0.8 }
-#define RLVColor_DeepPink4_Alpha5 ImVec4{ 0.37,0.0,0.37, 1.0 }
-
-#define RLVColor_Purple4_Alpha0 ImVec4{ 0.37,0.0,0.69, 0.0 }
-#define RLVColor_Purple4_Alpha1 ImVec4{ 0.37,0.0,0.69, 0.2 }
-#define RLVColor_Purple4_Alpha2 ImVec4{ 0.37,0.0,0.69, 0.4 }
-#define RLVColor_Purple4_Alpha3 ImVec4{ 0.37,0.0,0.69, 0.6 }
-#define RLVColor_Purple4_Alpha4 ImVec4{ 0.37,0.0,0.69, 0.8 }
-#define RLVColor_Purple4_Alpha5 ImVec4{ 0.37,0.0,0.69, 1.0 }
-
-#define RLVColor_BlueViolet_Alpha0 ImVec4{ 0.37,0.0,1.0, 0.0 }
-#define RLVColor_BlueViolet_Alpha1 ImVec4{ 0.37,0.0,1.0, 0.2 }
-#define RLVColor_BlueViolet_Alpha2 ImVec4{ 0.37,0.0,1.0, 0.4 }
-#define RLVColor_BlueViolet_Alpha3 ImVec4{ 0.37,0.0,1.0, 0.6 }
-#define RLVColor_BlueViolet_Alpha4 ImVec4{ 0.37,0.0,1.0, 0.8 }
-#define RLVColor_BlueViolet_Alpha5 ImVec4{ 0.37,0.0,1.0, 1.0 }
-
-#define RLVColor_Grey37_Alpha0 ImVec4{ 0.37,0.37,0.37, 0.0 }
-#define RLVColor_Grey37_Alpha1 ImVec4{ 0.37,0.37,0.37, 0.2 }
-#define RLVColor_Grey37_Alpha2 ImVec4{ 0.37,0.37,0.37, 0.4 }
-#define RLVColor_Grey37_Alpha3 ImVec4{ 0.37,0.37,0.37, 0.6 }
-#define RLVColor_Grey37_Alpha4 ImVec4{ 0.37,0.37,0.37, 0.8 }
-#define RLVColor_Grey37_Alpha5 ImVec4{ 0.37,0.37,0.37, 1.0 }
-
-#define RLVColor_SlateBlue3_Alpha0 ImVec4{ 0.37,0.37,0.69, 0.0 }
-#define RLVColor_SlateBlue3_Alpha1 ImVec4{ 0.37,0.37,0.69, 0.2 }
-#define RLVColor_SlateBlue3_Alpha2 ImVec4{ 0.37,0.37,0.69, 0.4 }
-#define RLVColor_SlateBlue3_Alpha3 ImVec4{ 0.37,0.37,0.69, 0.6 }
-#define RLVColor_SlateBlue3_Alpha4 ImVec4{ 0.37,0.37,0.69, 0.8 }
-#define RLVColor_SlateBlue3_Alpha5 ImVec4{ 0.37,0.37,0.69, 1.0 }
-
-#define RLVColor_RoyalBlue1_Alpha0 ImVec4{ 0.37,0.37,1.0, 0.0 }
-#define RLVColor_RoyalBlue1_Alpha1 ImVec4{ 0.37,0.37,1.0, 0.2 }
-#define RLVColor_RoyalBlue1_Alpha2 ImVec4{ 0.37,0.37,1.0, 0.4 }
-#define RLVColor_RoyalBlue1_Alpha3 ImVec4{ 0.37,0.37,1.0, 0.6 }
-#define RLVColor_RoyalBlue1_Alpha4 ImVec4{ 0.37,0.37,1.0, 0.8 }
-#define RLVColor_RoyalBlue1_Alpha5 ImVec4{ 0.37,0.37,1.0, 1.0 }
-
-#define RLVColor_DarkSeaGreen4_Alpha0 ImVec4{ 0.37,0.53,0.37, 0.0 }
-#define RLVColor_DarkSeaGreen4_Alpha1 ImVec4{ 0.37,0.53,0.37, 0.2 }
-#define RLVColor_DarkSeaGreen4_Alpha2 ImVec4{ 0.37,0.53,0.37, 0.4 }
-#define RLVColor_DarkSeaGreen4_Alpha3 ImVec4{ 0.37,0.53,0.37, 0.6 }
-#define RLVColor_DarkSeaGreen4_Alpha4 ImVec4{ 0.37,0.53,0.37, 0.8 }
-#define RLVColor_DarkSeaGreen4_Alpha5 ImVec4{ 0.37,0.53,0.37, 1.0 }
-
-#define RLVColor_SteelBlue_Alpha0 ImVec4{ 0.37,0.53,0.69, 0.0 }
-#define RLVColor_SteelBlue_Alpha1 ImVec4{ 0.37,0.53,0.69, 0.2 }
-#define RLVColor_SteelBlue_Alpha2 ImVec4{ 0.37,0.53,0.69, 0.4 }
-#define RLVColor_SteelBlue_Alpha3 ImVec4{ 0.37,0.53,0.69, 0.6 }
-#define RLVColor_SteelBlue_Alpha4 ImVec4{ 0.37,0.53,0.69, 0.8 }
-#define RLVColor_SteelBlue_Alpha5 ImVec4{ 0.37,0.53,0.69, 1.0 }
-
-#define RLVColor_CornflowerBlue_Alpha0 ImVec4{ 0.37,0.53,1.0, 0.0 }
-#define RLVColor_CornflowerBlue_Alpha1 ImVec4{ 0.37,0.53,1.0, 0.2 }
-#define RLVColor_CornflowerBlue_Alpha2 ImVec4{ 0.37,0.53,1.0, 0.4 }
-#define RLVColor_CornflowerBlue_Alpha3 ImVec4{ 0.37,0.53,1.0, 0.6 }
-#define RLVColor_CornflowerBlue_Alpha4 ImVec4{ 0.37,0.53,1.0, 0.8 }
-#define RLVColor_CornflowerBlue_Alpha5 ImVec4{ 0.37,0.53,1.0, 1.0 }
-
-#define RLVColor_CadetBlue_Alpha0 ImVec4{ 0.37,0.69,0.69, 0.0 }
-#define RLVColor_CadetBlue_Alpha1 ImVec4{ 0.37,0.69,0.69, 0.2 }
-#define RLVColor_CadetBlue_Alpha2 ImVec4{ 0.37,0.69,0.69, 0.4 }
-#define RLVColor_CadetBlue_Alpha3 ImVec4{ 0.37,0.69,0.69, 0.6 }
-#define RLVColor_CadetBlue_Alpha4 ImVec4{ 0.37,0.69,0.69, 0.8 }
-#define RLVColor_CadetBlue_Alpha5 ImVec4{ 0.37,0.69,0.69, 1.0 }
-
-#define RLVColor_SteelBlue1_Alpha0 ImVec4{ 0.37,0.69,1.0, 0.0 }
-#define RLVColor_SteelBlue1_Alpha1 ImVec4{ 0.37,0.69,1.0, 0.2 }
-#define RLVColor_SteelBlue1_Alpha2 ImVec4{ 0.37,0.69,1.0, 0.4 }
-#define RLVColor_SteelBlue1_Alpha3 ImVec4{ 0.37,0.69,1.0, 0.6 }
-#define RLVColor_SteelBlue1_Alpha4 ImVec4{ 0.37,0.69,1.0, 0.8 }
-#define RLVColor_SteelBlue1_Alpha5 ImVec4{ 0.37,0.69,1.0, 1.0 }
-
-#define RLVColor_PaleGreen3_Alpha0 ImVec4{ 0.37,0.84,0.37, 0.0 }
-#define RLVColor_PaleGreen3_Alpha1 ImVec4{ 0.37,0.84,0.37, 0.2 }
-#define RLVColor_PaleGreen3_Alpha2 ImVec4{ 0.37,0.84,0.37, 0.4 }
-#define RLVColor_PaleGreen3_Alpha3 ImVec4{ 0.37,0.84,0.37, 0.6 }
-#define RLVColor_PaleGreen3_Alpha4 ImVec4{ 0.37,0.84,0.37, 0.8 }
-#define RLVColor_PaleGreen3_Alpha5 ImVec4{ 0.37,0.84,0.37, 1.0 }
-
-#define RLVColor_Aquamarine3_Alpha0 ImVec4{ 0.37,0.84,0.69, 0.0 }
-#define RLVColor_Aquamarine3_Alpha1 ImVec4{ 0.37,0.84,0.69, 0.2 }
-#define RLVColor_Aquamarine3_Alpha2 ImVec4{ 0.37,0.84,0.69, 0.4 }
-#define RLVColor_Aquamarine3_Alpha3 ImVec4{ 0.37,0.84,0.69, 0.6 }
-#define RLVColor_Aquamarine3_Alpha4 ImVec4{ 0.37,0.84,0.69, 0.8 }
-#define RLVColor_Aquamarine3_Alpha5 ImVec4{ 0.37,0.84,0.69, 1.0 }
-
-#define RLVColor_SeaGreen2_Alpha0 ImVec4{ 0.37,1.0,0.37, 0.0 }
-#define RLVColor_SeaGreen2_Alpha1 ImVec4{ 0.37,1.0,0.37, 0.2 }
-#define RLVColor_SeaGreen2_Alpha2 ImVec4{ 0.37,1.0,0.37, 0.4 }
-#define RLVColor_SeaGreen2_Alpha3 ImVec4{ 0.37,1.0,0.37, 0.6 }
-#define RLVColor_SeaGreen2_Alpha4 ImVec4{ 0.37,1.0,0.37, 0.8 }
-#define RLVColor_SeaGreen2_Alpha5 ImVec4{ 0.37,1.0,0.37, 1.0 }
-
-#define RLVColor_SeaGreen1_Alpha0 ImVec4{ 0.37,1.0,0.69, 0.0 }
-#define RLVColor_SeaGreen1_Alpha1 ImVec4{ 0.37,1.0,0.69, 0.2 }
-#define RLVColor_SeaGreen1_Alpha2 ImVec4{ 0.37,1.0,0.69, 0.4 }
-#define RLVColor_SeaGreen1_Alpha3 ImVec4{ 0.37,1.0,0.69, 0.6 }
-#define RLVColor_SeaGreen1_Alpha4 ImVec4{ 0.37,1.0,0.69, 0.8 }
-#define RLVColor_SeaGreen1_Alpha5 ImVec4{ 0.37,1.0,0.69, 1.0 }
-
-#define RLVColor_DarkSlateGray2_Alpha0 ImVec4{ 0.37,1.0,1.0, 0.0 }
-#define RLVColor_DarkSlateGray2_Alpha1 ImVec4{ 0.37,1.0,1.0, 0.2 }
-#define RLVColor_DarkSlateGray2_Alpha2 ImVec4{ 0.37,1.0,1.0, 0.4 }
-#define RLVColor_DarkSlateGray2_Alpha3 ImVec4{ 0.37,1.0,1.0, 0.6 }
-#define RLVColor_DarkSlateGray2_Alpha4 ImVec4{ 0.37,1.0,1.0, 0.8 }
-#define RLVColor_DarkSlateGray2_Alpha5 ImVec4{ 0.37,1.0,1.0, 1.0 }
-
-#define RLVColor_DarkMagenta_Alpha0 ImVec4{ 0.53,0.0,0.69, 0.0 }
-#define RLVColor_DarkMagenta_Alpha1 ImVec4{ 0.53,0.0,0.69, 0.2 }
-#define RLVColor_DarkMagenta_Alpha2 ImVec4{ 0.53,0.0,0.69, 0.4 }
-#define RLVColor_DarkMagenta_Alpha3 ImVec4{ 0.53,0.0,0.69, 0.6 }
-#define RLVColor_DarkMagenta_Alpha4 ImVec4{ 0.53,0.0,0.69, 0.8 }
-#define RLVColor_DarkMagenta_Alpha5 ImVec4{ 0.53,0.0,0.69, 1.0 }
-
-#define RLVColor_Purple_Alpha0 ImVec4{ 0.53,0.0,1.0, 0.0 }
-#define RLVColor_Purple_Alpha1 ImVec4{ 0.53,0.0,1.0, 0.2 }
-#define RLVColor_Purple_Alpha2 ImVec4{ 0.53,0.0,1.0, 0.4 }
-#define RLVColor_Purple_Alpha3 ImVec4{ 0.53,0.0,1.0, 0.6 }
-#define RLVColor_Purple_Alpha4 ImVec4{ 0.53,0.0,1.0, 0.8 }
-#define RLVColor_Purple_Alpha5 ImVec4{ 0.53,0.0,1.0, 1.0 }
-
-#define RLVColor_LightPink4_Alpha0 ImVec4{ 0.53,0.37,0.37, 0.0 }
-#define RLVColor_LightPink4_Alpha1 ImVec4{ 0.53,0.37,0.37, 0.2 }
-#define RLVColor_LightPink4_Alpha2 ImVec4{ 0.53,0.37,0.37, 0.4 }
-#define RLVColor_LightPink4_Alpha3 ImVec4{ 0.53,0.37,0.37, 0.6 }
-#define RLVColor_LightPink4_Alpha4 ImVec4{ 0.53,0.37,0.37, 0.8 }
-#define RLVColor_LightPink4_Alpha5 ImVec4{ 0.53,0.37,0.37, 1.0 }
-
-#define RLVColor_MediumPurple3_Alpha0 ImVec4{ 0.53,0.37,0.69, 0.0 }
-#define RLVColor_MediumPurple3_Alpha1 ImVec4{ 0.53,0.37,0.69, 0.2 }
-#define RLVColor_MediumPurple3_Alpha2 ImVec4{ 0.53,0.37,0.69, 0.4 }
-#define RLVColor_MediumPurple3_Alpha3 ImVec4{ 0.53,0.37,0.69, 0.6 }
-#define RLVColor_MediumPurple3_Alpha4 ImVec4{ 0.53,0.37,0.69, 0.8 }
-#define RLVColor_MediumPurple3_Alpha5 ImVec4{ 0.53,0.37,0.69, 1.0 }
-
-#define RLVColor_SlateBlue1_Alpha0 ImVec4{ 0.53,0.37,1.0, 0.0 }
-#define RLVColor_SlateBlue1_Alpha1 ImVec4{ 0.53,0.37,1.0, 0.2 }
-#define RLVColor_SlateBlue1_Alpha2 ImVec4{ 0.53,0.37,1.0, 0.4 }
-#define RLVColor_SlateBlue1_Alpha3 ImVec4{ 0.53,0.37,1.0, 0.6 }
-#define RLVColor_SlateBlue1_Alpha4 ImVec4{ 0.53,0.37,1.0, 0.8 }
-#define RLVColor_SlateBlue1_Alpha5 ImVec4{ 0.53,0.37,1.0, 1.0 }
-
-#define RLVColor_Wheat4_Alpha0 ImVec4{ 0.53,0.53,0.37, 0.0 }
-#define RLVColor_Wheat4_Alpha1 ImVec4{ 0.53,0.53,0.37, 0.2 }
-#define RLVColor_Wheat4_Alpha2 ImVec4{ 0.53,0.53,0.37, 0.4 }
-#define RLVColor_Wheat4_Alpha3 ImVec4{ 0.53,0.53,0.37, 0.6 }
-#define RLVColor_Wheat4_Alpha4 ImVec4{ 0.53,0.53,0.37, 0.8 }
-#define RLVColor_Wheat4_Alpha5 ImVec4{ 0.53,0.53,0.37, 1.0 }
-
-#define RLVColor_LightSlateGrey_Alpha0 ImVec4{ 0.53,0.53,0.69, 0.0 }
-#define RLVColor_LightSlateGrey_Alpha1 ImVec4{ 0.53,0.53,0.69, 0.2 }
-#define RLVColor_LightSlateGrey_Alpha2 ImVec4{ 0.53,0.53,0.69, 0.4 }
-#define RLVColor_LightSlateGrey_Alpha3 ImVec4{ 0.53,0.53,0.69, 0.6 }
-#define RLVColor_LightSlateGrey_Alpha4 ImVec4{ 0.53,0.53,0.69, 0.8 }
-#define RLVColor_LightSlateGrey_Alpha5 ImVec4{ 0.53,0.53,0.69, 1.0 }
-
-#define RLVColor_LightSlateBlue_Alpha0 ImVec4{ 0.53,0.53,1.0, 0.0 }
-#define RLVColor_LightSlateBlue_Alpha1 ImVec4{ 0.53,0.53,1.0, 0.2 }
-#define RLVColor_LightSlateBlue_Alpha2 ImVec4{ 0.53,0.53,1.0, 0.4 }
-#define RLVColor_LightSlateBlue_Alpha3 ImVec4{ 0.53,0.53,1.0, 0.6 }
-#define RLVColor_LightSlateBlue_Alpha4 ImVec4{ 0.53,0.53,1.0, 0.8 }
-#define RLVColor_LightSlateBlue_Alpha5 ImVec4{ 0.53,0.53,1.0, 1.0 }
-
-#define RLVColor_DarkOliveGreen3_Alpha0 ImVec4{ 0.53,0.69,0.37, 0.0 }
-#define RLVColor_DarkOliveGreen3_Alpha1 ImVec4{ 0.53,0.69,0.37, 0.2 }
-#define RLVColor_DarkOliveGreen3_Alpha2 ImVec4{ 0.53,0.69,0.37, 0.4 }
-#define RLVColor_DarkOliveGreen3_Alpha3 ImVec4{ 0.53,0.69,0.37, 0.6 }
-#define RLVColor_DarkOliveGreen3_Alpha4 ImVec4{ 0.53,0.69,0.37, 0.8 }
-#define RLVColor_DarkOliveGreen3_Alpha5 ImVec4{ 0.53,0.69,0.37, 1.0 }
-
-#define RLVColor_LightSkyBlue3_Alpha0 ImVec4{ 0.53,0.69,0.69, 0.0 }
-#define RLVColor_LightSkyBlue3_Alpha1 ImVec4{ 0.53,0.69,0.69, 0.2 }
-#define RLVColor_LightSkyBlue3_Alpha2 ImVec4{ 0.53,0.69,0.69, 0.4 }
-#define RLVColor_LightSkyBlue3_Alpha3 ImVec4{ 0.53,0.69,0.69, 0.6 }
-#define RLVColor_LightSkyBlue3_Alpha4 ImVec4{ 0.53,0.69,0.69, 0.8 }
-#define RLVColor_LightSkyBlue3_Alpha5 ImVec4{ 0.53,0.69,0.69, 1.0 }
-
-#define RLVColor_SkyBlue2_Alpha0 ImVec4{ 0.53,0.69,1.0, 0.0 }
-#define RLVColor_SkyBlue2_Alpha1 ImVec4{ 0.53,0.69,1.0, 0.2 }
-#define RLVColor_SkyBlue2_Alpha2 ImVec4{ 0.53,0.69,1.0, 0.4 }
-#define RLVColor_SkyBlue2_Alpha3 ImVec4{ 0.53,0.69,1.0, 0.6 }
-#define RLVColor_SkyBlue2_Alpha4 ImVec4{ 0.53,0.69,1.0, 0.8 }
-#define RLVColor_SkyBlue2_Alpha5 ImVec4{ 0.53,0.69,1.0, 1.0 }
-
-#define RLVColor_DarkSeaGreen3_Alpha0 ImVec4{ 0.53,0.84,0.69, 0.0 }
-#define RLVColor_DarkSeaGreen3_Alpha1 ImVec4{ 0.53,0.84,0.69, 0.2 }
-#define RLVColor_DarkSeaGreen3_Alpha2 ImVec4{ 0.53,0.84,0.69, 0.4 }
-#define RLVColor_DarkSeaGreen3_Alpha3 ImVec4{ 0.53,0.84,0.69, 0.6 }
-#define RLVColor_DarkSeaGreen3_Alpha4 ImVec4{ 0.53,0.84,0.69, 0.8 }
-#define RLVColor_DarkSeaGreen3_Alpha5 ImVec4{ 0.53,0.84,0.69, 1.0 }
-
-#define RLVColor_SkyBlue1_Alpha0 ImVec4{ 0.53,0.84,1.0, 0.0 }
-#define RLVColor_SkyBlue1_Alpha1 ImVec4{ 0.53,0.84,1.0, 0.2 }
-#define RLVColor_SkyBlue1_Alpha2 ImVec4{ 0.53,0.84,1.0, 0.4 }
-#define RLVColor_SkyBlue1_Alpha3 ImVec4{ 0.53,0.84,1.0, 0.6 }
-#define RLVColor_SkyBlue1_Alpha4 ImVec4{ 0.53,0.84,1.0, 0.8 }
-#define RLVColor_SkyBlue1_Alpha5 ImVec4{ 0.53,0.84,1.0, 1.0 }
-
-#define RLVColor_LightGreen_Alpha0 ImVec4{ 0.53,1.0,0.37, 0.0 }
-#define RLVColor_LightGreen_Alpha1 ImVec4{ 0.53,1.0,0.37, 0.2 }
-#define RLVColor_LightGreen_Alpha2 ImVec4{ 0.53,1.0,0.37, 0.4 }
-#define RLVColor_LightGreen_Alpha3 ImVec4{ 0.53,1.0,0.37, 0.6 }
-#define RLVColor_LightGreen_Alpha4 ImVec4{ 0.53,1.0,0.37, 0.8 }
-#define RLVColor_LightGreen_Alpha5 ImVec4{ 0.53,1.0,0.37, 1.0 }
-
-#define RLVColor_PaleGreen1_Alpha0 ImVec4{ 0.53,1.0,0.69, 0.0 }
-#define RLVColor_PaleGreen1_Alpha1 ImVec4{ 0.53,1.0,0.69, 0.2 }
-#define RLVColor_PaleGreen1_Alpha2 ImVec4{ 0.53,1.0,0.69, 0.4 }
-#define RLVColor_PaleGreen1_Alpha3 ImVec4{ 0.53,1.0,0.69, 0.6 }
-#define RLVColor_PaleGreen1_Alpha4 ImVec4{ 0.53,1.0,0.69, 0.8 }
-#define RLVColor_PaleGreen1_Alpha5 ImVec4{ 0.53,1.0,0.69, 1.0 }
-
-#define RLVColor_DarkSlateGray1_Alpha0 ImVec4{ 0.53,1.0,1.0, 0.0 }
-#define RLVColor_DarkSlateGray1_Alpha1 ImVec4{ 0.53,1.0,1.0, 0.2 }
-#define RLVColor_DarkSlateGray1_Alpha2 ImVec4{ 0.53,1.0,1.0, 0.4 }
-#define RLVColor_DarkSlateGray1_Alpha3 ImVec4{ 0.53,1.0,1.0, 0.6 }
-#define RLVColor_DarkSlateGray1_Alpha4 ImVec4{ 0.53,1.0,1.0, 0.8 }
-#define RLVColor_DarkSlateGray1_Alpha5 ImVec4{ 0.53,1.0,1.0, 1.0 }
-
-#define RLVColor_Magenta3_Alpha0 ImVec4{ 0.69,0.0,0.69, 0.0 }
-#define RLVColor_Magenta3_Alpha1 ImVec4{ 0.69,0.0,0.69, 0.2 }
-#define RLVColor_Magenta3_Alpha2 ImVec4{ 0.69,0.0,0.69, 0.4 }
-#define RLVColor_Magenta3_Alpha3 ImVec4{ 0.69,0.0,0.69, 0.6 }
-#define RLVColor_Magenta3_Alpha4 ImVec4{ 0.69,0.0,0.69, 0.8 }
-#define RLVColor_Magenta3_Alpha5 ImVec4{ 0.69,0.0,0.69, 1.0 }
-
-#define RLVColor_IndianRed_Alpha0 ImVec4{ 0.69,0.37,0.37, 0.0 }
-#define RLVColor_IndianRed_Alpha1 ImVec4{ 0.69,0.37,0.37, 0.2 }
-#define RLVColor_IndianRed_Alpha2 ImVec4{ 0.69,0.37,0.37, 0.4 }
-#define RLVColor_IndianRed_Alpha3 ImVec4{ 0.69,0.37,0.37, 0.6 }
-#define RLVColor_IndianRed_Alpha4 ImVec4{ 0.69,0.37,0.37, 0.8 }
-#define RLVColor_IndianRed_Alpha5 ImVec4{ 0.69,0.37,0.37, 1.0 }
-
-#define RLVColor_MediumOrchid3_Alpha0 ImVec4{ 0.69,0.37,0.69, 0.0 }
-#define RLVColor_MediumOrchid3_Alpha1 ImVec4{ 0.69,0.37,0.69, 0.2 }
-#define RLVColor_MediumOrchid3_Alpha2 ImVec4{ 0.69,0.37,0.69, 0.4 }
-#define RLVColor_MediumOrchid3_Alpha3 ImVec4{ 0.69,0.37,0.69, 0.6 }
-#define RLVColor_MediumOrchid3_Alpha4 ImVec4{ 0.69,0.37,0.69, 0.8 }
-#define RLVColor_MediumOrchid3_Alpha5 ImVec4{ 0.69,0.37,0.69, 1.0 }
-
-#define RLVColor_MediumPurple2_Alpha0 ImVec4{ 0.69,0.37,1.0, 0.0 }
-#define RLVColor_MediumPurple2_Alpha1 ImVec4{ 0.69,0.37,1.0, 0.2 }
-#define RLVColor_MediumPurple2_Alpha2 ImVec4{ 0.69,0.37,1.0, 0.4 }
-#define RLVColor_MediumPurple2_Alpha3 ImVec4{ 0.69,0.37,1.0, 0.6 }
-#define RLVColor_MediumPurple2_Alpha4 ImVec4{ 0.69,0.37,1.0, 0.8 }
-#define RLVColor_MediumPurple2_Alpha5 ImVec4{ 0.69,0.37,1.0, 1.0 }
-
-#define RLVColor_LightSalmon3_Alpha0 ImVec4{ 0.69,0.53,0.37, 0.0 }
-#define RLVColor_LightSalmon3_Alpha1 ImVec4{ 0.69,0.53,0.37, 0.2 }
-#define RLVColor_LightSalmon3_Alpha2 ImVec4{ 0.69,0.53,0.37, 0.4 }
-#define RLVColor_LightSalmon3_Alpha3 ImVec4{ 0.69,0.53,0.37, 0.6 }
-#define RLVColor_LightSalmon3_Alpha4 ImVec4{ 0.69,0.53,0.37, 0.8 }
-#define RLVColor_LightSalmon3_Alpha5 ImVec4{ 0.69,0.53,0.37, 1.0 }
-
-#define RLVColor_Grey63_Alpha0 ImVec4{ 0.69,0.53,0.69, 0.0 }
-#define RLVColor_Grey63_Alpha1 ImVec4{ 0.69,0.53,0.69, 0.2 }
-#define RLVColor_Grey63_Alpha2 ImVec4{ 0.69,0.53,0.69, 0.4 }
-#define RLVColor_Grey63_Alpha3 ImVec4{ 0.69,0.53,0.69, 0.6 }
-#define RLVColor_Grey63_Alpha4 ImVec4{ 0.69,0.53,0.69, 0.8 }
-#define RLVColor_Grey63_Alpha5 ImVec4{ 0.69,0.53,0.69, 1.0 }
-
-#define RLVColor_MediumPurple1_Alpha0 ImVec4{ 0.69,0.53,1.0, 0.0 }
-#define RLVColor_MediumPurple1_Alpha1 ImVec4{ 0.69,0.53,1.0, 0.2 }
-#define RLVColor_MediumPurple1_Alpha2 ImVec4{ 0.69,0.53,1.0, 0.4 }
-#define RLVColor_MediumPurple1_Alpha3 ImVec4{ 0.69,0.53,1.0, 0.6 }
-#define RLVColor_MediumPurple1_Alpha4 ImVec4{ 0.69,0.53,1.0, 0.8 }
-#define RLVColor_MediumPurple1_Alpha5 ImVec4{ 0.69,0.53,1.0, 1.0 }
-
-#define RLVColor_DarkKhaki_Alpha0 ImVec4{ 0.69,0.69,0.37, 0.0 }
-#define RLVColor_DarkKhaki_Alpha1 ImVec4{ 0.69,0.69,0.37, 0.2 }
-#define RLVColor_DarkKhaki_Alpha2 ImVec4{ 0.69,0.69,0.37, 0.4 }
-#define RLVColor_DarkKhaki_Alpha3 ImVec4{ 0.69,0.69,0.37, 0.6 }
-#define RLVColor_DarkKhaki_Alpha4 ImVec4{ 0.69,0.69,0.37, 0.8 }
-#define RLVColor_DarkKhaki_Alpha5 ImVec4{ 0.69,0.69,0.37, 1.0 }
-
-#define RLVColor_Grey69_Alpha0 ImVec4{ 0.69,0.69,0.69, 0.0 }
-#define RLVColor_Grey69_Alpha1 ImVec4{ 0.69,0.69,0.69, 0.2 }
-#define RLVColor_Grey69_Alpha2 ImVec4{ 0.69,0.69,0.69, 0.4 }
-#define RLVColor_Grey69_Alpha3 ImVec4{ 0.69,0.69,0.69, 0.6 }
-#define RLVColor_Grey69_Alpha4 ImVec4{ 0.69,0.69,0.69, 0.8 }
-#define RLVColor_Grey69_Alpha5 ImVec4{ 0.69,0.69,0.69, 1.0 }
-
-#define RLVColor_LightSteelBlue_Alpha0 ImVec4{ 0.69,0.69,1.0, 0.0 }
-#define RLVColor_LightSteelBlue_Alpha1 ImVec4{ 0.69,0.69,1.0, 0.2 }
-#define RLVColor_LightSteelBlue_Alpha2 ImVec4{ 0.69,0.69,1.0, 0.4 }
-#define RLVColor_LightSteelBlue_Alpha3 ImVec4{ 0.69,0.69,1.0, 0.6 }
-#define RLVColor_LightSteelBlue_Alpha4 ImVec4{ 0.69,0.69,1.0, 0.8 }
-#define RLVColor_LightSteelBlue_Alpha5 ImVec4{ 0.69,0.69,1.0, 1.0 }
-
-#define RLVColor_DarkSeaGreen2_Alpha0 ImVec4{ 0.69,0.84,0.69, 0.0 }
-#define RLVColor_DarkSeaGreen2_Alpha1 ImVec4{ 0.69,0.84,0.69, 0.2 }
-#define RLVColor_DarkSeaGreen2_Alpha2 ImVec4{ 0.69,0.84,0.69, 0.4 }
-#define RLVColor_DarkSeaGreen2_Alpha3 ImVec4{ 0.69,0.84,0.69, 0.6 }
-#define RLVColor_DarkSeaGreen2_Alpha4 ImVec4{ 0.69,0.84,0.69, 0.8 }
-#define RLVColor_DarkSeaGreen2_Alpha5 ImVec4{ 0.69,0.84,0.69, 1.0 }
-
-#define RLVColor_LightSkyBlue1_Alpha0 ImVec4{ 0.69,0.84,1.0, 0.0 }
-#define RLVColor_LightSkyBlue1_Alpha1 ImVec4{ 0.69,0.84,1.0, 0.2 }
-#define RLVColor_LightSkyBlue1_Alpha2 ImVec4{ 0.69,0.84,1.0, 0.4 }
-#define RLVColor_LightSkyBlue1_Alpha3 ImVec4{ 0.69,0.84,1.0, 0.6 }
-#define RLVColor_LightSkyBlue1_Alpha4 ImVec4{ 0.69,0.84,1.0, 0.8 }
-#define RLVColor_LightSkyBlue1_Alpha5 ImVec4{ 0.69,0.84,1.0, 1.0 }
-
-#define RLVColor_DarkOliveGreen2_Alpha0 ImVec4{ 0.69,1.0,0.37, 0.0 }
-#define RLVColor_DarkOliveGreen2_Alpha1 ImVec4{ 0.69,1.0,0.37, 0.2 }
-#define RLVColor_DarkOliveGreen2_Alpha2 ImVec4{ 0.69,1.0,0.37, 0.4 }
-#define RLVColor_DarkOliveGreen2_Alpha3 ImVec4{ 0.69,1.0,0.37, 0.6 }
-#define RLVColor_DarkOliveGreen2_Alpha4 ImVec4{ 0.69,1.0,0.37, 0.8 }
-#define RLVColor_DarkOliveGreen2_Alpha5 ImVec4{ 0.69,1.0,0.37, 1.0 }
-
-#define RLVColor_PaleTurquoise1_Alpha0 ImVec4{ 0.69,1.0,1.0, 0.0 }
-#define RLVColor_PaleTurquoise1_Alpha1 ImVec4{ 0.69,1.0,1.0, 0.2 }
-#define RLVColor_PaleTurquoise1_Alpha2 ImVec4{ 0.69,1.0,1.0, 0.4 }
-#define RLVColor_PaleTurquoise1_Alpha3 ImVec4{ 0.69,1.0,1.0, 0.6 }
-#define RLVColor_PaleTurquoise1_Alpha4 ImVec4{ 0.69,1.0,1.0, 0.8 }
-#define RLVColor_PaleTurquoise1_Alpha5 ImVec4{ 0.69,1.0,1.0, 1.0 }
-
-#define RLVColor_DeepPink3_Alpha0 ImVec4{ 0.84,0.0,0.37, 0.0 }
-#define RLVColor_DeepPink3_Alpha1 ImVec4{ 0.84,0.0,0.37, 0.2 }
-#define RLVColor_DeepPink3_Alpha2 ImVec4{ 0.84,0.0,0.37, 0.4 }
-#define RLVColor_DeepPink3_Alpha3 ImVec4{ 0.84,0.0,0.37, 0.6 }
-#define RLVColor_DeepPink3_Alpha4 ImVec4{ 0.84,0.0,0.37, 0.8 }
-#define RLVColor_DeepPink3_Alpha5 ImVec4{ 0.84,0.0,0.37, 1.0 }
-
-#define RLVColor_Magenta2_Alpha0 ImVec4{ 0.84,0.0,1.0, 0.0 }
-#define RLVColor_Magenta2_Alpha1 ImVec4{ 0.84,0.0,1.0, 0.2 }
-#define RLVColor_Magenta2_Alpha2 ImVec4{ 0.84,0.0,1.0, 0.4 }
-#define RLVColor_Magenta2_Alpha3 ImVec4{ 0.84,0.0,1.0, 0.6 }
-#define RLVColor_Magenta2_Alpha4 ImVec4{ 0.84,0.0,1.0, 0.8 }
-#define RLVColor_Magenta2_Alpha5 ImVec4{ 0.84,0.0,1.0, 1.0 }
-
-#define RLVColor_HotPink2_Alpha0 ImVec4{ 0.84,0.37,0.69, 0.0 }
-#define RLVColor_HotPink2_Alpha1 ImVec4{ 0.84,0.37,0.69, 0.2 }
-#define RLVColor_HotPink2_Alpha2 ImVec4{ 0.84,0.37,0.69, 0.4 }
-#define RLVColor_HotPink2_Alpha3 ImVec4{ 0.84,0.37,0.69, 0.6 }
-#define RLVColor_HotPink2_Alpha4 ImVec4{ 0.84,0.37,0.69, 0.8 }
-#define RLVColor_HotPink2_Alpha5 ImVec4{ 0.84,0.37,0.69, 1.0 }
-
-#define RLVColor_MediumOrchid1_Alpha0 ImVec4{ 0.84,0.37,1.0, 0.0 }
-#define RLVColor_MediumOrchid1_Alpha1 ImVec4{ 0.84,0.37,1.0, 0.2 }
-#define RLVColor_MediumOrchid1_Alpha2 ImVec4{ 0.84,0.37,1.0, 0.4 }
-#define RLVColor_MediumOrchid1_Alpha3 ImVec4{ 0.84,0.37,1.0, 0.6 }
-#define RLVColor_MediumOrchid1_Alpha4 ImVec4{ 0.84,0.37,1.0, 0.8 }
-#define RLVColor_MediumOrchid1_Alpha5 ImVec4{ 0.84,0.37,1.0, 1.0 }
-
-#define RLVColor_Pink3_Alpha0 ImVec4{ 0.84,0.53,0.69, 0.0 }
-#define RLVColor_Pink3_Alpha1 ImVec4{ 0.84,0.53,0.69, 0.2 }
-#define RLVColor_Pink3_Alpha2 ImVec4{ 0.84,0.53,0.69, 0.4 }
-#define RLVColor_Pink3_Alpha3 ImVec4{ 0.84,0.53,0.69, 0.6 }
-#define RLVColor_Pink3_Alpha4 ImVec4{ 0.84,0.53,0.69, 0.8 }
-#define RLVColor_Pink3_Alpha5 ImVec4{ 0.84,0.53,0.69, 1.0 }
-
-#define RLVColor_Violet_Alpha0 ImVec4{ 0.84,0.53,1.0, 0.0 }
-#define RLVColor_Violet_Alpha1 ImVec4{ 0.84,0.53,1.0, 0.2 }
-#define RLVColor_Violet_Alpha2 ImVec4{ 0.84,0.53,1.0, 0.4 }
-#define RLVColor_Violet_Alpha3 ImVec4{ 0.84,0.53,1.0, 0.6 }
-#define RLVColor_Violet_Alpha4 ImVec4{ 0.84,0.53,1.0, 0.8 }
-#define RLVColor_Violet_Alpha5 ImVec4{ 0.84,0.53,1.0, 1.0 }
-
-#define RLVColor_LightGoldenrod3_Alpha0 ImVec4{ 0.84,0.69,0.37, 0.0 }
-#define RLVColor_LightGoldenrod3_Alpha1 ImVec4{ 0.84,0.69,0.37, 0.2 }
-#define RLVColor_LightGoldenrod3_Alpha2 ImVec4{ 0.84,0.69,0.37, 0.4 }
-#define RLVColor_LightGoldenrod3_Alpha3 ImVec4{ 0.84,0.69,0.37, 0.6 }
-#define RLVColor_LightGoldenrod3_Alpha4 ImVec4{ 0.84,0.69,0.37, 0.8 }
-#define RLVColor_LightGoldenrod3_Alpha5 ImVec4{ 0.84,0.69,0.37, 1.0 }
-
-#define RLVColor_MistyRose3_Alpha0 ImVec4{ 0.84,0.69,0.69, 0.0 }
-#define RLVColor_MistyRose3_Alpha1 ImVec4{ 0.84,0.69,0.69, 0.2 }
-#define RLVColor_MistyRose3_Alpha2 ImVec4{ 0.84,0.69,0.69, 0.4 }
-#define RLVColor_MistyRose3_Alpha3 ImVec4{ 0.84,0.69,0.69, 0.6 }
-#define RLVColor_MistyRose3_Alpha4 ImVec4{ 0.84,0.69,0.69, 0.8 }
-#define RLVColor_MistyRose3_Alpha5 ImVec4{ 0.84,0.69,0.69, 1.0 }
-
-#define RLVColor_Plum2_Alpha0 ImVec4{ 0.84,0.69,1.0, 0.0 }
-#define RLVColor_Plum2_Alpha1 ImVec4{ 0.84,0.69,1.0, 0.2 }
-#define RLVColor_Plum2_Alpha2 ImVec4{ 0.84,0.69,1.0, 0.4 }
-#define RLVColor_Plum2_Alpha3 ImVec4{ 0.84,0.69,1.0, 0.6 }
-#define RLVColor_Plum2_Alpha4 ImVec4{ 0.84,0.69,1.0, 0.8 }
-#define RLVColor_Plum2_Alpha5 ImVec4{ 0.84,0.69,1.0, 1.0 }
-
-#define RLVColor_Khaki3_Alpha0 ImVec4{ 0.84,0.84,0.37, 0.0 }
-#define RLVColor_Khaki3_Alpha1 ImVec4{ 0.84,0.84,0.37, 0.2 }
-#define RLVColor_Khaki3_Alpha2 ImVec4{ 0.84,0.84,0.37, 0.4 }
-#define RLVColor_Khaki3_Alpha3 ImVec4{ 0.84,0.84,0.37, 0.6 }
-#define RLVColor_Khaki3_Alpha4 ImVec4{ 0.84,0.84,0.37, 0.8 }
-#define RLVColor_Khaki3_Alpha5 ImVec4{ 0.84,0.84,0.37, 1.0 }
-
-#define RLVColor_LightYellow3_Alpha0 ImVec4{ 0.84,0.84,0.69, 0.0 }
-#define RLVColor_LightYellow3_Alpha1 ImVec4{ 0.84,0.84,0.69, 0.2 }
-#define RLVColor_LightYellow3_Alpha2 ImVec4{ 0.84,0.84,0.69, 0.4 }
-#define RLVColor_LightYellow3_Alpha3 ImVec4{ 0.84,0.84,0.69, 0.6 }
-#define RLVColor_LightYellow3_Alpha4 ImVec4{ 0.84,0.84,0.69, 0.8 }
-#define RLVColor_LightYellow3_Alpha5 ImVec4{ 0.84,0.84,0.69, 1.0 }
-
-#define RLVColor_LightSteelBlue1_Alpha0 ImVec4{ 0.84,0.84,1.0, 0.0 }
-#define RLVColor_LightSteelBlue1_Alpha1 ImVec4{ 0.84,0.84,1.0, 0.2 }
-#define RLVColor_LightSteelBlue1_Alpha2 ImVec4{ 0.84,0.84,1.0, 0.4 }
-#define RLVColor_LightSteelBlue1_Alpha3 ImVec4{ 0.84,0.84,1.0, 0.6 }
-#define RLVColor_LightSteelBlue1_Alpha4 ImVec4{ 0.84,0.84,1.0, 0.8 }
-#define RLVColor_LightSteelBlue1_Alpha5 ImVec4{ 0.84,0.84,1.0, 1.0 }
-
-#define RLVColor_DarkOliveGreen1_Alpha0 ImVec4{ 0.84,1.0,0.37, 0.0 }
-#define RLVColor_DarkOliveGreen1_Alpha1 ImVec4{ 0.84,1.0,0.37, 0.2 }
-#define RLVColor_DarkOliveGreen1_Alpha2 ImVec4{ 0.84,1.0,0.37, 0.4 }
-#define RLVColor_DarkOliveGreen1_Alpha3 ImVec4{ 0.84,1.0,0.37, 0.6 }
-#define RLVColor_DarkOliveGreen1_Alpha4 ImVec4{ 0.84,1.0,0.37, 0.8 }
-#define RLVColor_DarkOliveGreen1_Alpha5 ImVec4{ 0.84,1.0,0.37, 1.0 }
-
-#define RLVColor_DarkSeaGreen1_Alpha0 ImVec4{ 0.84,1.0,0.69, 0.0 }
-#define RLVColor_DarkSeaGreen1_Alpha1 ImVec4{ 0.84,1.0,0.69, 0.2 }
-#define RLVColor_DarkSeaGreen1_Alpha2 ImVec4{ 0.84,1.0,0.69, 0.4 }
-#define RLVColor_DarkSeaGreen1_Alpha3 ImVec4{ 0.84,1.0,0.69, 0.6 }
-#define RLVColor_DarkSeaGreen1_Alpha4 ImVec4{ 0.84,1.0,0.69, 0.8 }
-#define RLVColor_DarkSeaGreen1_Alpha5 ImVec4{ 0.84,1.0,0.69, 1.0 }
-
-#define RLVColor_LightCyan1_Alpha0 ImVec4{ 0.84,1.0,1.0, 0.0 }
-#define RLVColor_LightCyan1_Alpha1 ImVec4{ 0.84,1.0,1.0, 0.2 }
-#define RLVColor_LightCyan1_Alpha2 ImVec4{ 0.84,1.0,1.0, 0.4 }
-#define RLVColor_LightCyan1_Alpha3 ImVec4{ 0.84,1.0,1.0, 0.6 }
-#define RLVColor_LightCyan1_Alpha4 ImVec4{ 0.84,1.0,1.0, 0.8 }
-#define RLVColor_LightCyan1_Alpha5 ImVec4{ 0.84,1.0,1.0, 1.0 }
-
-#define RLVColor_DeepPink2_Alpha0 ImVec4{ 1.0,0.0,0.37, 0.0 }
-#define RLVColor_DeepPink2_Alpha1 ImVec4{ 1.0,0.0,0.37, 0.2 }
-#define RLVColor_DeepPink2_Alpha2 ImVec4{ 1.0,0.0,0.37, 0.4 }
-#define RLVColor_DeepPink2_Alpha3 ImVec4{ 1.0,0.0,0.37, 0.6 }
-#define RLVColor_DeepPink2_Alpha4 ImVec4{ 1.0,0.0,0.37, 0.8 }
-#define RLVColor_DeepPink2_Alpha5 ImVec4{ 1.0,0.0,0.37, 1.0 }
-
-#define RLVColor_DeepPink1_Alpha0 ImVec4{ 1.0,0.0,0.69, 0.0 }
-#define RLVColor_DeepPink1_Alpha1 ImVec4{ 1.0,0.0,0.69, 0.2 }
-#define RLVColor_DeepPink1_Alpha2 ImVec4{ 1.0,0.0,0.69, 0.4 }
-#define RLVColor_DeepPink1_Alpha3 ImVec4{ 1.0,0.0,0.69, 0.6 }
-#define RLVColor_DeepPink1_Alpha4 ImVec4{ 1.0,0.0,0.69, 0.8 }
-#define RLVColor_DeepPink1_Alpha5 ImVec4{ 1.0,0.0,0.69, 1.0 }
-
-#define RLVColor_Magenta1_Alpha0 ImVec4{ 1.0,0.0,1.0, 0.0 }
-#define RLVColor_Magenta1_Alpha1 ImVec4{ 1.0,0.0,1.0, 0.2 }
-#define RLVColor_Magenta1_Alpha2 ImVec4{ 1.0,0.0,1.0, 0.4 }
-#define RLVColor_Magenta1_Alpha3 ImVec4{ 1.0,0.0,1.0, 0.6 }
-#define RLVColor_Magenta1_Alpha4 ImVec4{ 1.0,0.0,1.0, 0.8 }
-#define RLVColor_Magenta1_Alpha5 ImVec4{ 1.0,0.0,1.0, 1.0 }
-
-#define RLVColor_IndianRed1_Alpha0 ImVec4{ 1.0,0.37,0.37, 0.0 }
-#define RLVColor_IndianRed1_Alpha1 ImVec4{ 1.0,0.37,0.37, 0.2 }
-#define RLVColor_IndianRed1_Alpha2 ImVec4{ 1.0,0.37,0.37, 0.4 }
-#define RLVColor_IndianRed1_Alpha3 ImVec4{ 1.0,0.37,0.37, 0.6 }
-#define RLVColor_IndianRed1_Alpha4 ImVec4{ 1.0,0.37,0.37, 0.8 }
-#define RLVColor_IndianRed1_Alpha5 ImVec4{ 1.0,0.37,0.37, 1.0 }
-
-#define RLVColor_HotPink_Alpha0 ImVec4{ 1.0,0.37,0.69, 0.0 }
-#define RLVColor_HotPink_Alpha1 ImVec4{ 1.0,0.37,0.69, 0.2 }
-#define RLVColor_HotPink_Alpha2 ImVec4{ 1.0,0.37,0.69, 0.4 }
-#define RLVColor_HotPink_Alpha3 ImVec4{ 1.0,0.37,0.69, 0.6 }
-#define RLVColor_HotPink_Alpha4 ImVec4{ 1.0,0.37,0.69, 0.8 }
-#define RLVColor_HotPink_Alpha5 ImVec4{ 1.0,0.37,0.69, 1.0 }
-
-#define RLVColor_Salmon1_Alpha0 ImVec4{ 1.0,0.53,0.37, 0.0 }
-#define RLVColor_Salmon1_Alpha1 ImVec4{ 1.0,0.53,0.37, 0.2 }
-#define RLVColor_Salmon1_Alpha2 ImVec4{ 1.0,0.53,0.37, 0.4 }
-#define RLVColor_Salmon1_Alpha3 ImVec4{ 1.0,0.53,0.37, 0.6 }
-#define RLVColor_Salmon1_Alpha4 ImVec4{ 1.0,0.53,0.37, 0.8 }
-#define RLVColor_Salmon1_Alpha5 ImVec4{ 1.0,0.53,0.37, 1.0 }
-
-#define RLVColor_PaleVioletRed1_Alpha0 ImVec4{ 1.0,0.53,0.69, 0.0 }
-#define RLVColor_PaleVioletRed1_Alpha1 ImVec4{ 1.0,0.53,0.69, 0.2 }
-#define RLVColor_PaleVioletRed1_Alpha2 ImVec4{ 1.0,0.53,0.69, 0.4 }
-#define RLVColor_PaleVioletRed1_Alpha3 ImVec4{ 1.0,0.53,0.69, 0.6 }
-#define RLVColor_PaleVioletRed1_Alpha4 ImVec4{ 1.0,0.53,0.69, 0.8 }
-#define RLVColor_PaleVioletRed1_Alpha5 ImVec4{ 1.0,0.53,0.69, 1.0 }
-
-#define RLVColor_Orchid1_Alpha0 ImVec4{ 1.0,0.53,1.0, 0.0 }
-#define RLVColor_Orchid1_Alpha1 ImVec4{ 1.0,0.53,1.0, 0.2 }
-#define RLVColor_Orchid1_Alpha2 ImVec4{ 1.0,0.53,1.0, 0.4 }
-#define RLVColor_Orchid1_Alpha3 ImVec4{ 1.0,0.53,1.0, 0.6 }
-#define RLVColor_Orchid1_Alpha4 ImVec4{ 1.0,0.53,1.0, 0.8 }
-#define RLVColor_Orchid1_Alpha5 ImVec4{ 1.0,0.53,1.0, 1.0 }
-
-#define RLVColor_SandyBrown_Alpha0 ImVec4{ 1.0,0.69,0.37, 0.0 }
-#define RLVColor_SandyBrown_Alpha1 ImVec4{ 1.0,0.69,0.37, 0.2 }
-#define RLVColor_SandyBrown_Alpha2 ImVec4{ 1.0,0.69,0.37, 0.4 }
-#define RLVColor_SandyBrown_Alpha3 ImVec4{ 1.0,0.69,0.37, 0.6 }
-#define RLVColor_SandyBrown_Alpha4 ImVec4{ 1.0,0.69,0.37, 0.8 }
-#define RLVColor_SandyBrown_Alpha5 ImVec4{ 1.0,0.69,0.37, 1.0 }
-
-#define RLVColor_LightPink1_Alpha0 ImVec4{ 1.0,0.69,0.69, 0.0 }
-#define RLVColor_LightPink1_Alpha1 ImVec4{ 1.0,0.69,0.69, 0.2 }
-#define RLVColor_LightPink1_Alpha2 ImVec4{ 1.0,0.69,0.69, 0.4 }
-#define RLVColor_LightPink1_Alpha3 ImVec4{ 1.0,0.69,0.69, 0.6 }
-#define RLVColor_LightPink1_Alpha4 ImVec4{ 1.0,0.69,0.69, 0.8 }
-#define RLVColor_LightPink1_Alpha5 ImVec4{ 1.0,0.69,0.69, 1.0 }
-
-#define RLVColor_Plum1_Alpha0 ImVec4{ 1.0,0.69,1.0, 0.0 }
-#define RLVColor_Plum1_Alpha1 ImVec4{ 1.0,0.69,1.0, 0.2 }
-#define RLVColor_Plum1_Alpha2 ImVec4{ 1.0,0.69,1.0, 0.4 }
-#define RLVColor_Plum1_Alpha3 ImVec4{ 1.0,0.69,1.0, 0.6 }
-#define RLVColor_Plum1_Alpha4 ImVec4{ 1.0,0.69,1.0, 0.8 }
-#define RLVColor_Plum1_Alpha5 ImVec4{ 1.0,0.69,1.0, 1.0 }
-
-#define RLVColor_LightGoldenrod2_Alpha0 ImVec4{ 1.0,0.84,0.37, 0.0 }
-#define RLVColor_LightGoldenrod2_Alpha1 ImVec4{ 1.0,0.84,0.37, 0.2 }
-#define RLVColor_LightGoldenrod2_Alpha2 ImVec4{ 1.0,0.84,0.37, 0.4 }
-#define RLVColor_LightGoldenrod2_Alpha3 ImVec4{ 1.0,0.84,0.37, 0.6 }
-#define RLVColor_LightGoldenrod2_Alpha4 ImVec4{ 1.0,0.84,0.37, 0.8 }
-#define RLVColor_LightGoldenrod2_Alpha5 ImVec4{ 1.0,0.84,0.37, 1.0 }
-
-#define RLVColor_NavajoWhite1_Alpha0 ImVec4{ 1.0,0.84,0.69, 0.0 }
-#define RLVColor_NavajoWhite1_Alpha1 ImVec4{ 1.0,0.84,0.69, 0.2 }
-#define RLVColor_NavajoWhite1_Alpha2 ImVec4{ 1.0,0.84,0.69, 0.4 }
-#define RLVColor_NavajoWhite1_Alpha3 ImVec4{ 1.0,0.84,0.69, 0.6 }
-#define RLVColor_NavajoWhite1_Alpha4 ImVec4{ 1.0,0.84,0.69, 0.8 }
-#define RLVColor_NavajoWhite1_Alpha5 ImVec4{ 1.0,0.84,0.69, 1.0 }
-
-#define RLVColor_Thistle1_Alpha0 ImVec4{ 1.0,0.84,1.0, 0.0 }
-#define RLVColor_Thistle1_Alpha1 ImVec4{ 1.0,0.84,1.0, 0.2 }
-#define RLVColor_Thistle1_Alpha2 ImVec4{ 1.0,0.84,1.0, 0.4 }
-#define RLVColor_Thistle1_Alpha3 ImVec4{ 1.0,0.84,1.0, 0.6 }
-#define RLVColor_Thistle1_Alpha4 ImVec4{ 1.0,0.84,1.0, 0.8 }
-#define RLVColor_Thistle1_Alpha5 ImVec4{ 1.0,0.84,1.0, 1.0 }
-
-#define RLVColor_LightGoldenrod1_Alpha0 ImVec4{ 1.0,1.0,0.37, 0.0 }
-#define RLVColor_LightGoldenrod1_Alpha1 ImVec4{ 1.0,1.0,0.37, 0.2 }
-#define RLVColor_LightGoldenrod1_Alpha2 ImVec4{ 1.0,1.0,0.37, 0.4 }
-#define RLVColor_LightGoldenrod1_Alpha3 ImVec4{ 1.0,1.0,0.37, 0.6 }
-#define RLVColor_LightGoldenrod1_Alpha4 ImVec4{ 1.0,1.0,0.37, 0.8 }
-#define RLVColor_LightGoldenrod1_Alpha5 ImVec4{ 1.0,1.0,0.37, 1.0 }
-
-#define RLVColor_Wheat1_Alpha0 ImVec4{ 1.0,1.0,0.69, 0.0 }
-#define RLVColor_Wheat1_Alpha1 ImVec4{ 1.0,1.0,0.69, 0.2 }
-#define RLVColor_Wheat1_Alpha2 ImVec4{ 1.0,1.0,0.69, 0.4 }
-#define RLVColor_Wheat1_Alpha3 ImVec4{ 1.0,1.0,0.69, 0.6 }
-#define RLVColor_Wheat1_Alpha4 ImVec4{ 1.0,1.0,0.69, 0.8 }
-#define RLVColor_Wheat1_Alpha5 ImVec4{ 1.0,1.0,0.69, 1.0 }
-
-#define RLVColor_Grey100_Alpha0 ImVec4{ 1.0,1.0,1.0, 0.0 }
-#define RLVColor_Grey100_Alpha1 ImVec4{ 1.0,1.0,1.0, 0.2 }
-#define RLVColor_Grey100_Alpha2 ImVec4{ 1.0,1.0,1.0, 0.4 }
-#define RLVColor_Grey100_Alpha3 ImVec4{ 1.0,1.0,1.0, 0.6 }
-#define RLVColor_Grey100_Alpha4 ImVec4{ 1.0,1.0,1.0, 0.8 }
-#define RLVColor_Grey100_Alpha5 ImVec4{ 1.0,1.0,1.0, 1.0 }
-
-#define RLVColor_Grey7_Alpha0 ImVec4{ 0.07,0.07,0.07, 0.0 }
-#define RLVColor_Grey7_Alpha1 ImVec4{ 0.07,0.07,0.07, 0.2 }
-#define RLVColor_Grey7_Alpha2 ImVec4{ 0.07,0.07,0.07, 0.4 }
-#define RLVColor_Grey7_Alpha3 ImVec4{ 0.07,0.07,0.07, 0.6 }
-#define RLVColor_Grey7_Alpha4 ImVec4{ 0.07,0.07,0.07, 0.8 }
-#define RLVColor_Grey7_Alpha5 ImVec4{ 0.07,0.07,0.07, 1.0 }
-
-#define RLVColor_Grey15_Alpha0 ImVec4{ 0.15,0.15,0.15, 0.0 }
-#define RLVColor_Grey15_Alpha1 ImVec4{ 0.15,0.15,0.15, 0.2 }
-#define RLVColor_Grey15_Alpha2 ImVec4{ 0.15,0.15,0.15, 0.4 }
-#define RLVColor_Grey15_Alpha3 ImVec4{ 0.15,0.15,0.15, 0.6 }
-#define RLVColor_Grey15_Alpha4 ImVec4{ 0.15,0.15,0.15, 0.8 }
-#define RLVColor_Grey15_Alpha5 ImVec4{ 0.15,0.15,0.15, 1.0 }
-
-#define RLVColor_Grey23_Alpha0 ImVec4{ 0.23,0.23,0.23, 0.0 }
-#define RLVColor_Grey23_Alpha1 ImVec4{ 0.23,0.23,0.23, 0.2 }
-#define RLVColor_Grey23_Alpha2 ImVec4{ 0.23,0.23,0.23, 0.4 }
-#define RLVColor_Grey23_Alpha3 ImVec4{ 0.23,0.23,0.23, 0.6 }
-#define RLVColor_Grey23_Alpha4 ImVec4{ 0.23,0.23,0.23, 0.8 }
-#define RLVColor_Grey23_Alpha5 ImVec4{ 0.23,0.23,0.23, 1.0 }
-
-#define RLVColor_Grey30_Alpha0 ImVec4{ 0.31,0.31,0.31, 0.0 }
-#define RLVColor_Grey30_Alpha1 ImVec4{ 0.31,0.31,0.31, 0.2 }
-#define RLVColor_Grey30_Alpha2 ImVec4{ 0.31,0.31,0.31, 0.4 }
-#define RLVColor_Grey30_Alpha3 ImVec4{ 0.31,0.31,0.31, 0.6 }
-#define RLVColor_Grey30_Alpha4 ImVec4{ 0.31,0.31,0.31, 0.8 }
-#define RLVColor_Grey30_Alpha5 ImVec4{ 0.31,0.31,0.31, 1.0 }
-
-#define RLVColor_Grey39_Alpha0 ImVec4{ 0.38,0.38,0.38, 0.0 }
-#define RLVColor_Grey39_Alpha1 ImVec4{ 0.38,0.38,0.38, 0.2 }
-#define RLVColor_Grey39_Alpha2 ImVec4{ 0.38,0.38,0.38, 0.4 }
-#define RLVColor_Grey39_Alpha3 ImVec4{ 0.38,0.38,0.38, 0.6 }
-#define RLVColor_Grey39_Alpha4 ImVec4{ 0.38,0.38,0.38, 0.8 }
-#define RLVColor_Grey39_Alpha5 ImVec4{ 0.38,0.38,0.38, 1.0 }
-
-#define RLVColor_Grey46_Alpha0 ImVec4{ 0.46,0.46,0.46, 0.0 }
-#define RLVColor_Grey46_Alpha1 ImVec4{ 0.46,0.46,0.46, 0.2 }
-#define RLVColor_Grey46_Alpha2 ImVec4{ 0.46,0.46,0.46, 0.4 }
-#define RLVColor_Grey46_Alpha3 ImVec4{ 0.46,0.46,0.46, 0.6 }
-#define RLVColor_Grey46_Alpha4 ImVec4{ 0.46,0.46,0.46, 0.8 }
-#define RLVColor_Grey46_Alpha5 ImVec4{ 0.46,0.46,0.46, 1.0 }
-
-#define RLVColor_Grey54_Alpha0 ImVec4{ 0.54,0.54,0.54, 0.0 }
-#define RLVColor_Grey54_Alpha1 ImVec4{ 0.54,0.54,0.54, 0.2 }
-#define RLVColor_Grey54_Alpha2 ImVec4{ 0.54,0.54,0.54, 0.4 }
-#define RLVColor_Grey54_Alpha3 ImVec4{ 0.54,0.54,0.54, 0.6 }
-#define RLVColor_Grey54_Alpha4 ImVec4{ 0.54,0.54,0.54, 0.8 }
-#define RLVColor_Grey54_Alpha5 ImVec4{ 0.54,0.54,0.54, 1.0 }
-
-#define RLVColor_Grey62_Alpha0 ImVec4{ 0.62,0.62,0.62, 0.0 }
-#define RLVColor_Grey62_Alpha1 ImVec4{ 0.62,0.62,0.62, 0.2 }
-#define RLVColor_Grey62_Alpha2 ImVec4{ 0.62,0.62,0.62, 0.4 }
-#define RLVColor_Grey62_Alpha3 ImVec4{ 0.62,0.62,0.62, 0.6 }
-#define RLVColor_Grey62_Alpha4 ImVec4{ 0.62,0.62,0.62, 0.8 }
-#define RLVColor_Grey62_Alpha5 ImVec4{ 0.62,0.62,0.62, 1.0 }
-
-#define RLVColor_Grey70_Alpha0 ImVec4{ 0.7,0.7,0.7, 0.0 }
-#define RLVColor_Grey70_Alpha1 ImVec4{ 0.7,0.7,0.7, 0.2 }
-#define RLVColor_Grey70_Alpha2 ImVec4{ 0.7,0.7,0.7, 0.4 }
-#define RLVColor_Grey70_Alpha3 ImVec4{ 0.7,0.7,0.7, 0.6 }
-#define RLVColor_Grey70_Alpha4 ImVec4{ 0.7,0.7,0.7, 0.8 }
-#define RLVColor_Grey70_Alpha5 ImVec4{ 0.7,0.7,0.7, 1.0 }
-
-#define RLVColor_Grey78_Alpha0 ImVec4{ 0.78,0.78,0.78, 0.0 }
-#define RLVColor_Grey78_Alpha1 ImVec4{ 0.78,0.78,0.78, 0.2 }
-#define RLVColor_Grey78_Alpha2 ImVec4{ 0.78,0.78,0.78, 0.4 }
-#define RLVColor_Grey78_Alpha3 ImVec4{ 0.78,0.78,0.78, 0.6 }
-#define RLVColor_Grey78_Alpha4 ImVec4{ 0.78,0.78,0.78, 0.8 }
-#define RLVColor_Grey78_Alpha5 ImVec4{ 0.78,0.78,0.78, 1.0 }
-
-#define RLVColor_Grey85_Alpha0 ImVec4{ 0.85,0.85,0.85, 0.0 }
-#define RLVColor_Grey85_Alpha1 ImVec4{ 0.85,0.85,0.85, 0.2 }
-#define RLVColor_Grey85_Alpha2 ImVec4{ 0.85,0.85,0.85, 0.4 }
-#define RLVColor_Grey85_Alpha3 ImVec4{ 0.85,0.85,0.85, 0.6 }
-#define RLVColor_Grey85_Alpha4 ImVec4{ 0.85,0.85,0.85, 0.8 }
-#define RLVColor_Grey85_Alpha5 ImVec4{ 0.85,0.85,0.85, 1.0 }
-
-#define RLVColor_Grey93_Alpha0 ImVec4{ 0.93,0.93,0.93, 0.0 }
-#define RLVColor_Grey93_Alpha1 ImVec4{ 0.93,0.93,0.93, 0.2 }
-#define RLVColor_Grey93_Alpha2 ImVec4{ 0.93,0.93,0.93, 0.4 }
-#define RLVColor_Grey93_Alpha3 ImVec4{ 0.93,0.93,0.93, 0.6 }
-#define RLVColor_Grey93_Alpha4 ImVec4{ 0.93,0.93,0.93, 0.8 }
-#define RLVColor_Grey93_Alpha5 ImVec4{ 0.93,0.93,0.93, 1.0 }
+#define RLVColor_NavyBlue_Alpha0 ImVec4{ 0.0, 0.0, 0.37, 0.0 }
+#define RLVColor_NavyBlue_Alpha1 ImVec4{ 0.0, 0.0, 0.37, 0.2 }
+#define RLVColor_NavyBlue_Alpha2 ImVec4{ 0.0, 0.0, 0.37, 0.4 }
+#define RLVColor_NavyBlue_Alpha3 ImVec4{ 0.0, 0.0, 0.37, 0.6 }
+#define RLVColor_NavyBlue_Alpha4 ImVec4{ 0.0, 0.0, 0.37, 0.8 }
+#define RLVColor_NavyBlue_Alpha5 ImVec4{ 0.0, 0.0, 0.37, 1.0 }
+
+#define RLVColor_Blue3_Alpha0 ImVec4{ 0.0, 0.0, 0.69, 0.0 }
+#define RLVColor_Blue3_Alpha1 ImVec4{ 0.0, 0.0, 0.69, 0.2 }
+#define RLVColor_Blue3_Alpha2 ImVec4{ 0.0, 0.0, 0.69, 0.4 }
+#define RLVColor_Blue3_Alpha3 ImVec4{ 0.0, 0.0, 0.69, 0.6 }
+#define RLVColor_Blue3_Alpha4 ImVec4{ 0.0, 0.0, 0.69, 0.8 }
+#define RLVColor_Blue3_Alpha5 ImVec4{ 0.0, 0.0, 0.69, 1.0 }
+
+#define RLVColor_Blue1_Alpha0 ImVec4{ 0.0, 0.0, 1.0, 0.0 }
+#define RLVColor_Blue1_Alpha1 ImVec4{ 0.0, 0.0, 1.0, 0.2 }
+#define RLVColor_Blue1_Alpha2 ImVec4{ 0.0, 0.0, 1.0, 0.4 }
+#define RLVColor_Blue1_Alpha3 ImVec4{ 0.0, 0.0, 1.0, 0.6 }
+#define RLVColor_Blue1_Alpha4 ImVec4{ 0.0, 0.0, 1.0, 0.8 }
+#define RLVColor_Blue1_Alpha5 ImVec4{ 0.0, 0.0, 1.0, 1.0 }
+
+#define RLVColor_DeepSkyBlue4_Alpha0 ImVec4{ 0.0, 0.37, 0.37, 0.0 }
+#define RLVColor_DeepSkyBlue4_Alpha1 ImVec4{ 0.0, 0.37, 0.37, 0.2 }
+#define RLVColor_DeepSkyBlue4_Alpha2 ImVec4{ 0.0, 0.37, 0.37, 0.4 }
+#define RLVColor_DeepSkyBlue4_Alpha3 ImVec4{ 0.0, 0.37, 0.37, 0.6 }
+#define RLVColor_DeepSkyBlue4_Alpha4 ImVec4{ 0.0, 0.37, 0.37, 0.8 }
+#define RLVColor_DeepSkyBlue4_Alpha5 ImVec4{ 0.0, 0.37, 0.37, 1.0 }
+
+#define RLVColor_DodgerBlue2_Alpha0 ImVec4{ 0.0, 0.37, 1.0, 0.0 }
+#define RLVColor_DodgerBlue2_Alpha1 ImVec4{ 0.0, 0.37, 1.0, 0.2 }
+#define RLVColor_DodgerBlue2_Alpha2 ImVec4{ 0.0, 0.37, 1.0, 0.4 }
+#define RLVColor_DodgerBlue2_Alpha3 ImVec4{ 0.0, 0.37, 1.0, 0.6 }
+#define RLVColor_DodgerBlue2_Alpha4 ImVec4{ 0.0, 0.37, 1.0, 0.8 }
+#define RLVColor_DodgerBlue2_Alpha5 ImVec4{ 0.0, 0.37, 1.0, 1.0 }
+
+#define RLVColor_SpringGreen4_Alpha0 ImVec4{ 0.0, 0.53, 0.37, 0.0 }
+#define RLVColor_SpringGreen4_Alpha1 ImVec4{ 0.0, 0.53, 0.37, 0.2 }
+#define RLVColor_SpringGreen4_Alpha2 ImVec4{ 0.0, 0.53, 0.37, 0.4 }
+#define RLVColor_SpringGreen4_Alpha3 ImVec4{ 0.0, 0.53, 0.37, 0.6 }
+#define RLVColor_SpringGreen4_Alpha4 ImVec4{ 0.0, 0.53, 0.37, 0.8 }
+#define RLVColor_SpringGreen4_Alpha5 ImVec4{ 0.0, 0.53, 0.37, 1.0 }
+
+#define RLVColor_DeepSkyBlue3_Alpha0 ImVec4{ 0.0, 0.53, 0.69, 0.0 }
+#define RLVColor_DeepSkyBlue3_Alpha1 ImVec4{ 0.0, 0.53, 0.69, 0.2 }
+#define RLVColor_DeepSkyBlue3_Alpha2 ImVec4{ 0.0, 0.53, 0.69, 0.4 }
+#define RLVColor_DeepSkyBlue3_Alpha3 ImVec4{ 0.0, 0.53, 0.69, 0.6 }
+#define RLVColor_DeepSkyBlue3_Alpha4 ImVec4{ 0.0, 0.53, 0.69, 0.8 }
+#define RLVColor_DeepSkyBlue3_Alpha5 ImVec4{ 0.0, 0.53, 0.69, 1.0 }
+
+#define RLVColor_DodgerBlue1_Alpha0 ImVec4{ 0.0, 0.53, 1.0, 0.0 }
+#define RLVColor_DodgerBlue1_Alpha1 ImVec4{ 0.0, 0.53, 1.0, 0.2 }
+#define RLVColor_DodgerBlue1_Alpha2 ImVec4{ 0.0, 0.53, 1.0, 0.4 }
+#define RLVColor_DodgerBlue1_Alpha3 ImVec4{ 0.0, 0.53, 1.0, 0.6 }
+#define RLVColor_DodgerBlue1_Alpha4 ImVec4{ 0.0, 0.53, 1.0, 0.8 }
+#define RLVColor_DodgerBlue1_Alpha5 ImVec4{ 0.0, 0.53, 1.0, 1.0 }
+
+#define RLVColor_SpringGreen3_Alpha0 ImVec4{ 0.0, 0.69, 0.37, 0.0 }
+#define RLVColor_SpringGreen3_Alpha1 ImVec4{ 0.0, 0.69, 0.37, 0.2 }
+#define RLVColor_SpringGreen3_Alpha2 ImVec4{ 0.0, 0.69, 0.37, 0.4 }
+#define RLVColor_SpringGreen3_Alpha3 ImVec4{ 0.0, 0.69, 0.37, 0.6 }
+#define RLVColor_SpringGreen3_Alpha4 ImVec4{ 0.0, 0.69, 0.37, 0.8 }
+#define RLVColor_SpringGreen3_Alpha5 ImVec4{ 0.0, 0.69, 0.37, 1.0 }
+
+#define RLVColor_LightSeaGreen_Alpha0 ImVec4{ 0.0, 0.69, 0.69, 0.0 }
+#define RLVColor_LightSeaGreen_Alpha1 ImVec4{ 0.0, 0.69, 0.69, 0.2 }
+#define RLVColor_LightSeaGreen_Alpha2 ImVec4{ 0.0, 0.69, 0.69, 0.4 }
+#define RLVColor_LightSeaGreen_Alpha3 ImVec4{ 0.0, 0.69, 0.69, 0.6 }
+#define RLVColor_LightSeaGreen_Alpha4 ImVec4{ 0.0, 0.69, 0.69, 0.8 }
+#define RLVColor_LightSeaGreen_Alpha5 ImVec4{ 0.0, 0.69, 0.69, 1.0 }
+
+#define RLVColor_DeepSkyBlue1_Alpha0 ImVec4{ 0.0, 0.69, 1.0, 0.0 }
+#define RLVColor_DeepSkyBlue1_Alpha1 ImVec4{ 0.0, 0.69, 1.0, 0.2 }
+#define RLVColor_DeepSkyBlue1_Alpha2 ImVec4{ 0.0, 0.69, 1.0, 0.4 }
+#define RLVColor_DeepSkyBlue1_Alpha3 ImVec4{ 0.0, 0.69, 1.0, 0.6 }
+#define RLVColor_DeepSkyBlue1_Alpha4 ImVec4{ 0.0, 0.69, 1.0, 0.8 }
+#define RLVColor_DeepSkyBlue1_Alpha5 ImVec4{ 0.0, 0.69, 1.0, 1.0 }
+
+#define RLVColor_Cyan3_Alpha0 ImVec4{ 0.0, 0.84, 0.69, 0.0 }
+#define RLVColor_Cyan3_Alpha1 ImVec4{ 0.0, 0.84, 0.69, 0.2 }
+#define RLVColor_Cyan3_Alpha2 ImVec4{ 0.0, 0.84, 0.69, 0.4 }
+#define RLVColor_Cyan3_Alpha3 ImVec4{ 0.0, 0.84, 0.69, 0.6 }
+#define RLVColor_Cyan3_Alpha4 ImVec4{ 0.0, 0.84, 0.69, 0.8 }
+#define RLVColor_Cyan3_Alpha5 ImVec4{ 0.0, 0.84, 0.69, 1.0 }
+
+#define RLVColor_Turquoise2_Alpha0 ImVec4{ 0.0, 0.84, 1.0, 0.0 }
+#define RLVColor_Turquoise2_Alpha1 ImVec4{ 0.0, 0.84, 1.0, 0.2 }
+#define RLVColor_Turquoise2_Alpha2 ImVec4{ 0.0, 0.84, 1.0, 0.4 }
+#define RLVColor_Turquoise2_Alpha3 ImVec4{ 0.0, 0.84, 1.0, 0.6 }
+#define RLVColor_Turquoise2_Alpha4 ImVec4{ 0.0, 0.84, 1.0, 0.8 }
+#define RLVColor_Turquoise2_Alpha5 ImVec4{ 0.0, 0.84, 1.0, 1.0 }
+
+#define RLVColor_SpringGreen2_Alpha0 ImVec4{ 0.0, 1.0, 0.37, 0.0 }
+#define RLVColor_SpringGreen2_Alpha1 ImVec4{ 0.0, 1.0, 0.37, 0.2 }
+#define RLVColor_SpringGreen2_Alpha2 ImVec4{ 0.0, 1.0, 0.37, 0.4 }
+#define RLVColor_SpringGreen2_Alpha3 ImVec4{ 0.0, 1.0, 0.37, 0.6 }
+#define RLVColor_SpringGreen2_Alpha4 ImVec4{ 0.0, 1.0, 0.37, 0.8 }
+#define RLVColor_SpringGreen2_Alpha5 ImVec4{ 0.0, 1.0, 0.37, 1.0 }
+
+#define RLVColor_MediumSpringGreen_Alpha0 ImVec4{ 0.0, 1.0, 0.69, 0.0 }
+#define RLVColor_MediumSpringGreen_Alpha1 ImVec4{ 0.0, 1.0, 0.69, 0.2 }
+#define RLVColor_MediumSpringGreen_Alpha2 ImVec4{ 0.0, 1.0, 0.69, 0.4 }
+#define RLVColor_MediumSpringGreen_Alpha3 ImVec4{ 0.0, 1.0, 0.69, 0.6 }
+#define RLVColor_MediumSpringGreen_Alpha4 ImVec4{ 0.0, 1.0, 0.69, 0.8 }
+#define RLVColor_MediumSpringGreen_Alpha5 ImVec4{ 0.0, 1.0, 0.69, 1.0 }
+
+#define RLVColor_Cyan1_Alpha0 ImVec4{ 0.0, 1.0, 1.0, 0.0 }
+#define RLVColor_Cyan1_Alpha1 ImVec4{ 0.0, 1.0, 1.0, 0.2 }
+#define RLVColor_Cyan1_Alpha2 ImVec4{ 0.0, 1.0, 1.0, 0.4 }
+#define RLVColor_Cyan1_Alpha3 ImVec4{ 0.0, 1.0, 1.0, 0.6 }
+#define RLVColor_Cyan1_Alpha4 ImVec4{ 0.0, 1.0, 1.0, 0.8 }
+#define RLVColor_Cyan1_Alpha5 ImVec4{ 0.0, 1.0, 1.0, 1.0 }
+
+#define RLVColor_DeepPink4_Alpha0 ImVec4{ 0.37, 0.0, 0.37, 0.0 }
+#define RLVColor_DeepPink4_Alpha1 ImVec4{ 0.37, 0.0, 0.37, 0.2 }
+#define RLVColor_DeepPink4_Alpha2 ImVec4{ 0.37, 0.0, 0.37, 0.4 }
+#define RLVColor_DeepPink4_Alpha3 ImVec4{ 0.37, 0.0, 0.37, 0.6 }
+#define RLVColor_DeepPink4_Alpha4 ImVec4{ 0.37, 0.0, 0.37, 0.8 }
+#define RLVColor_DeepPink4_Alpha5 ImVec4{ 0.37, 0.0, 0.37, 1.0 }
+
+#define RLVColor_Purple4_Alpha0 ImVec4{ 0.37, 0.0, 0.69, 0.0 }
+#define RLVColor_Purple4_Alpha1 ImVec4{ 0.37, 0.0, 0.69, 0.2 }
+#define RLVColor_Purple4_Alpha2 ImVec4{ 0.37, 0.0, 0.69, 0.4 }
+#define RLVColor_Purple4_Alpha3 ImVec4{ 0.37, 0.0, 0.69, 0.6 }
+#define RLVColor_Purple4_Alpha4 ImVec4{ 0.37, 0.0, 0.69, 0.8 }
+#define RLVColor_Purple4_Alpha5 ImVec4{ 0.37, 0.0, 0.69, 1.0 }
+
+#define RLVColor_BlueViolet_Alpha0 ImVec4{ 0.37, 0.0, 1.0, 0.0 }
+#define RLVColor_BlueViolet_Alpha1 ImVec4{ 0.37, 0.0, 1.0, 0.2 }
+#define RLVColor_BlueViolet_Alpha2 ImVec4{ 0.37, 0.0, 1.0, 0.4 }
+#define RLVColor_BlueViolet_Alpha3 ImVec4{ 0.37, 0.0, 1.0, 0.6 }
+#define RLVColor_BlueViolet_Alpha4 ImVec4{ 0.37, 0.0, 1.0, 0.8 }
+#define RLVColor_BlueViolet_Alpha5 ImVec4{ 0.37, 0.0, 1.0, 1.0 }
+
+#define RLVColor_Grey37_Alpha0 ImVec4{ 0.37, 0.37, 0.37, 0.0 }
+#define RLVColor_Grey37_Alpha1 ImVec4{ 0.37, 0.37, 0.37, 0.2 }
+#define RLVColor_Grey37_Alpha2 ImVec4{ 0.37, 0.37, 0.37, 0.4 }
+#define RLVColor_Grey37_Alpha3 ImVec4{ 0.37, 0.37, 0.37, 0.6 }
+#define RLVColor_Grey37_Alpha4 ImVec4{ 0.37, 0.37, 0.37, 0.8 }
+#define RLVColor_Grey37_Alpha5 ImVec4{ 0.37, 0.37, 0.37, 1.0 }
+
+#define RLVColor_SlateBlue3_Alpha0 ImVec4{ 0.37, 0.37, 0.69, 0.0 }
+#define RLVColor_SlateBlue3_Alpha1 ImVec4{ 0.37, 0.37, 0.69, 0.2 }
+#define RLVColor_SlateBlue3_Alpha2 ImVec4{ 0.37, 0.37, 0.69, 0.4 }
+#define RLVColor_SlateBlue3_Alpha3 ImVec4{ 0.37, 0.37, 0.69, 0.6 }
+#define RLVColor_SlateBlue3_Alpha4 ImVec4{ 0.37, 0.37, 0.69, 0.8 }
+#define RLVColor_SlateBlue3_Alpha5 ImVec4{ 0.37, 0.37, 0.69, 1.0 }
+
+#define RLVColor_RoyalBlue1_Alpha0 ImVec4{ 0.37, 0.37, 1.0, 0.0 }
+#define RLVColor_RoyalBlue1_Alpha1 ImVec4{ 0.37, 0.37, 1.0, 0.2 }
+#define RLVColor_RoyalBlue1_Alpha2 ImVec4{ 0.37, 0.37, 1.0, 0.4 }
+#define RLVColor_RoyalBlue1_Alpha3 ImVec4{ 0.37, 0.37, 1.0, 0.6 }
+#define RLVColor_RoyalBlue1_Alpha4 ImVec4{ 0.37, 0.37, 1.0, 0.8 }
+#define RLVColor_RoyalBlue1_Alpha5 ImVec4{ 0.37, 0.37, 1.0, 1.0 }
+
+#define RLVColor_DarkSeaGreen4_Alpha0 ImVec4{ 0.37, 0.53, 0.37, 0.0 }
+#define RLVColor_DarkSeaGreen4_Alpha1 ImVec4{ 0.37, 0.53, 0.37, 0.2 }
+#define RLVColor_DarkSeaGreen4_Alpha2 ImVec4{ 0.37, 0.53, 0.37, 0.4 }
+#define RLVColor_DarkSeaGreen4_Alpha3 ImVec4{ 0.37, 0.53, 0.37, 0.6 }
+#define RLVColor_DarkSeaGreen4_Alpha4 ImVec4{ 0.37, 0.53, 0.37, 0.8 }
+#define RLVColor_DarkSeaGreen4_Alpha5 ImVec4{ 0.37, 0.53, 0.37, 1.0 }
+
+#define RLVColor_SteelBlue_Alpha0 ImVec4{ 0.37, 0.53, 0.69, 0.0 }
+#define RLVColor_SteelBlue_Alpha1 ImVec4{ 0.37, 0.53, 0.69, 0.2 }
+#define RLVColor_SteelBlue_Alpha2 ImVec4{ 0.37, 0.53, 0.69, 0.4 }
+#define RLVColor_SteelBlue_Alpha3 ImVec4{ 0.37, 0.53, 0.69, 0.6 }
+#define RLVColor_SteelBlue_Alpha4 ImVec4{ 0.37, 0.53, 0.69, 0.8 }
+#define RLVColor_SteelBlue_Alpha5 ImVec4{ 0.37, 0.53, 0.69, 1.0 }
+
+#define RLVColor_CornflowerBlue_Alpha0 ImVec4{ 0.37, 0.53, 1.0, 0.0 }
+#define RLVColor_CornflowerBlue_Alpha1 ImVec4{ 0.37, 0.53, 1.0, 0.2 }
+#define RLVColor_CornflowerBlue_Alpha2 ImVec4{ 0.37, 0.53, 1.0, 0.4 }
+#define RLVColor_CornflowerBlue_Alpha3 ImVec4{ 0.37, 0.53, 1.0, 0.6 }
+#define RLVColor_CornflowerBlue_Alpha4 ImVec4{ 0.37, 0.53, 1.0, 0.8 }
+#define RLVColor_CornflowerBlue_Alpha5 ImVec4{ 0.37, 0.53, 1.0, 1.0 }
+
+#define RLVColor_CadetBlue_Alpha0 ImVec4{ 0.37, 0.69, 0.69, 0.0 }
+#define RLVColor_CadetBlue_Alpha1 ImVec4{ 0.37, 0.69, 0.69, 0.2 }
+#define RLVColor_CadetBlue_Alpha2 ImVec4{ 0.37, 0.69, 0.69, 0.4 }
+#define RLVColor_CadetBlue_Alpha3 ImVec4{ 0.37, 0.69, 0.69, 0.6 }
+#define RLVColor_CadetBlue_Alpha4 ImVec4{ 0.37, 0.69, 0.69, 0.8 }
+#define RLVColor_CadetBlue_Alpha5 ImVec4{ 0.37, 0.69, 0.69, 1.0 }
+
+#define RLVColor_SteelBlue1_Alpha0 ImVec4{ 0.37, 0.69, 1.0, 0.0 }
+#define RLVColor_SteelBlue1_Alpha1 ImVec4{ 0.37, 0.69, 1.0, 0.2 }
+#define RLVColor_SteelBlue1_Alpha2 ImVec4{ 0.37, 0.69, 1.0, 0.4 }
+#define RLVColor_SteelBlue1_Alpha3 ImVec4{ 0.37, 0.69, 1.0, 0.6 }
+#define RLVColor_SteelBlue1_Alpha4 ImVec4{ 0.37, 0.69, 1.0, 0.8 }
+#define RLVColor_SteelBlue1_Alpha5 ImVec4{ 0.37, 0.69, 1.0, 1.0 }
+
+#define RLVColor_PaleGreen3_Alpha0 ImVec4{ 0.37, 0.84, 0.37, 0.0 }
+#define RLVColor_PaleGreen3_Alpha1 ImVec4{ 0.37, 0.84, 0.37, 0.2 }
+#define RLVColor_PaleGreen3_Alpha2 ImVec4{ 0.37, 0.84, 0.37, 0.4 }
+#define RLVColor_PaleGreen3_Alpha3 ImVec4{ 0.37, 0.84, 0.37, 0.6 }
+#define RLVColor_PaleGreen3_Alpha4 ImVec4{ 0.37, 0.84, 0.37, 0.8 }
+#define RLVColor_PaleGreen3_Alpha5 ImVec4{ 0.37, 0.84, 0.37, 1.0 }
+
+#define RLVColor_Aquamarine3_Alpha0 ImVec4{ 0.37, 0.84, 0.69, 0.0 }
+#define RLVColor_Aquamarine3_Alpha1 ImVec4{ 0.37, 0.84, 0.69, 0.2 }
+#define RLVColor_Aquamarine3_Alpha2 ImVec4{ 0.37, 0.84, 0.69, 0.4 }
+#define RLVColor_Aquamarine3_Alpha3 ImVec4{ 0.37, 0.84, 0.69, 0.6 }
+#define RLVColor_Aquamarine3_Alpha4 ImVec4{ 0.37, 0.84, 0.69, 0.8 }
+#define RLVColor_Aquamarine3_Alpha5 ImVec4{ 0.37, 0.84, 0.69, 1.0 }
+
+#define RLVColor_SeaGreen2_Alpha0 ImVec4{ 0.37, 1.0, 0.37, 0.0 }
+#define RLVColor_SeaGreen2_Alpha1 ImVec4{ 0.37, 1.0, 0.37, 0.2 }
+#define RLVColor_SeaGreen2_Alpha2 ImVec4{ 0.37, 1.0, 0.37, 0.4 }
+#define RLVColor_SeaGreen2_Alpha3 ImVec4{ 0.37, 1.0, 0.37, 0.6 }
+#define RLVColor_SeaGreen2_Alpha4 ImVec4{ 0.37, 1.0, 0.37, 0.8 }
+#define RLVColor_SeaGreen2_Alpha5 ImVec4{ 0.37, 1.0, 0.37, 1.0 }
+
+#define RLVColor_SeaGreen1_Alpha0 ImVec4{ 0.37, 1.0, 0.69, 0.0 }
+#define RLVColor_SeaGreen1_Alpha1 ImVec4{ 0.37, 1.0, 0.69, 0.2 }
+#define RLVColor_SeaGreen1_Alpha2 ImVec4{ 0.37, 1.0, 0.69, 0.4 }
+#define RLVColor_SeaGreen1_Alpha3 ImVec4{ 0.37, 1.0, 0.69, 0.6 }
+#define RLVColor_SeaGreen1_Alpha4 ImVec4{ 0.37, 1.0, 0.69, 0.8 }
+#define RLVColor_SeaGreen1_Alpha5 ImVec4{ 0.37, 1.0, 0.69, 1.0 }
+
+#define RLVColor_DarkSlateGray2_Alpha0 ImVec4{ 0.37, 1.0, 1.0, 0.0 }
+#define RLVColor_DarkSlateGray2_Alpha1 ImVec4{ 0.37, 1.0, 1.0, 0.2 }
+#define RLVColor_DarkSlateGray2_Alpha2 ImVec4{ 0.37, 1.0, 1.0, 0.4 }
+#define RLVColor_DarkSlateGray2_Alpha3 ImVec4{ 0.37, 1.0, 1.0, 0.6 }
+#define RLVColor_DarkSlateGray2_Alpha4 ImVec4{ 0.37, 1.0, 1.0, 0.8 }
+#define RLVColor_DarkSlateGray2_Alpha5 ImVec4{ 0.37, 1.0, 1.0, 1.0 }
+
+#define RLVColor_DarkMagenta_Alpha0 ImVec4{ 0.53, 0.0, 0.69, 0.0 }
+#define RLVColor_DarkMagenta_Alpha1 ImVec4{ 0.53, 0.0, 0.69, 0.2 }
+#define RLVColor_DarkMagenta_Alpha2 ImVec4{ 0.53, 0.0, 0.69, 0.4 }
+#define RLVColor_DarkMagenta_Alpha3 ImVec4{ 0.53, 0.0, 0.69, 0.6 }
+#define RLVColor_DarkMagenta_Alpha4 ImVec4{ 0.53, 0.0, 0.69, 0.8 }
+#define RLVColor_DarkMagenta_Alpha5 ImVec4{ 0.53, 0.0, 0.69, 1.0 }
+
+#define RLVColor_Purple_Alpha0 ImVec4{ 0.53, 0.0, 1.0, 0.0 }
+#define RLVColor_Purple_Alpha1 ImVec4{ 0.53, 0.0, 1.0, 0.2 }
+#define RLVColor_Purple_Alpha2 ImVec4{ 0.53, 0.0, 1.0, 0.4 }
+#define RLVColor_Purple_Alpha3 ImVec4{ 0.53, 0.0, 1.0, 0.6 }
+#define RLVColor_Purple_Alpha4 ImVec4{ 0.53, 0.0, 1.0, 0.8 }
+#define RLVColor_Purple_Alpha5 ImVec4{ 0.53, 0.0, 1.0, 1.0 }
+
+#define RLVColor_LightPink4_Alpha0 ImVec4{ 0.53, 0.37, 0.37, 0.0 }
+#define RLVColor_LightPink4_Alpha1 ImVec4{ 0.53, 0.37, 0.37, 0.2 }
+#define RLVColor_LightPink4_Alpha2 ImVec4{ 0.53, 0.37, 0.37, 0.4 }
+#define RLVColor_LightPink4_Alpha3 ImVec4{ 0.53, 0.37, 0.37, 0.6 }
+#define RLVColor_LightPink4_Alpha4 ImVec4{ 0.53, 0.37, 0.37, 0.8 }
+#define RLVColor_LightPink4_Alpha5 ImVec4{ 0.53, 0.37, 0.37, 1.0 }
+
+#define RLVColor_MediumPurple3_Alpha0 ImVec4{ 0.53, 0.37, 0.69, 0.0 }
+#define RLVColor_MediumPurple3_Alpha1 ImVec4{ 0.53, 0.37, 0.69, 0.2 }
+#define RLVColor_MediumPurple3_Alpha2 ImVec4{ 0.53, 0.37, 0.69, 0.4 }
+#define RLVColor_MediumPurple3_Alpha3 ImVec4{ 0.53, 0.37, 0.69, 0.6 }
+#define RLVColor_MediumPurple3_Alpha4 ImVec4{ 0.53, 0.37, 0.69, 0.8 }
+#define RLVColor_MediumPurple3_Alpha5 ImVec4{ 0.53, 0.37, 0.69, 1.0 }
+
+#define RLVColor_SlateBlue1_Alpha0 ImVec4{ 0.53, 0.37, 1.0, 0.0 }
+#define RLVColor_SlateBlue1_Alpha1 ImVec4{ 0.53, 0.37, 1.0, 0.2 }
+#define RLVColor_SlateBlue1_Alpha2 ImVec4{ 0.53, 0.37, 1.0, 0.4 }
+#define RLVColor_SlateBlue1_Alpha3 ImVec4{ 0.53, 0.37, 1.0, 0.6 }
+#define RLVColor_SlateBlue1_Alpha4 ImVec4{ 0.53, 0.37, 1.0, 0.8 }
+#define RLVColor_SlateBlue1_Alpha5 ImVec4{ 0.53, 0.37, 1.0, 1.0 }
+
+#define RLVColor_Wheat4_Alpha0 ImVec4{ 0.53, 0.53, 0.37, 0.0 }
+#define RLVColor_Wheat4_Alpha1 ImVec4{ 0.53, 0.53, 0.37, 0.2 }
+#define RLVColor_Wheat4_Alpha2 ImVec4{ 0.53, 0.53, 0.37, 0.4 }
+#define RLVColor_Wheat4_Alpha3 ImVec4{ 0.53, 0.53, 0.37, 0.6 }
+#define RLVColor_Wheat4_Alpha4 ImVec4{ 0.53, 0.53, 0.37, 0.8 }
+#define RLVColor_Wheat4_Alpha5 ImVec4{ 0.53, 0.53, 0.37, 1.0 }
+
+#define RLVColor_LightSlateGrey_Alpha0 ImVec4{ 0.53, 0.53, 0.69, 0.0 }
+#define RLVColor_LightSlateGrey_Alpha1 ImVec4{ 0.53, 0.53, 0.69, 0.2 }
+#define RLVColor_LightSlateGrey_Alpha2 ImVec4{ 0.53, 0.53, 0.69, 0.4 }
+#define RLVColor_LightSlateGrey_Alpha3 ImVec4{ 0.53, 0.53, 0.69, 0.6 }
+#define RLVColor_LightSlateGrey_Alpha4 ImVec4{ 0.53, 0.53, 0.69, 0.8 }
+#define RLVColor_LightSlateGrey_Alpha5 ImVec4{ 0.53, 0.53, 0.69, 1.0 }
+
+#define RLVColor_LightSlateBlue_Alpha0 ImVec4{ 0.53, 0.53, 1.0, 0.0 }
+#define RLVColor_LightSlateBlue_Alpha1 ImVec4{ 0.53, 0.53, 1.0, 0.2 }
+#define RLVColor_LightSlateBlue_Alpha2 ImVec4{ 0.53, 0.53, 1.0, 0.4 }
+#define RLVColor_LightSlateBlue_Alpha3 ImVec4{ 0.53, 0.53, 1.0, 0.6 }
+#define RLVColor_LightSlateBlue_Alpha4 ImVec4{ 0.53, 0.53, 1.0, 0.8 }
+#define RLVColor_LightSlateBlue_Alpha5 ImVec4{ 0.53, 0.53, 1.0, 1.0 }
+
+#define RLVColor_DarkOliveGreen3_Alpha0 ImVec4{ 0.53, 0.69, 0.37, 0.0 }
+#define RLVColor_DarkOliveGreen3_Alpha1 ImVec4{ 0.53, 0.69, 0.37, 0.2 }
+#define RLVColor_DarkOliveGreen3_Alpha2 ImVec4{ 0.53, 0.69, 0.37, 0.4 }
+#define RLVColor_DarkOliveGreen3_Alpha3 ImVec4{ 0.53, 0.69, 0.37, 0.6 }
+#define RLVColor_DarkOliveGreen3_Alpha4 ImVec4{ 0.53, 0.69, 0.37, 0.8 }
+#define RLVColor_DarkOliveGreen3_Alpha5 ImVec4{ 0.53, 0.69, 0.37, 1.0 }
+
+#define RLVColor_LightSkyBlue3_Alpha0 ImVec4{ 0.53, 0.69, 0.69, 0.0 }
+#define RLVColor_LightSkyBlue3_Alpha1 ImVec4{ 0.53, 0.69, 0.69, 0.2 }
+#define RLVColor_LightSkyBlue3_Alpha2 ImVec4{ 0.53, 0.69, 0.69, 0.4 }
+#define RLVColor_LightSkyBlue3_Alpha3 ImVec4{ 0.53, 0.69, 0.69, 0.6 }
+#define RLVColor_LightSkyBlue3_Alpha4 ImVec4{ 0.53, 0.69, 0.69, 0.8 }
+#define RLVColor_LightSkyBlue3_Alpha5 ImVec4{ 0.53, 0.69, 0.69, 1.0 }
+
+#define RLVColor_SkyBlue2_Alpha0 ImVec4{ 0.53, 0.69, 1.0, 0.0 }
+#define RLVColor_SkyBlue2_Alpha1 ImVec4{ 0.53, 0.69, 1.0, 0.2 }
+#define RLVColor_SkyBlue2_Alpha2 ImVec4{ 0.53, 0.69, 1.0, 0.4 }
+#define RLVColor_SkyBlue2_Alpha3 ImVec4{ 0.53, 0.69, 1.0, 0.6 }
+#define RLVColor_SkyBlue2_Alpha4 ImVec4{ 0.53, 0.69, 1.0, 0.8 }
+#define RLVColor_SkyBlue2_Alpha5 ImVec4{ 0.53, 0.69, 1.0, 1.0 }
+
+#define RLVColor_DarkSeaGreen3_Alpha0 ImVec4{ 0.53, 0.84, 0.69, 0.0 }
+#define RLVColor_DarkSeaGreen3_Alpha1 ImVec4{ 0.53, 0.84, 0.69, 0.2 }
+#define RLVColor_DarkSeaGreen3_Alpha2 ImVec4{ 0.53, 0.84, 0.69, 0.4 }
+#define RLVColor_DarkSeaGreen3_Alpha3 ImVec4{ 0.53, 0.84, 0.69, 0.6 }
+#define RLVColor_DarkSeaGreen3_Alpha4 ImVec4{ 0.53, 0.84, 0.69, 0.8 }
+#define RLVColor_DarkSeaGreen3_Alpha5 ImVec4{ 0.53, 0.84, 0.69, 1.0 }
+
+#define RLVColor_SkyBlue1_Alpha0 ImVec4{ 0.53, 0.84, 1.0, 0.0 }
+#define RLVColor_SkyBlue1_Alpha1 ImVec4{ 0.53, 0.84, 1.0, 0.2 }
+#define RLVColor_SkyBlue1_Alpha2 ImVec4{ 0.53, 0.84, 1.0, 0.4 }
+#define RLVColor_SkyBlue1_Alpha3 ImVec4{ 0.53, 0.84, 1.0, 0.6 }
+#define RLVColor_SkyBlue1_Alpha4 ImVec4{ 0.53, 0.84, 1.0, 0.8 }
+#define RLVColor_SkyBlue1_Alpha5 ImVec4{ 0.53, 0.84, 1.0, 1.0 }
+
+#define RLVColor_LightGreen_Alpha0 ImVec4{ 0.53, 1.0, 0.37, 0.0 }
+#define RLVColor_LightGreen_Alpha1 ImVec4{ 0.53, 1.0, 0.37, 0.2 }
+#define RLVColor_LightGreen_Alpha2 ImVec4{ 0.53, 1.0, 0.37, 0.4 }
+#define RLVColor_LightGreen_Alpha3 ImVec4{ 0.53, 1.0, 0.37, 0.6 }
+#define RLVColor_LightGreen_Alpha4 ImVec4{ 0.53, 1.0, 0.37, 0.8 }
+#define RLVColor_LightGreen_Alpha5 ImVec4{ 0.53, 1.0, 0.37, 1.0 }
+
+#define RLVColor_PaleGreen1_Alpha0 ImVec4{ 0.53, 1.0, 0.69, 0.0 }
+#define RLVColor_PaleGreen1_Alpha1 ImVec4{ 0.53, 1.0, 0.69, 0.2 }
+#define RLVColor_PaleGreen1_Alpha2 ImVec4{ 0.53, 1.0, 0.69, 0.4 }
+#define RLVColor_PaleGreen1_Alpha3 ImVec4{ 0.53, 1.0, 0.69, 0.6 }
+#define RLVColor_PaleGreen1_Alpha4 ImVec4{ 0.53, 1.0, 0.69, 0.8 }
+#define RLVColor_PaleGreen1_Alpha5 ImVec4{ 0.53, 1.0, 0.69, 1.0 }
+
+#define RLVColor_DarkSlateGray1_Alpha0 ImVec4{ 0.53, 1.0, 1.0, 0.0 }
+#define RLVColor_DarkSlateGray1_Alpha1 ImVec4{ 0.53, 1.0, 1.0, 0.2 }
+#define RLVColor_DarkSlateGray1_Alpha2 ImVec4{ 0.53, 1.0, 1.0, 0.4 }
+#define RLVColor_DarkSlateGray1_Alpha3 ImVec4{ 0.53, 1.0, 1.0, 0.6 }
+#define RLVColor_DarkSlateGray1_Alpha4 ImVec4{ 0.53, 1.0, 1.0, 0.8 }
+#define RLVColor_DarkSlateGray1_Alpha5 ImVec4{ 0.53, 1.0, 1.0, 1.0 }
+
+#define RLVColor_Magenta3_Alpha0 ImVec4{ 0.69, 0.0, 0.69, 0.0 }
+#define RLVColor_Magenta3_Alpha1 ImVec4{ 0.69, 0.0, 0.69, 0.2 }
+#define RLVColor_Magenta3_Alpha2 ImVec4{ 0.69, 0.0, 0.69, 0.4 }
+#define RLVColor_Magenta3_Alpha3 ImVec4{ 0.69, 0.0, 0.69, 0.6 }
+#define RLVColor_Magenta3_Alpha4 ImVec4{ 0.69, 0.0, 0.69, 0.8 }
+#define RLVColor_Magenta3_Alpha5 ImVec4{ 0.69, 0.0, 0.69, 1.0 }
+
+#define RLVColor_IndianRed_Alpha0 ImVec4{ 0.69, 0.37, 0.37, 0.0 }
+#define RLVColor_IndianRed_Alpha1 ImVec4{ 0.69, 0.37, 0.37, 0.2 }
+#define RLVColor_IndianRed_Alpha2 ImVec4{ 0.69, 0.37, 0.37, 0.4 }
+#define RLVColor_IndianRed_Alpha3 ImVec4{ 0.69, 0.37, 0.37, 0.6 }
+#define RLVColor_IndianRed_Alpha4 ImVec4{ 0.69, 0.37, 0.37, 0.8 }
+#define RLVColor_IndianRed_Alpha5 ImVec4{ 0.69, 0.37, 0.37, 1.0 }
+
+#define RLVColor_MediumOrchid3_Alpha0 ImVec4{ 0.69, 0.37, 0.69, 0.0 }
+#define RLVColor_MediumOrchid3_Alpha1 ImVec4{ 0.69, 0.37, 0.69, 0.2 }
+#define RLVColor_MediumOrchid3_Alpha2 ImVec4{ 0.69, 0.37, 0.69, 0.4 }
+#define RLVColor_MediumOrchid3_Alpha3 ImVec4{ 0.69, 0.37, 0.69, 0.6 }
+#define RLVColor_MediumOrchid3_Alpha4 ImVec4{ 0.69, 0.37, 0.69, 0.8 }
+#define RLVColor_MediumOrchid3_Alpha5 ImVec4{ 0.69, 0.37, 0.69, 1.0 }
+
+#define RLVColor_MediumPurple2_Alpha0 ImVec4{ 0.69, 0.37, 1.0, 0.0 }
+#define RLVColor_MediumPurple2_Alpha1 ImVec4{ 0.69, 0.37, 1.0, 0.2 }
+#define RLVColor_MediumPurple2_Alpha2 ImVec4{ 0.69, 0.37, 1.0, 0.4 }
+#define RLVColor_MediumPurple2_Alpha3 ImVec4{ 0.69, 0.37, 1.0, 0.6 }
+#define RLVColor_MediumPurple2_Alpha4 ImVec4{ 0.69, 0.37, 1.0, 0.8 }
+#define RLVColor_MediumPurple2_Alpha5 ImVec4{ 0.69, 0.37, 1.0, 1.0 }
+
+#define RLVColor_LightSalmon3_Alpha0 ImVec4{ 0.69, 0.53, 0.37, 0.0 }
+#define RLVColor_LightSalmon3_Alpha1 ImVec4{ 0.69, 0.53, 0.37, 0.2 }
+#define RLVColor_LightSalmon3_Alpha2 ImVec4{ 0.69, 0.53, 0.37, 0.4 }
+#define RLVColor_LightSalmon3_Alpha3 ImVec4{ 0.69, 0.53, 0.37, 0.6 }
+#define RLVColor_LightSalmon3_Alpha4 ImVec4{ 0.69, 0.53, 0.37, 0.8 }
+#define RLVColor_LightSalmon3_Alpha5 ImVec4{ 0.69, 0.53, 0.37, 1.0 }
+
+#define RLVColor_Grey63_Alpha0 ImVec4{ 0.69, 0.53, 0.69, 0.0 }
+#define RLVColor_Grey63_Alpha1 ImVec4{ 0.69, 0.53, 0.69, 0.2 }
+#define RLVColor_Grey63_Alpha2 ImVec4{ 0.69, 0.53, 0.69, 0.4 }
+#define RLVColor_Grey63_Alpha3 ImVec4{ 0.69, 0.53, 0.69, 0.6 }
+#define RLVColor_Grey63_Alpha4 ImVec4{ 0.69, 0.53, 0.69, 0.8 }
+#define RLVColor_Grey63_Alpha5 ImVec4{ 0.69, 0.53, 0.69, 1.0 }
+
+#define RLVColor_MediumPurple1_Alpha0 ImVec4{ 0.69, 0.53, 1.0, 0.0 }
+#define RLVColor_MediumPurple1_Alpha1 ImVec4{ 0.69, 0.53, 1.0, 0.2 }
+#define RLVColor_MediumPurple1_Alpha2 ImVec4{ 0.69, 0.53, 1.0, 0.4 }
+#define RLVColor_MediumPurple1_Alpha3 ImVec4{ 0.69, 0.53, 1.0, 0.6 }
+#define RLVColor_MediumPurple1_Alpha4 ImVec4{ 0.69, 0.53, 1.0, 0.8 }
+#define RLVColor_MediumPurple1_Alpha5 ImVec4{ 0.69, 0.53, 1.0, 1.0 }
+
+#define RLVColor_DarkKhaki_Alpha0 ImVec4{ 0.69, 0.69, 0.37, 0.0 }
+#define RLVColor_DarkKhaki_Alpha1 ImVec4{ 0.69, 0.69, 0.37, 0.2 }
+#define RLVColor_DarkKhaki_Alpha2 ImVec4{ 0.69, 0.69, 0.37, 0.4 }
+#define RLVColor_DarkKhaki_Alpha3 ImVec4{ 0.69, 0.69, 0.37, 0.6 }
+#define RLVColor_DarkKhaki_Alpha4 ImVec4{ 0.69, 0.69, 0.37, 0.8 }
+#define RLVColor_DarkKhaki_Alpha5 ImVec4{ 0.69, 0.69, 0.37, 1.0 }
+
+#define RLVColor_Grey69_Alpha0 ImVec4{ 0.69, 0.69, 0.69, 0.0 }
+#define RLVColor_Grey69_Alpha1 ImVec4{ 0.69, 0.69, 0.69, 0.2 }
+#define RLVColor_Grey69_Alpha2 ImVec4{ 0.69, 0.69, 0.69, 0.4 }
+#define RLVColor_Grey69_Alpha3 ImVec4{ 0.69, 0.69, 0.69, 0.6 }
+#define RLVColor_Grey69_Alpha4 ImVec4{ 0.69, 0.69, 0.69, 0.8 }
+#define RLVColor_Grey69_Alpha5 ImVec4{ 0.69, 0.69, 0.69, 1.0 }
+
+#define RLVColor_LightSteelBlue_Alpha0 ImVec4{ 0.69, 0.69, 1.0, 0.0 }
+#define RLVColor_LightSteelBlue_Alpha1 ImVec4{ 0.69, 0.69, 1.0, 0.2 }
+#define RLVColor_LightSteelBlue_Alpha2 ImVec4{ 0.69, 0.69, 1.0, 0.4 }
+#define RLVColor_LightSteelBlue_Alpha3 ImVec4{ 0.69, 0.69, 1.0, 0.6 }
+#define RLVColor_LightSteelBlue_Alpha4 ImVec4{ 0.69, 0.69, 1.0, 0.8 }
+#define RLVColor_LightSteelBlue_Alpha5 ImVec4{ 0.69, 0.69, 1.0, 1.0 }
+
+#define RLVColor_DarkSeaGreen2_Alpha0 ImVec4{ 0.69, 0.84, 0.69, 0.0 }
+#define RLVColor_DarkSeaGreen2_Alpha1 ImVec4{ 0.69, 0.84, 0.69, 0.2 }
+#define RLVColor_DarkSeaGreen2_Alpha2 ImVec4{ 0.69, 0.84, 0.69, 0.4 }
+#define RLVColor_DarkSeaGreen2_Alpha3 ImVec4{ 0.69, 0.84, 0.69, 0.6 }
+#define RLVColor_DarkSeaGreen2_Alpha4 ImVec4{ 0.69, 0.84, 0.69, 0.8 }
+#define RLVColor_DarkSeaGreen2_Alpha5 ImVec4{ 0.69, 0.84, 0.69, 1.0 }
+
+#define RLVColor_LightSkyBlue1_Alpha0 ImVec4{ 0.69, 0.84, 1.0, 0.0 }
+#define RLVColor_LightSkyBlue1_Alpha1 ImVec4{ 0.69, 0.84, 1.0, 0.2 }
+#define RLVColor_LightSkyBlue1_Alpha2 ImVec4{ 0.69, 0.84, 1.0, 0.4 }
+#define RLVColor_LightSkyBlue1_Alpha3 ImVec4{ 0.69, 0.84, 1.0, 0.6 }
+#define RLVColor_LightSkyBlue1_Alpha4 ImVec4{ 0.69, 0.84, 1.0, 0.8 }
+#define RLVColor_LightSkyBlue1_Alpha5 ImVec4{ 0.69, 0.84, 1.0, 1.0 }
+
+#define RLVColor_DarkOliveGreen2_Alpha0 ImVec4{ 0.69, 1.0, 0.37, 0.0 }
+#define RLVColor_DarkOliveGreen2_Alpha1 ImVec4{ 0.69, 1.0, 0.37, 0.2 }
+#define RLVColor_DarkOliveGreen2_Alpha2 ImVec4{ 0.69, 1.0, 0.37, 0.4 }
+#define RLVColor_DarkOliveGreen2_Alpha3 ImVec4{ 0.69, 1.0, 0.37, 0.6 }
+#define RLVColor_DarkOliveGreen2_Alpha4 ImVec4{ 0.69, 1.0, 0.37, 0.8 }
+#define RLVColor_DarkOliveGreen2_Alpha5 ImVec4{ 0.69, 1.0, 0.37, 1.0 }
+
+#define RLVColor_PaleTurquoise1_Alpha0 ImVec4{ 0.69, 1.0, 1.0, 0.0 }
+#define RLVColor_PaleTurquoise1_Alpha1 ImVec4{ 0.69, 1.0, 1.0, 0.2 }
+#define RLVColor_PaleTurquoise1_Alpha2 ImVec4{ 0.69, 1.0, 1.0, 0.4 }
+#define RLVColor_PaleTurquoise1_Alpha3 ImVec4{ 0.69, 1.0, 1.0, 0.6 }
+#define RLVColor_PaleTurquoise1_Alpha4 ImVec4{ 0.69, 1.0, 1.0, 0.8 }
+#define RLVColor_PaleTurquoise1_Alpha5 ImVec4{ 0.69, 1.0, 1.0, 1.0 }
+
+#define RLVColor_DeepPink3_Alpha0 ImVec4{ 0.84, 0.0, 0.37, 0.0 }
+#define RLVColor_DeepPink3_Alpha1 ImVec4{ 0.84, 0.0, 0.37, 0.2 }
+#define RLVColor_DeepPink3_Alpha2 ImVec4{ 0.84, 0.0, 0.37, 0.4 }
+#define RLVColor_DeepPink3_Alpha3 ImVec4{ 0.84, 0.0, 0.37, 0.6 }
+#define RLVColor_DeepPink3_Alpha4 ImVec4{ 0.84, 0.0, 0.37, 0.8 }
+#define RLVColor_DeepPink3_Alpha5 ImVec4{ 0.84, 0.0, 0.37, 1.0 }
+
+#define RLVColor_Magenta2_Alpha0 ImVec4{ 0.84, 0.0, 1.0, 0.0 }
+#define RLVColor_Magenta2_Alpha1 ImVec4{ 0.84, 0.0, 1.0, 0.2 }
+#define RLVColor_Magenta2_Alpha2 ImVec4{ 0.84, 0.0, 1.0, 0.4 }
+#define RLVColor_Magenta2_Alpha3 ImVec4{ 0.84, 0.0, 1.0, 0.6 }
+#define RLVColor_Magenta2_Alpha4 ImVec4{ 0.84, 0.0, 1.0, 0.8 }
+#define RLVColor_Magenta2_Alpha5 ImVec4{ 0.84, 0.0, 1.0, 1.0 }
+
+#define RLVColor_HotPink2_Alpha0 ImVec4{ 0.84, 0.37, 0.69, 0.0 }
+#define RLVColor_HotPink2_Alpha1 ImVec4{ 0.84, 0.37, 0.69, 0.2 }
+#define RLVColor_HotPink2_Alpha2 ImVec4{ 0.84, 0.37, 0.69, 0.4 }
+#define RLVColor_HotPink2_Alpha3 ImVec4{ 0.84, 0.37, 0.69, 0.6 }
+#define RLVColor_HotPink2_Alpha4 ImVec4{ 0.84, 0.37, 0.69, 0.8 }
+#define RLVColor_HotPink2_Alpha5 ImVec4{ 0.84, 0.37, 0.69, 1.0 }
+
+#define RLVColor_MediumOrchid1_Alpha0 ImVec4{ 0.84, 0.37, 1.0, 0.0 }
+#define RLVColor_MediumOrchid1_Alpha1 ImVec4{ 0.84, 0.37, 1.0, 0.2 }
+#define RLVColor_MediumOrchid1_Alpha2 ImVec4{ 0.84, 0.37, 1.0, 0.4 }
+#define RLVColor_MediumOrchid1_Alpha3 ImVec4{ 0.84, 0.37, 1.0, 0.6 }
+#define RLVColor_MediumOrchid1_Alpha4 ImVec4{ 0.84, 0.37, 1.0, 0.8 }
+#define RLVColor_MediumOrchid1_Alpha5 ImVec4{ 0.84, 0.37, 1.0, 1.0 }
+
+#define RLVColor_Pink3_Alpha0 ImVec4{ 0.84, 0.53, 0.69, 0.0 }
+#define RLVColor_Pink3_Alpha1 ImVec4{ 0.84, 0.53, 0.69, 0.2 }
+#define RLVColor_Pink3_Alpha2 ImVec4{ 0.84, 0.53, 0.69, 0.4 }
+#define RLVColor_Pink3_Alpha3 ImVec4{ 0.84, 0.53, 0.69, 0.6 }
+#define RLVColor_Pink3_Alpha4 ImVec4{ 0.84, 0.53, 0.69, 0.8 }
+#define RLVColor_Pink3_Alpha5 ImVec4{ 0.84, 0.53, 0.69, 1.0 }
+
+#define RLVColor_Violet_Alpha0 ImVec4{ 0.84, 0.53, 1.0, 0.0 }
+#define RLVColor_Violet_Alpha1 ImVec4{ 0.84, 0.53, 1.0, 0.2 }
+#define RLVColor_Violet_Alpha2 ImVec4{ 0.84, 0.53, 1.0, 0.4 }
+#define RLVColor_Violet_Alpha3 ImVec4{ 0.84, 0.53, 1.0, 0.6 }
+#define RLVColor_Violet_Alpha4 ImVec4{ 0.84, 0.53, 1.0, 0.8 }
+#define RLVColor_Violet_Alpha5 ImVec4{ 0.84, 0.53, 1.0, 1.0 }
+
+#define RLVColor_LightGoldenrod3_Alpha0 ImVec4{ 0.84, 0.69, 0.37, 0.0 }
+#define RLVColor_LightGoldenrod3_Alpha1 ImVec4{ 0.84, 0.69, 0.37, 0.2 }
+#define RLVColor_LightGoldenrod3_Alpha2 ImVec4{ 0.84, 0.69, 0.37, 0.4 }
+#define RLVColor_LightGoldenrod3_Alpha3 ImVec4{ 0.84, 0.69, 0.37, 0.6 }
+#define RLVColor_LightGoldenrod3_Alpha4 ImVec4{ 0.84, 0.69, 0.37, 0.8 }
+#define RLVColor_LightGoldenrod3_Alpha5 ImVec4{ 0.84, 0.69, 0.37, 1.0 }
+
+#define RLVColor_MistyRose3_Alpha0 ImVec4{ 0.84, 0.69, 0.69, 0.0 }
+#define RLVColor_MistyRose3_Alpha1 ImVec4{ 0.84, 0.69, 0.69, 0.2 }
+#define RLVColor_MistyRose3_Alpha2 ImVec4{ 0.84, 0.69, 0.69, 0.4 }
+#define RLVColor_MistyRose3_Alpha3 ImVec4{ 0.84, 0.69, 0.69, 0.6 }
+#define RLVColor_MistyRose3_Alpha4 ImVec4{ 0.84, 0.69, 0.69, 0.8 }
+#define RLVColor_MistyRose3_Alpha5 ImVec4{ 0.84, 0.69, 0.69, 1.0 }
+
+#define RLVColor_Plum2_Alpha0 ImVec4{ 0.84, 0.69, 1.0, 0.0 }
+#define RLVColor_Plum2_Alpha1 ImVec4{ 0.84, 0.69, 1.0, 0.2 }
+#define RLVColor_Plum2_Alpha2 ImVec4{ 0.84, 0.69, 1.0, 0.4 }
+#define RLVColor_Plum2_Alpha3 ImVec4{ 0.84, 0.69, 1.0, 0.6 }
+#define RLVColor_Plum2_Alpha4 ImVec4{ 0.84, 0.69, 1.0, 0.8 }
+#define RLVColor_Plum2_Alpha5 ImVec4{ 0.84, 0.69, 1.0, 1.0 }
+
+#define RLVColor_Khaki3_Alpha0 ImVec4{ 0.84, 0.84, 0.37, 0.0 }
+#define RLVColor_Khaki3_Alpha1 ImVec4{ 0.84, 0.84, 0.37, 0.2 }
+#define RLVColor_Khaki3_Alpha2 ImVec4{ 0.84, 0.84, 0.37, 0.4 }
+#define RLVColor_Khaki3_Alpha3 ImVec4{ 0.84, 0.84, 0.37, 0.6 }
+#define RLVColor_Khaki3_Alpha4 ImVec4{ 0.84, 0.84, 0.37, 0.8 }
+#define RLVColor_Khaki3_Alpha5 ImVec4{ 0.84, 0.84, 0.37, 1.0 }
+
+#define RLVColor_LightYellow3_Alpha0 ImVec4{ 0.84, 0.84, 0.69, 0.0 }
+#define RLVColor_LightYellow3_Alpha1 ImVec4{ 0.84, 0.84, 0.69, 0.2 }
+#define RLVColor_LightYellow3_Alpha2 ImVec4{ 0.84, 0.84, 0.69, 0.4 }
+#define RLVColor_LightYellow3_Alpha3 ImVec4{ 0.84, 0.84, 0.69, 0.6 }
+#define RLVColor_LightYellow3_Alpha4 ImVec4{ 0.84, 0.84, 0.69, 0.8 }
+#define RLVColor_LightYellow3_Alpha5 ImVec4{ 0.84, 0.84, 0.69, 1.0 }
+
+#define RLVColor_LightSteelBlue1_Alpha0 ImVec4{ 0.84, 0.84, 1.0, 0.0 }
+#define RLVColor_LightSteelBlue1_Alpha1 ImVec4{ 0.84, 0.84, 1.0, 0.2 }
+#define RLVColor_LightSteelBlue1_Alpha2 ImVec4{ 0.84, 0.84, 1.0, 0.4 }
+#define RLVColor_LightSteelBlue1_Alpha3 ImVec4{ 0.84, 0.84, 1.0, 0.6 }
+#define RLVColor_LightSteelBlue1_Alpha4 ImVec4{ 0.84, 0.84, 1.0, 0.8 }
+#define RLVColor_LightSteelBlue1_Alpha5 ImVec4{ 0.84, 0.84, 1.0, 1.0 }
+
+#define RLVColor_DarkOliveGreen1_Alpha0 ImVec4{ 0.84, 1.0, 0.37, 0.0 }
+#define RLVColor_DarkOliveGreen1_Alpha1 ImVec4{ 0.84, 1.0, 0.37, 0.2 }
+#define RLVColor_DarkOliveGreen1_Alpha2 ImVec4{ 0.84, 1.0, 0.37, 0.4 }
+#define RLVColor_DarkOliveGreen1_Alpha3 ImVec4{ 0.84, 1.0, 0.37, 0.6 }
+#define RLVColor_DarkOliveGreen1_Alpha4 ImVec4{ 0.84, 1.0, 0.37, 0.8 }
+#define RLVColor_DarkOliveGreen1_Alpha5 ImVec4{ 0.84, 1.0, 0.37, 1.0 }
+
+#define RLVColor_DarkSeaGreen1_Alpha0 ImVec4{ 0.84, 1.0, 0.69, 0.0 }
+#define RLVColor_DarkSeaGreen1_Alpha1 ImVec4{ 0.84, 1.0, 0.69, 0.2 }
+#define RLVColor_DarkSeaGreen1_Alpha2 ImVec4{ 0.84, 1.0, 0.69, 0.4 }
+#define RLVColor_DarkSeaGreen1_Alpha3 ImVec4{ 0.84, 1.0, 0.69, 0.6 }
+#define RLVColor_DarkSeaGreen1_Alpha4 ImVec4{ 0.84, 1.0, 0.69, 0.8 }
+#define RLVColor_DarkSeaGreen1_Alpha5 ImVec4{ 0.84, 1.0, 0.69, 1.0 }
+
+#define RLVColor_LightCyan1_Alpha0 ImVec4{ 0.84, 1.0, 1.0, 0.0 }
+#define RLVColor_LightCyan1_Alpha1 ImVec4{ 0.84, 1.0, 1.0, 0.2 }
+#define RLVColor_LightCyan1_Alpha2 ImVec4{ 0.84, 1.0, 1.0, 0.4 }
+#define RLVColor_LightCyan1_Alpha3 ImVec4{ 0.84, 1.0, 1.0, 0.6 }
+#define RLVColor_LightCyan1_Alpha4 ImVec4{ 0.84, 1.0, 1.0, 0.8 }
+#define RLVColor_LightCyan1_Alpha5 ImVec4{ 0.84, 1.0, 1.0, 1.0 }
+
+#define RLVColor_DeepPink2_Alpha0 ImVec4{ 1.0, 0.0, 0.37, 0.0 }
+#define RLVColor_DeepPink2_Alpha1 ImVec4{ 1.0, 0.0, 0.37, 0.2 }
+#define RLVColor_DeepPink2_Alpha2 ImVec4{ 1.0, 0.0, 0.37, 0.4 }
+#define RLVColor_DeepPink2_Alpha3 ImVec4{ 1.0, 0.0, 0.37, 0.6 }
+#define RLVColor_DeepPink2_Alpha4 ImVec4{ 1.0, 0.0, 0.37, 0.8 }
+#define RLVColor_DeepPink2_Alpha5 ImVec4{ 1.0, 0.0, 0.37, 1.0 }
+
+#define RLVColor_DeepPink1_Alpha0 ImVec4{ 1.0, 0.0, 0.69, 0.0 }
+#define RLVColor_DeepPink1_Alpha1 ImVec4{ 1.0, 0.0, 0.69, 0.2 }
+#define RLVColor_DeepPink1_Alpha2 ImVec4{ 1.0, 0.0, 0.69, 0.4 }
+#define RLVColor_DeepPink1_Alpha3 ImVec4{ 1.0, 0.0, 0.69, 0.6 }
+#define RLVColor_DeepPink1_Alpha4 ImVec4{ 1.0, 0.0, 0.69, 0.8 }
+#define RLVColor_DeepPink1_Alpha5 ImVec4{ 1.0, 0.0, 0.69, 1.0 }
+
+#define RLVColor_Magenta1_Alpha0 ImVec4{ 1.0, 0.0, 1.0, 0.0 }
+#define RLVColor_Magenta1_Alpha1 ImVec4{ 1.0, 0.0, 1.0, 0.2 }
+#define RLVColor_Magenta1_Alpha2 ImVec4{ 1.0, 0.0, 1.0, 0.4 }
+#define RLVColor_Magenta1_Alpha3 ImVec4{ 1.0, 0.0, 1.0, 0.6 }
+#define RLVColor_Magenta1_Alpha4 ImVec4{ 1.0, 0.0, 1.0, 0.8 }
+#define RLVColor_Magenta1_Alpha5 ImVec4{ 1.0, 0.0, 1.0, 1.0 }
+
+#define RLVColor_IndianRed1_Alpha0 ImVec4{ 1.0, 0.37, 0.37, 0.0 }
+#define RLVColor_IndianRed1_Alpha1 ImVec4{ 1.0, 0.37, 0.37, 0.2 }
+#define RLVColor_IndianRed1_Alpha2 ImVec4{ 1.0, 0.37, 0.37, 0.4 }
+#define RLVColor_IndianRed1_Alpha3 ImVec4{ 1.0, 0.37, 0.37, 0.6 }
+#define RLVColor_IndianRed1_Alpha4 ImVec4{ 1.0, 0.37, 0.37, 0.8 }
+#define RLVColor_IndianRed1_Alpha5 ImVec4{ 1.0, 0.37, 0.37, 1.0 }
+
+#define RLVColor_HotPink_Alpha0 ImVec4{ 1.0, 0.37, 0.69, 0.0 }
+#define RLVColor_HotPink_Alpha1 ImVec4{ 1.0, 0.37, 0.69, 0.2 }
+#define RLVColor_HotPink_Alpha2 ImVec4{ 1.0, 0.37, 0.69, 0.4 }
+#define RLVColor_HotPink_Alpha3 ImVec4{ 1.0, 0.37, 0.69, 0.6 }
+#define RLVColor_HotPink_Alpha4 ImVec4{ 1.0, 0.37, 0.69, 0.8 }
+#define RLVColor_HotPink_Alpha5 ImVec4{ 1.0, 0.37, 0.69, 1.0 }
+
+#define RLVColor_Salmon1_Alpha0 ImVec4{ 1.0, 0.53, 0.37, 0.0 }
+#define RLVColor_Salmon1_Alpha1 ImVec4{ 1.0, 0.53, 0.37, 0.2 }
+#define RLVColor_Salmon1_Alpha2 ImVec4{ 1.0, 0.53, 0.37, 0.4 }
+#define RLVColor_Salmon1_Alpha3 ImVec4{ 1.0, 0.53, 0.37, 0.6 }
+#define RLVColor_Salmon1_Alpha4 ImVec4{ 1.0, 0.53, 0.37, 0.8 }
+#define RLVColor_Salmon1_Alpha5 ImVec4{ 1.0, 0.53, 0.37, 1.0 }
+
+#define RLVColor_PaleVioletRed1_Alpha0 ImVec4{ 1.0, 0.53, 0.69, 0.0 }
+#define RLVColor_PaleVioletRed1_Alpha1 ImVec4{ 1.0, 0.53, 0.69, 0.2 }
+#define RLVColor_PaleVioletRed1_Alpha2 ImVec4{ 1.0, 0.53, 0.69, 0.4 }
+#define RLVColor_PaleVioletRed1_Alpha3 ImVec4{ 1.0, 0.53, 0.69, 0.6 }
+#define RLVColor_PaleVioletRed1_Alpha4 ImVec4{ 1.0, 0.53, 0.69, 0.8 }
+#define RLVColor_PaleVioletRed1_Alpha5 ImVec4{ 1.0, 0.53, 0.69, 1.0 }
+
+#define RLVColor_Orchid1_Alpha0 ImVec4{ 1.0, 0.53, 1.0, 0.0 }
+#define RLVColor_Orchid1_Alpha1 ImVec4{ 1.0, 0.53, 1.0, 0.2 }
+#define RLVColor_Orchid1_Alpha2 ImVec4{ 1.0, 0.53, 1.0, 0.4 }
+#define RLVColor_Orchid1_Alpha3 ImVec4{ 1.0, 0.53, 1.0, 0.6 }
+#define RLVColor_Orchid1_Alpha4 ImVec4{ 1.0, 0.53, 1.0, 0.8 }
+#define RLVColor_Orchid1_Alpha5 ImVec4{ 1.0, 0.53, 1.0, 1.0 }
+
+#define RLVColor_SandyBrown_Alpha0 ImVec4{ 1.0, 0.69, 0.37, 0.0 }
+#define RLVColor_SandyBrown_Alpha1 ImVec4{ 1.0, 0.69, 0.37, 0.2 }
+#define RLVColor_SandyBrown_Alpha2 ImVec4{ 1.0, 0.69, 0.37, 0.4 }
+#define RLVColor_SandyBrown_Alpha3 ImVec4{ 1.0, 0.69, 0.37, 0.6 }
+#define RLVColor_SandyBrown_Alpha4 ImVec4{ 1.0, 0.69, 0.37, 0.8 }
+#define RLVColor_SandyBrown_Alpha5 ImVec4{ 1.0, 0.69, 0.37, 1.0 }
+
+#define RLVColor_LightPink1_Alpha0 ImVec4{ 1.0, 0.69, 0.69, 0.0 }
+#define RLVColor_LightPink1_Alpha1 ImVec4{ 1.0, 0.69, 0.69, 0.2 }
+#define RLVColor_LightPink1_Alpha2 ImVec4{ 1.0, 0.69, 0.69, 0.4 }
+#define RLVColor_LightPink1_Alpha3 ImVec4{ 1.0, 0.69, 0.69, 0.6 }
+#define RLVColor_LightPink1_Alpha4 ImVec4{ 1.0, 0.69, 0.69, 0.8 }
+#define RLVColor_LightPink1_Alpha5 ImVec4{ 1.0, 0.69, 0.69, 1.0 }
+
+#define RLVColor_Plum1_Alpha0 ImVec4{ 1.0, 0.69, 1.0, 0.0 }
+#define RLVColor_Plum1_Alpha1 ImVec4{ 1.0, 0.69, 1.0, 0.2 }
+#define RLVColor_Plum1_Alpha2 ImVec4{ 1.0, 0.69, 1.0, 0.4 }
+#define RLVColor_Plum1_Alpha3 ImVec4{ 1.0, 0.69, 1.0, 0.6 }
+#define RLVColor_Plum1_Alpha4 ImVec4{ 1.0, 0.69, 1.0, 0.8 }
+#define RLVColor_Plum1_Alpha5 ImVec4{ 1.0, 0.69, 1.0, 1.0 }
+
+#define RLVColor_LightGoldenrod2_Alpha0 ImVec4{ 1.0, 0.84, 0.37, 0.0 }
+#define RLVColor_LightGoldenrod2_Alpha1 ImVec4{ 1.0, 0.84, 0.37, 0.2 }
+#define RLVColor_LightGoldenrod2_Alpha2 ImVec4{ 1.0, 0.84, 0.37, 0.4 }
+#define RLVColor_LightGoldenrod2_Alpha3 ImVec4{ 1.0, 0.84, 0.37, 0.6 }
+#define RLVColor_LightGoldenrod2_Alpha4 ImVec4{ 1.0, 0.84, 0.37, 0.8 }
+#define RLVColor_LightGoldenrod2_Alpha5 ImVec4{ 1.0, 0.84, 0.37, 1.0 }
+
+#define RLVColor_NavajoWhite1_Alpha0 ImVec4{ 1.0, 0.84, 0.69, 0.0 }
+#define RLVColor_NavajoWhite1_Alpha1 ImVec4{ 1.0, 0.84, 0.69, 0.2 }
+#define RLVColor_NavajoWhite1_Alpha2 ImVec4{ 1.0, 0.84, 0.69, 0.4 }
+#define RLVColor_NavajoWhite1_Alpha3 ImVec4{ 1.0, 0.84, 0.69, 0.6 }
+#define RLVColor_NavajoWhite1_Alpha4 ImVec4{ 1.0, 0.84, 0.69, 0.8 }
+#define RLVColor_NavajoWhite1_Alpha5 ImVec4{ 1.0, 0.84, 0.69, 1.0 }
+
+#define RLVColor_Thistle1_Alpha0 ImVec4{ 1.0, 0.84, 1.0, 0.0 }
+#define RLVColor_Thistle1_Alpha1 ImVec4{ 1.0, 0.84, 1.0, 0.2 }
+#define RLVColor_Thistle1_Alpha2 ImVec4{ 1.0, 0.84, 1.0, 0.4 }
+#define RLVColor_Thistle1_Alpha3 ImVec4{ 1.0, 0.84, 1.0, 0.6 }
+#define RLVColor_Thistle1_Alpha4 ImVec4{ 1.0, 0.84, 1.0, 0.8 }
+#define RLVColor_Thistle1_Alpha5 ImVec4{ 1.0, 0.84, 1.0, 1.0 }
+
+#define RLVColor_LightGoldenrod1_Alpha0 ImVec4{ 1.0, 1.0, 0.37, 0.0 }
+#define RLVColor_LightGoldenrod1_Alpha1 ImVec4{ 1.0, 1.0, 0.37, 0.2 }
+#define RLVColor_LightGoldenrod1_Alpha2 ImVec4{ 1.0, 1.0, 0.37, 0.4 }
+#define RLVColor_LightGoldenrod1_Alpha3 ImVec4{ 1.0, 1.0, 0.37, 0.6 }
+#define RLVColor_LightGoldenrod1_Alpha4 ImVec4{ 1.0, 1.0, 0.37, 0.8 }
+#define RLVColor_LightGoldenrod1_Alpha5 ImVec4{ 1.0, 1.0, 0.37, 1.0 }
+
+#define RLVColor_Wheat1_Alpha0 ImVec4{ 1.0, 1.0, 0.69, 0.0 }
+#define RLVColor_Wheat1_Alpha1 ImVec4{ 1.0, 1.0, 0.69, 0.2 }
+#define RLVColor_Wheat1_Alpha2 ImVec4{ 1.0, 1.0, 0.69, 0.4 }
+#define RLVColor_Wheat1_Alpha3 ImVec4{ 1.0, 1.0, 0.69, 0.6 }
+#define RLVColor_Wheat1_Alpha4 ImVec4{ 1.0, 1.0, 0.69, 0.8 }
+#define RLVColor_Wheat1_Alpha5 ImVec4{ 1.0, 1.0, 0.69, 1.0 }
+
+#define RLVColor_Grey100_Alpha0 ImVec4{ 1.0, 1.0, 1.0, 0.0 }
+#define RLVColor_Grey100_Alpha1 ImVec4{ 1.0, 1.0, 1.0, 0.2 }
+#define RLVColor_Grey100_Alpha2 ImVec4{ 1.0, 1.0, 1.0, 0.4 }
+#define RLVColor_Grey100_Alpha3 ImVec4{ 1.0, 1.0, 1.0, 0.6 }
+#define RLVColor_Grey100_Alpha4 ImVec4{ 1.0, 1.0, 1.0, 0.8 }
+#define RLVColor_Grey100_Alpha5 ImVec4{ 1.0, 1.0, 1.0, 1.0 }
+
+#define RLVColor_Grey7_Alpha0 ImVec4{ 0.07, 0.07, 0.07, 0.0 }
+#define RLVColor_Grey7_Alpha1 ImVec4{ 0.07, 0.07, 0.07, 0.2 }
+#define RLVColor_Grey7_Alpha2 ImVec4{ 0.07, 0.07, 0.07, 0.4 }
+#define RLVColor_Grey7_Alpha3 ImVec4{ 0.07, 0.07, 0.07, 0.6 }
+#define RLVColor_Grey7_Alpha4 ImVec4{ 0.07, 0.07, 0.07, 0.8 }
+#define RLVColor_Grey7_Alpha5 ImVec4{ 0.07, 0.07, 0.07, 1.0 }
+
+#define RLVColor_Grey15_Alpha0 ImVec4{ 0.15, 0.15, 0.15, 0.0 }
+#define RLVColor_Grey15_Alpha1 ImVec4{ 0.15, 0.15, 0.15, 0.2 }
+#define RLVColor_Grey15_Alpha2 ImVec4{ 0.15, 0.15, 0.15, 0.4 }
+#define RLVColor_Grey15_Alpha3 ImVec4{ 0.15, 0.15, 0.15, 0.6 }
+#define RLVColor_Grey15_Alpha4 ImVec4{ 0.15, 0.15, 0.15, 0.8 }
+#define RLVColor_Grey15_Alpha5 ImVec4{ 0.15, 0.15, 0.15, 1.0 }
+
+#define RLVColor_Grey23_Alpha0 ImVec4{ 0.23, 0.23, 0.23, 0.0 }
+#define RLVColor_Grey23_Alpha1 ImVec4{ 0.23, 0.23, 0.23, 0.2 }
+#define RLVColor_Grey23_Alpha2 ImVec4{ 0.23, 0.23, 0.23, 0.4 }
+#define RLVColor_Grey23_Alpha3 ImVec4{ 0.23, 0.23, 0.23, 0.6 }
+#define RLVColor_Grey23_Alpha4 ImVec4{ 0.23, 0.23, 0.23, 0.8 }
+#define RLVColor_Grey23_Alpha5 ImVec4{ 0.23, 0.23, 0.23, 1.0 }
+
+#define RLVColor_Grey30_Alpha0 ImVec4{ 0.31, 0.31, 0.31, 0.0 }
+#define RLVColor_Grey30_Alpha1 ImVec4{ 0.31, 0.31, 0.31, 0.2 }
+#define RLVColor_Grey30_Alpha2 ImVec4{ 0.31, 0.31, 0.31, 0.4 }
+#define RLVColor_Grey30_Alpha3 ImVec4{ 0.31, 0.31, 0.31, 0.6 }
+#define RLVColor_Grey30_Alpha4 ImVec4{ 0.31, 0.31, 0.31, 0.8 }
+#define RLVColor_Grey30_Alpha5 ImVec4{ 0.31, 0.31, 0.31, 1.0 }
+
+#define RLVColor_Grey39_Alpha0 ImVec4{ 0.38, 0.38, 0.38, 0.0 }
+#define RLVColor_Grey39_Alpha1 ImVec4{ 0.38, 0.38, 0.38, 0.2 }
+#define RLVColor_Grey39_Alpha2 ImVec4{ 0.38, 0.38, 0.38, 0.4 }
+#define RLVColor_Grey39_Alpha3 ImVec4{ 0.38, 0.38, 0.38, 0.6 }
+#define RLVColor_Grey39_Alpha4 ImVec4{ 0.38, 0.38, 0.38, 0.8 }
+#define RLVColor_Grey39_Alpha5 ImVec4{ 0.38, 0.38, 0.38, 1.0 }
+
+#define RLVColor_Grey46_Alpha0 ImVec4{ 0.46, 0.46, 0.46, 0.0 }
+#define RLVColor_Grey46_Alpha1 ImVec4{ 0.46, 0.46, 0.46, 0.2 }
+#define RLVColor_Grey46_Alpha2 ImVec4{ 0.46, 0.46, 0.46, 0.4 }
+#define RLVColor_Grey46_Alpha3 ImVec4{ 0.46, 0.46, 0.46, 0.6 }
+#define RLVColor_Grey46_Alpha4 ImVec4{ 0.46, 0.46, 0.46, 0.8 }
+#define RLVColor_Grey46_Alpha5 ImVec4{ 0.46, 0.46, 0.46, 1.0 }
+
+#define RLVColor_Grey54_Alpha0 ImVec4{ 0.54, 0.54, 0.54, 0.0 }
+#define RLVColor_Grey54_Alpha1 ImVec4{ 0.54, 0.54, 0.54, 0.2 }
+#define RLVColor_Grey54_Alpha2 ImVec4{ 0.54, 0.54, 0.54, 0.4 }
+#define RLVColor_Grey54_Alpha3 ImVec4{ 0.54, 0.54, 0.54, 0.6 }
+#define RLVColor_Grey54_Alpha4 ImVec4{ 0.54, 0.54, 0.54, 0.8 }
+#define RLVColor_Grey54_Alpha5 ImVec4{ 0.54, 0.54, 0.54, 1.0 }
+
+#define RLVColor_Grey62_Alpha0 ImVec4{ 0.62, 0.62, 0.62, 0.0 }
+#define RLVColor_Grey62_Alpha1 ImVec4{ 0.62, 0.62, 0.62, 0.2 }
+#define RLVColor_Grey62_Alpha2 ImVec4{ 0.62, 0.62, 0.62, 0.4 }
+#define RLVColor_Grey62_Alpha3 ImVec4{ 0.62, 0.62, 0.62, 0.6 }
+#define RLVColor_Grey62_Alpha4 ImVec4{ 0.62, 0.62, 0.62, 0.8 }
+#define RLVColor_Grey62_Alpha5 ImVec4{ 0.62, 0.62, 0.62, 1.0 }
+
+#define RLVColor_Grey70_Alpha0 ImVec4{ 0.7, 0.7, 0.7, 0.0 }
+#define RLVColor_Grey70_Alpha1 ImVec4{ 0.7, 0.7, 0.7, 0.2 }
+#define RLVColor_Grey70_Alpha2 ImVec4{ 0.7, 0.7, 0.7, 0.4 }
+#define RLVColor_Grey70_Alpha3 ImVec4{ 0.7, 0.7, 0.7, 0.6 }
+#define RLVColor_Grey70_Alpha4 ImVec4{ 0.7, 0.7, 0.7, 0.8 }
+#define RLVColor_Grey70_Alpha5 ImVec4{ 0.7, 0.7, 0.7, 1.0 }
+
+#define RLVColor_Grey78_Alpha0 ImVec4{ 0.78, 0.78, 0.78, 0.0 }
+#define RLVColor_Grey78_Alpha1 ImVec4{ 0.78, 0.78, 0.78, 0.2 }
+#define RLVColor_Grey78_Alpha2 ImVec4{ 0.78, 0.78, 0.78, 0.4 }
+#define RLVColor_Grey78_Alpha3 ImVec4{ 0.78, 0.78, 0.78, 0.6 }
+#define RLVColor_Grey78_Alpha4 ImVec4{ 0.78, 0.78, 0.78, 0.8 }
+#define RLVColor_Grey78_Alpha5 ImVec4{ 0.78, 0.78, 0.78, 1.0 }
+
+#define RLVColor_Grey85_Alpha0 ImVec4{ 0.85, 0.85, 0.85, 0.0 }
+#define RLVColor_Grey85_Alpha1 ImVec4{ 0.85, 0.85, 0.85, 0.2 }
+#define RLVColor_Grey85_Alpha2 ImVec4{ 0.85, 0.85, 0.85, 0.4 }
+#define RLVColor_Grey85_Alpha3 ImVec4{ 0.85, 0.85, 0.85, 0.6 }
+#define RLVColor_Grey85_Alpha4 ImVec4{ 0.85, 0.85, 0.85, 0.8 }
+#define RLVColor_Grey85_Alpha5 ImVec4{ 0.85, 0.85, 0.85, 1.0 }
+
+#define RLVColor_Grey93_Alpha0 ImVec4{ 0.93, 0.93, 0.93, 0.0 }
+#define RLVColor_Grey93_Alpha1 ImVec4{ 0.93, 0.93, 0.93, 0.2 }
+#define RLVColor_Grey93_Alpha2 ImVec4{ 0.93, 0.93, 0.93, 0.4 }
+#define RLVColor_Grey93_Alpha3 ImVec4{ 0.93, 0.93, 0.93, 0.6 }
+#define RLVColor_Grey93_Alpha4 ImVec4{ 0.93, 0.93, 0.93, 0.8 }
+#define RLVColor_Grey93_Alpha5 ImVec4{ 0.93, 0.93, 0.93, 1.0 }
 ```
-

@@ -1,7 +1,5 @@
 # git 技巧
 
-
-
 ## 修改 git 的默认编辑器
 
 ```bash
@@ -9,8 +7,6 @@ git config core.editor vim
 ```
 
 将 git 的默认编辑器修改为 vim。
-
-
 
 ## 将 git 部分命令的输出中的中文从八进制改成中文
 
@@ -20,13 +16,11 @@ git config core.editor vim
 git config --global core.quotepath false
 ```
 
-
-
 ## 按条件查看提交历史
 
 [2.3 Git 基础 - 查看提交历史](https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2)
 
-查看提交历史使用的命令是 `git log`。下面介绍几个常用的选项。
+查看提交历史使用的命令是 `git log` 。下面介绍几个常用的选项。
 
 ```bash
 git log -2 # 输出最近的两次提交
@@ -38,8 +32,6 @@ git log --committer carl # 输出提交者字符串中包含 "carl" 的提交
 git log --grep carl # 输出提交说明中包含 "carl" 的提交
 git log -S carl # 输出提交的内容中添加或删除了该字符串的提交，例如可以用来查看函数的改动
 ```
-
-
 
 ## 重写提交说明
 
@@ -196,8 +188,6 @@ Date:   Wed Oct 20 20:50:30 2021 +0800
 
 通过 `git log` 命令可以看到第一次提交的 commit 信息发生了变化。
 
-
-
 ## 去除错误提交的文件
 
 如果是要删除最近一次提交的话，可以使用 `git rm` 和 `git commit` 命令。
@@ -252,7 +242,9 @@ index 0000000..e69de29
 
 如果需要修改文件的不是最近一次提交，而是历史提交记录，则需要使用 `rebase` 操作。
 
- ```bash
+ 
+
+```bash
  ➜ mkdir test
  ➜ cd test/
  ➜ git init
@@ -388,8 +380,6 @@ index 0000000..9d4e288
 {+when you how+}
 ```
 
-
-
 ## 用 git stash 临时保存进度
 
  在开发一个功能开发到一半的过程中需要紧急处理另一个 bug 的时候，需要将未开发完成的功能临时进程保存，恢复一个没有修改的工作区，或者切换到其他分支进行 bug 修复。
@@ -473,25 +463,21 @@ when you me
 add line 2
 ```
 
-
-
 ## git 的配置文件
 
 git 有三个优先级不同的配置文件。
 
-- 项目级别的配置文件，在项目的  `.git/config` 位置
-- 用户级别的配置文件，在 `~/.gitconfig` 位置
-- 系统级别的配置文件，在 `/etc/gitconfig` 位置
+* 项目级别的配置文件，在项目的  `.git/config` 位置
+* 用户级别的配置文件，在 `~/.gitconfig` 位置
+* 系统级别的配置文件，在 `/etc/gitconfig` 位置
 
 三个配置文件的优先级依次降低。
 
-- 进行项目级别的配置，使用的命令是 `git config`。
+* 进行项目级别的配置，使用的命令是 `git config`。
 
-- 进行用户级别的配置，使用的命令是 `git config --global`。
+* 进行用户级别的配置，使用的命令是 `git config --global`。
 
-- 进行系统级别的配置，使用的命令是 `git config --system`。
-
-
+* 进行系统级别的配置，使用的命令是 `git config --system`。
 
 ## 修改错误的提交者信息
 
@@ -534,15 +520,11 @@ Date:   Mon Oct 25 05:39:16 2021 +0800
     commit by right author info
 ```
 
-
-
 ## git diff 的几个参数说明
 
 对于一个 git 仓库某个分支中的文件，最多会有三个不同的版本(不考虑 git stash)：版本库中的版本，暂存区 stage 中的版本，工作区中的版本。
 
-`git diff` 比较的是工作区和暂存区的差异。`git diff HEAD` 比较的是工作区和版本库当前分支的差异。`git diff --cache` 或者 `git diff --staged`比较的是暂存区 stage 和版本库当前分支的差异。
-
-
+`git diff` 比较的是工作区和暂存区的差异。 `git diff HEAD` 比较的是工作区和版本库当前分支的差异。 `git diff --cache` 或者 `git diff --staged` 比较的是暂存区 stage 和版本库当前分支的差异。
 
 ## 工作区，版本库，暂存区关系示意图
 
@@ -599,10 +581,6 @@ git reset --mixed commited
 # 将文件 file 的改动从暂存区去除, 注意 -- 和文件名之间有空格
 git reset -- file
 ```
-
-
-
-
 
 ## 错误使用了 git reset 后如何恢复
 
@@ -695,21 +673,15 @@ Date:   Mon Oct 25 17:29:39 2021 +0800
 a.txt  b.txt  c.txt
 ```
 
-
-
 ## 查看一个摘要值对应的 git 对象的信息
 
 ```bash
 git cat-file -p 摘要值
 ```
 
-
-
 ## git 引用的概念
 
 [Git 内部原理 - Git 引用](https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-Git-%E5%BC%95%E7%94%A8)
-
-
 
 ## 将 checkout 到某个提交记录后新添加的内容合并到分支中
 
@@ -719,9 +691,7 @@ HEAD 指向当前工作区的 “最新” 版本，当工作区提交新内容�
 
 如果 checkout 到了一个提交之后，又做了新的提交会怎么样？新的提交会作为这个提交的子提交， HEAD 也会更新为子提交，但是会出现一个问题：子提交并不属于任何一个分支。这样的提交是很危险的，因为当再次 checkout 到了另一个提交记录的时候，刚才的提交由于不属于任何一个分支，可以理解为 “丢失” 了。虽然可以用 reflog 找到，但是 reflog 可能会被删除，而且这中处理方式也很不合理。那么如何将这个提交合并到一个分支中呢？
 
-下面是一个例子，首先在 main 分支上创建两次提交，分别创建文件 `a.txt` 和 `b.txt`，然后 checkout 到创建 `a.txt` 的这次提交上，这个时候创建文件 `c.txt` 并进行一次提交，然后再 checkout 到 main 分支，并将创建 `c.txt` 的这次提交合并到 main 分支上。
-
-
+下面是一个例子，首先在 main 分支上创建两次提交，分别创建文件 `a.txt` 和 `b.txt` ，然后 checkout 到创建 `a.txt` 的这次提交上，这个时候创建文件 `c.txt` 并进行一次提交，然后再 checkout 到 main 分支，并将创建 `c.txt` 的这次提交合并到 main 分支上。
 
 ```bash
 ➜ git init test
@@ -799,8 +769,6 @@ e541944c6c5cb0070939f8cfa950167e75683e05 (HEAD -> main) merge c.txt to main bran
 139673827ea6d4f25d6796871ceb57348152fdd9 add a.txt
 ```
 
-
-
 ## 删除多余的文件
 
 ### 删除未加入版本控制的文件
@@ -809,31 +777,23 @@ e541944c6c5cb0070939f8cfa950167e75683e05 (HEAD -> main) merge c.txt to main bran
 
 2. `git clean` 命令可以帮助删除本地未加入版本控制的文件和目录。如果想在删除前预先知道将会删除哪些文件，可以使用参数 `-n`, 意思是不真正执行删除操作，而是展示将会删除那些文件和目录。
 
-
-
 ### 删除加入到了暂存区的文件
 
 1. 使用 `git rm -f filename` 将文件 filename 从暂存区和工作区删除。使用 `git rm --cached filename` 只将文件 filename 从暂存区删除，工作区保留。
 2. 使用 shell 命令 `rm filename` 将文件 filename 删除，然后使用 `git add -u filename`  更新暂存区将已加入到暂存区的文件 filename 删除。
 
-
-
 ## 恢复从工作区和暂存区都被删除的文件
 
 1. 使用 `git checkout HEAD^ -- filename` 恢复被删除的文件 filename，接着使用 `git add filename` 将文件加入到暂存区。
-
-
 
 ## 文件改名
 
 1. 使用 `git mv old_name new_name`。
 2. 使用 shell 命令 `mv old_name new_name`。
 
-
-
 ## 撤销最近一次提交中错误删除的文件
 
-下面是一个具体的例子，在第一次提交中创建 `a.txt` `b.txt` 两个文件，在第二次提交中删除 `a.txt`, `b.txt` 两个文件。假设 `a.txt` 是我们错误删除的文件，现在需要修改最后一次提交，将 `a.txt` 的删除从提交中撤销。
+下面是一个具体的例子，在第一次提交中创建 `a.txt`  `b.txt` 两个文件，在第二次提交中删除 `a.txt` , `b.txt` 两个文件。假设 `a.txt` 是我们错误删除的文件，现在需要修改最后一次提交，将 `a.txt` 的删除从提交中撤销。
 
 ```bash
 ➜ git init test
@@ -870,8 +830,6 @@ rm 'b.txt'
 ➜ ls
 a.txt
 ```
-
-
 
 ## 撤销最近的多次提交，将最近的多次提交合并为一次
 
@@ -926,8 +884,6 @@ b4ebe2d40dbd9908155305e3c93f7d45b96b54e3 (HEAD -> main) merge two commit to one 
 86512568e385db638fe60ad10ddefe707069db37 add a.txt
 ```
 
-
-
 如果想将从第一次提交到最新提交的多次提交合并成一次提交，可以使用 `git update-ref` 命令。
 
 ```bash
@@ -980,8 +936,6 @@ Changes to be committed:
 46d36fedd301cec3728ad1967bbb7cc2859b18c5 (HEAD -> main) merge all commits into one commit
 ```
 
-
-
 ## 删除某个历史提交记录
 
 为了简化创建测试用的仓库，使用如下 shell 脚本来创建仓库。这个脚本会传遍一个含有四次提交的仓库。
@@ -1016,11 +970,11 @@ git commit -m "add line 4"
 git log --pretty=oneline
 ```
 
-删除某次历史提交需要使用到 `git cherry-pick` 命令。`git cherry-pick` 命令的作用是将指定的提交（commit）应用于其他分支。`git cherry-pick commitid` 会将指定的提交`commitid`，应用于当前分支。这会在当前分支产生一个新的提交，这个新的提交的哈希值和 `commitid` 不一样。更多的对 `git cherry-pick` 的提交参考 [git cherry-pick 教程](https://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html)，本节部分内容就是从这篇文章中摘抄的。
+删除某次历史提交需要使用到 `git cherry-pick` 命令。 `git cherry-pick` 命令的作用是将指定的提交（commit）应用于其他分支。 `git cherry-pick commitid` 会将指定的提交 `commitid` ，应用于当前分支。这会在当前分支产生一个新的提交，这个新的提交的哈希值和 `commitid` 不一样。更多的对 `git cherry-pick` 的提交参考 [git cherry-pick 教程](https://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html)，本节部分内容就是从这篇文章中摘抄的。
 
 有了这个命令，就可以删除某个历史提交了，具体的步骤如下：
 
-假设测试用的仓库中有 4 次提交，按提交时间先后分别叫他们 `commit1`, `commit2`, `commit3`, `commit4`。我们想要删除 `commit2` 这次提交。
+假设测试用的仓库中有 4 次提交，按提交时间先后分别叫他们 `commit1` , `commit2` , `commit3` , `commit4` 。我们想要删除 `commit2` 这次提交。
 
 1. `git checkout commit1` ，将 HEAD 检出到 `commit1`
 2. `git cherry-pick commit3`，将 `commit3` 应用到当前分支，现在 HEAD 变成了 `commit3` 的内容，注意新的提交的 hash 值一定不是 `commit3`
@@ -1030,23 +984,23 @@ git log --pretty=oneline
 
 ### 如果 `git cherry-pick` 出现了冲突怎么办
 
-如果操作过程中发生代码冲突，`git cherry-pick` 会停下来，让用户决定如何继续操作，有三种结局方案。
+如果操作过程中发生代码冲突， `git cherry-pick` 会停下来，让用户决定如何继续操作，有三种结局方案。
 
-`--continue`
+ `--continue`
 
-用户解决代码冲突后，第一步将修改的文件重新加入暂存区（`git add .`），第二步使用下面的命令，让 `git cherry-pick` 过程继续执行。
+用户解决代码冲突后，第一步将修改的文件重新加入暂存区（ `git add .` ），第二步使用下面的命令，让 `git cherry-pick` 过程继续执行。
 
 ```bash
 $ git cherry-pick --continue
 ```
 
-`--abort`
+ `--abort`
 
 发生代码冲突后，放弃合并，回到操作前的样子。
 
-`--quit`
+ `--quit`
 
-发生代码冲突后，退出 `git cherry-pick`，但是不回到操作前的样子。
+发生代码冲突后，退出 `git cherry-pick` ，但是不回到操作前的样子。
 
 ### 如果需要删除的一次很早之前的提交记录，在那次提交之后有成千上万个提交，难道需要对这些提交都执行一次 `git checcy-pick` 吗？
 
@@ -1071,7 +1025,6 @@ $ git cherry-pick A..B
 ```bash
 $ git cherry-pick A^..B 
 ```
-
 
 接下来使用上面的脚本创建的仓库来进行一次真实的操作。
 
@@ -1130,8 +1083,6 @@ line 1
 line 3
 line 4
 ```
-
-
 
 ## 合并某几个历史提交记录
 
@@ -1214,18 +1165,3 @@ line 2
 line 3
 line 4
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
