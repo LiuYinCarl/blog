@@ -2,6 +2,15 @@
 
 ### 堆排序算法
 
+> 参考的 JaneStreet 实现的 OCaml 基础库
+> https://github.com/janestreet/base/blob/master/src/array.ml
+
+逻辑和命令式语言实现的差不多，主要逻辑如下：
+1. 先将数组整理为最大堆，则 `arr[0]` 必定是数组最大值。
+2. 将 `arr[0]`（数组第一个成员） 与 `arr[len-1]` 交换（数组最后一个成员），`arr[len-1]` 保存数组最大值。
+3. 重新整理 `arr[0]` 到 `arr[len-2]`，将它恢复成一个最大堆。
+4. 重复步骤 2 和步骤 3 直到堆中没有成员。
+
 ```ocaml
 (* 辅助打印功能 *)
 let cnt = ref 0
