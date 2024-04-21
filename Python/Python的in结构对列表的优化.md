@@ -120,7 +120,7 @@ _PyAST_Compile(mod_ty mod, PyObject *filename, PyCompilerFlags *pflags,
 cpython 的 C 代码中我没有发现有提供打印 AST 的调试函数， 所以这里看 AST 的办法只能是通过 GDB 或者其他调试手段。
 用 VSCode 会方便些，基本就是断点到对应位置，然后看结构了，之后看是否有空写一个 GDB 调试脚本，用类似 `ast` 模块的方式打印 AST。
 
-![image-20240421231727940](assets\image-20240421231727940.png)
+![image-20240421231727940](assets/image-20240421231727940.png)
 
 调试这个函数之后，可以发现调用 `new_compiler` 前后对应的节点从 `List_kind` 变为了 `Tuple_kind`。
 接着调试 `new_compiler` 函数内部，可以追踪到 `fold_compare` 函数，里面的注释清晰的指明了这个优化。
@@ -180,7 +180,7 @@ fold_iter(expr_ty arg, PyArena *arena, _PyASTOptimizeState *state)
 
 完整的堆栈图如下，调试使用的 cpython 代码版本为 `3.13.0a6+ heads/main:b6c62c79e7`
 
-![image-20240421233238213](assets\image-20240421233238213.png)
+![image-20240421233238213](assets/image-20240421233238213.png)
 
 ## 打印代码的 AST
 
