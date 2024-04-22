@@ -116,7 +116,7 @@ _PyAST_Compile(mod_ty mod, PyObject *filename, PyCompilerFlags *pflags,
 
 参数 `mod` 就是步骤二生成的 AST。上面代码中两个函数调用比较重要， `new_compiler` 负责优化 AST，
 `compiler_mod` 负责将 AST 编译为字节码。按照验证猜想的步骤，可以在这两个函数的前面分别打上断点，
-看一下对应的 AST。**这里插入一个小知识：使用 标准库的 `ast` 模块获得的 AST 是没有被优化的，具体看文章中后面的专题小节**。
+看一下对应的 AST。**这里插入一个小知识：使用 cpython 3.13 之前的标准库的 `ast` 模块获得的 AST 是没有被优化的，具体看文章中后面的专题小节**。
 cpython 的 C 代码中我没有发现有提供打印 AST 的调试函数， 所以这里看 AST 的办法只能是通过 GDB 或者其他调试手段。
 用 VSCode 会方便些，基本就是断点到对应位置，然后看结构了，之后看是否有空写一个 GDB 调试脚本，用类似 `ast` 模块的方式打印 AST。
 
@@ -184,7 +184,7 @@ fold_iter(expr_ty arg, PyArena *arena, _PyASTOptimizeState *state)
 
 ## 打印代码的 AST
 
-使用 标准库的 `ast` 模块获得的 AST 是没有被优化的。可以看这个代码例子。
+在 cpython 3.13 之前，使用标准库的 `ast` 模块获得的 AST 是没有被优化的。可以看这个代码例子。
 
 ```python
 import ast
@@ -231,3 +231,75 @@ Module(
             decorator_list=[])],
     type_ignores=[])
 ```
+
+在 cpython 3.13 之后，`ast` 模块的 `ast.parse` 函数增加了一个 `optimize` 参数，设置为大于 0 的值可以获取优化后的 AST。
+
+```python
+def parse(source, filename='<unknown>', mode='exec', *,
+          type_comments=False, feature_version=None, optimize=-1):
+    """
+    Parse the source into an AST node.
+    Equivalent to compile(source, filename, mode, PyCF_ONLY_AST).
+    Pass type_comments=True to get back type comments where the syntax allows.
+    """
+    flags = PyCF_ONLY_AST
+    if optimize > 0:
+        flags |= PyCF_OPTIMIZED_AST
+    if type_comments:
+        flags |= PyCF_TYPE_COMMENTS
+    if feature_version is None:
+        feature_version = -1
+    elif isinstance(feature_version, tuple):
+        major, minor = feature_version  # Should be a 2-tuple.
+        if major != 3:
+            raise ValueError(f"Unsupported major version: {major}")
+        feature_version = minor
+    # Else it should be an int giving the minor version for 3.x.
+    return compile(source, filename, mode, flags,
+                   _feature_version=feature_version, optimize=optimize)
+```
+
+仍然使用上面的代码，看一下优化后的 AST 如何。
+
+```python
+import ast
+import inspect
+
+def f():
+    if 5 in[1,2,3]:
+        pass
+
+code = inspect.getsource(f)
+tree = ast.parse(code, optimize=1)
+print(ast.dump(tree, indent=4))
+```
+
+输出中可以看到 `List` 被优化成了 `Constant`：
+
+```sh
+Module(
+    body=[
+        FunctionDef(
+            name='f',
+            args=arguments(
+                posonlyargs=[],
+                args=[],
+                kwonlyargs=[],
+                kw_defaults=[],
+                defaults=[]),
+            body=[
+                If(
+                    test=Compare(
+                        left=Constant(value=5),
+                        ops=[
+                            In()],
+                        comparators=[
+                            Constant(value=(1, 2, 3))]),
+                    body=[
+                        Pass()],
+                    orelse=[])],
+            decorator_list=[],
+            type_params=[])],
+    type_ignores=[])
+```
+
