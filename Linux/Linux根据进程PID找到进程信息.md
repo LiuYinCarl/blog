@@ -9,7 +9,7 @@ kenshin     5331    5187  0 15:02 pts/1    00:00:00 ./python
 # 进入 /proc 下对应目录
 $ cd /proc/5331
 
-# 列出进程信息 `ll` 或者 `ls -l`
+# 列出进程信息 'll' 或者 'ls -l'
 kenshin:/proc/5331$ ls -l
 total 0
 -r--r--r--  1 kenshin kenshin 0 Apr 24 15:02 arch_status
