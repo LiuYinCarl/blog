@@ -1,17 +1,14 @@
 # Linux 根据进程 PID 找到需要的进程信息
 
-下面以 python 解释器程序作为例子。
+下面以 python 解释器程序作为例子，找到进程启动目录，二进制程序，日志文件位置等信息。
 
 ```bash
 $ ps -ef | grep "./python"
 kenshin     5331    5187  0 15:02 pts/1    00:00:00 ./python
-```
 
-## 找到进程启动目录，二进制程序，日志文件位置等信息
-
-```bash
 # 进入 /proc 下对应目录
 $ cd /proc/5331
+
 # 列出进程信息 `ll` 或者 `ls -l`
 kenshin:/proc/5331$ ls -l
 total 0
