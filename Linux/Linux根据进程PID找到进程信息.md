@@ -2,7 +2,7 @@
 
 下面以 python 解释器程序作为例子，找到进程启动目录，二进制程序，日志文件位置等信息。
 
-```bash
+```sh
 $ ps -ef | grep "./python"
 kenshin     5331    5187  0 15:02 pts/1    00:00:00 ./python
 
@@ -67,13 +67,10 @@ dr-xr-xr-x  3 kenshin kenshin 0 Apr 24 15:02 task
 -rw-r--r--  1 kenshin kenshin 0 Apr 24 15:02 uid_map
 -r--r--r--  1 kenshin kenshin 0 Apr 24 15:02 wchan
 ```
+其中 `cwd -> /home/kenshin/cpython` 是进程启动目录。`exe -> /home/kenshin/cpython/python`
+是进程的二进制文件。`cmdline` 是进程启动的参数。`fd/` 目录下保存了文件所有打开的句柄。
 
-`cwd -> /home/kenshin/cpython` 是进程启动目录。
-`exe -> /home/kenshin/cpython/python` 是进程的二进制文件。
-`cmdline` 是进程启动的参数。
-`fd/` 目录下保存了文件所有打开的句柄。
-
-```bash
+```sh
 kenshin:/proc/5331/fd$ ll
 total 0
 dr-x------ 2 kenshin kenshin  0 Apr 24 15:02 ./
