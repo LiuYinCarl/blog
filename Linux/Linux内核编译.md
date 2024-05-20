@@ -25,4 +25,7 @@ $ make defconfig
 $ bear -- make -j $(nproc) bzImage
 ```
 
+完成编译之后就可以使用 Emacs 等编辑器查看代码并且支持跳转了。
+
+![查看内核代码](.asserts/linux.jpeg)
 
