@@ -39,5 +39,7 @@ kenshin:~$ ls /usr/include/c++/
 kenshin:~$ sudo apt install libstdc++-12-dev
 ```
 
-> 参考：[clang++ cannot find iostream](https://askubuntu.com/questions/1449769/clang-cannot-find-iostream)
+## 参考
+
+1. [clang++ cannot find iostream](https://askubuntu.com/questions/1449769/clang-cannot-find-iostream)
 
