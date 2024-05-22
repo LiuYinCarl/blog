@@ -33,7 +33,7 @@ kenshin:~$ ls /usr/include/c++/
 11/
 ```
 
-可以看到，并没有安装 GCC12 版本的标准库，只有 GCC11 版本的，接着安装对应的 GCC 标准库。
+可以看到，并没有安装 GCC12 版本的标准库，只有 GCC11 版本的，接着安装对应的 GCC 标准库即可解决这个问题。
 
 ```bash
 kenshin:~$ sudo apt install libstdc++-12-dev
