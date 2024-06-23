@@ -1,6 +1,6 @@
 # CMake 使用 llvm-config
 
-使用 LLVM 是，`llvm-config` 是一个很方便的工具，可以自动设置头文件目录，链接参数和链接库等。
+使用 LLVM 时，`llvm-config` 是一个很方便的工具，可以自动设置头文件目录，链接参数和链接库等。
 但是如果需要将 `llvm-config` 这个工具接入 CMakeLists.txt 则没有找到资料进行说明，这里分享一下简单的模板。
 
 首先是一个测试代码，主要是测试 LLVM 提供的 `scope_exit` 工具类，代码如下。
@@ -8,7 +8,6 @@
 ```c++
 #include "llvm/ADT/ScopeExit.h"
 #include <iostream>
-
 
 int main() {
     auto foo = []() { std::cout << "test scope_exit" << std::endl; };
