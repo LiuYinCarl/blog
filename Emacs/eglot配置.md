@@ -243,5 +243,14 @@ CMakeCache.txt  CMakeLists.txt  CONTRIBUTORS     LICENSE              README.md 
 ]
 ```
 
+使用 CMake 生成 `compile_commands.json`。
+
+```bash
+$ cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -B ./build
+$ cmake --build ./build/
+```
+
+CMake 生成 的 `compile_commands.json` 的内容要少于 bear 生成的，但是也能正常使用。
+
 生成 `compile_commands.json` 文件之后，打开 Emacs 即可使用 eglot 来体验 C/C++ 代码项目索引、代码跳转、变量重命名、代码补全、提示信息、格式化代码 等功能。
 

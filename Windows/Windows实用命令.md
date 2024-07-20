@@ -1,3 +1,13 @@
+# Windows 实用命令
+
+## MSDN bat 教程
+
+[MSDN bat 教程](https://docs.microsoft.com/en-us/previous-versions/tn-archive/cc722477(v=technet.10)?redirectedfrom=MSDN)
+
+## SS64 多脚本教程
+
+[SS64 多脚本教程/查询工具](https://ss64.com/)
+
 ## 查看 CPU 温度
 
 powershell 管理员权限下执行任意一条即可
