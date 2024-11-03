@@ -13,6 +13,28 @@ export CPATH=`xcrun --show-sdk-path`/usr/include
 export SDKROOT="`xcrun --show-sdk-path`"
 ```
 
+如果是找不到 C++ 的标准头文件，则可以参考如下方式进行处理。
+
+```bash
+# 首先查看以下 clang 或 gcc 的头文件查找路径
+$ clang++ -E -x c++ - -v < /dev/null
+#include "..." search starts here:
+#include <...> search starts here:
+ /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1
+ /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include
+ /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include
+ /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include
+ /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks (framework directory)
+```
+
+里面展示的第一行就是 MacOS 安装的C++ 头文件的路径，只需要将这个路径配置到 `~/.bashrc` 即可。
+
+```bash
+# 因为这个路径会在 SDK 路径下，所以可以直接使用 SDK 路径进行拼接
+export CPLUS_INCLUDE_PATH=`xcrun --show-sdk-path`/usr/include/c++/v1
+```
+
+
 ## 参考
 
 1. https://andreasfertig.blog/2021/02/clang-and-gcc-on-macos-catalina-finding-the-include-paths/
